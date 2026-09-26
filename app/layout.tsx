@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Guard — Stop fraud before it happens',
-  description: 'Ghana-first fraud prevention and intelligence for everyday digital interactions.'
+  title: 'Guard — Check before your money moves',
+  description: 'Ghana-first Mobile Money and payment fraud prevention that helps people and businesses avoid financial loss.'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

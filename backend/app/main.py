@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 app = FastAPI(title="Guard Analysis API", version="0.1.0")
 
 class AnalyseRequest(BaseModel):
-    kind: Literal["message", "screenshot", "link", "number", "payment", "call"]
+    kind: Literal["message", "screenshot", "link", "number", "whatsapp", "payment", "call"]
     content: str = Field(default="", max_length=20000)
 
 class AnalyseResponse(BaseModel):
@@ -33,13 +33,17 @@ def analyse(request: AnalyseRequest) -> AnalyseResponse:
     signals = list(dict.fromkeys(label for term, label in SIGNALS.items() if term in text))
     if request.kind == "screenshot":
         signals.append("Image submitted for contextual review")
+    if request.kind == "whatsapp":
+        signals.append("WhatsApp accounts can be taken over; verify unusual requests through another trusted channel")
     score = min(90, len(signals) * 18 + (15 if "http" in text else 0))
-    level = "High Risk" if score >= 60 else "Caution" if score >= 30 else "Unable to Determine"
+    level = "High Risk" if score >= 60 else "Caution" if score >= 30 else "Low Risk" if score == 0 else "Unable to Determine"
     explanation = {
         "High Risk": "Strong fraud indicators were detected in the submitted information.",
         "Caution": "Some suspicious or unverifiable signals were detected.",
+        "Low Risk": "No strong deterministic fraud signal was detected in the information submitted.",
         "Unable to Determine": "Not enough information was available to make a confident assessment.",
     }[level]
     action = ("Do not share OTPs, PINs or more money. Pause contact and verify through an official channel."
-              if level == "High Risk" else "Pause before responding. Verify independently before acting.")
+              if level == "High Risk" else "No strong warning sign was found, but still verify unexpected requests before acting."
+              if level == "Low Risk" else "Pause before responding. Verify independently before acting.")
     return AnalyseResponse(level=level, score=score, signals=signals or ["No deterministic warning signal found"], explanation=explanation, recommended_action=action)

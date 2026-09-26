@@ -36,7 +36,7 @@ function Section({ eyebrow, title, children }: { eyebrow: string; title: string;
 export default function DesignSystemPage() {
   return <main className="ds-page">
     <header className="ds-nav">
-      <a className="ds-brand" href="#top"><span className="ds-brand-mark"><ShieldCheck size={18}/></span>Guard</a>
+      <a className="ds-brand" href="#top"><span className="ds-brand-mark"><img src="/images/guard-white.png" alt=""/></span>Guard</a>
       <nav><a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#patterns">Patterns</a></nav>
       <button className="ds-button ds-button-orange ds-button-small">Run a check <ArrowRight size={14}/></button>
     </header>
@@ -61,6 +61,6 @@ export default function DesignSystemPage() {
 
       <div id="patterns"><Section eyebrow="05 / Product patterns" title="A calm path through a high-stakes moment."><div className="ds-pattern"><div className="ds-pattern-side"><span className="ds-step-active">01</span><span>02</span><span>03</span></div><div className="ds-pattern-main"><div className="ds-pattern-top"><span className="ds-eyebrow">Message check</span><span className="ds-pattern-meta">2 min read</span></div><h3>“Your account will be closed today. Send the code now.”</h3><p>Guard finds pressure language, a request for a one-time code, and an identity mismatch.</p><div className="ds-signal-list"><div><span className="ds-check"><Check size={13}/></span><div><strong>Urgency is being used</strong><small>Scammers often force a rushed decision.</small></div></div><div><span className="ds-check"><Check size={13}/></span><div><strong>Never share a verification code</strong><small>Legitimate teams won’t ask for your private code.</small></div></div></div><button className="ds-button ds-button-orange">Show me what to do <ArrowRight size={16}/></button></div></div></Section></div>
     </div>
-    <footer className="ds-footer"><span className="ds-brand"><span className="ds-brand-mark"><ShieldCheck size={16}/></span>Guard</span><span>Design system preview · Signal over noise</span></footer>
+    <footer className="ds-footer"><span className="ds-brand"><span className="ds-brand-mark"><img src="/images/guard-violet.png" alt=""/></span>Guard</span><span>Design system preview · Signal over noise</span></footer>
   </main>;
 }
