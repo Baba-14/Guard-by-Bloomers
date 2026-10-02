@@ -57,6 +57,7 @@ class AnalyseResponse(BaseModel):
     signals: list[str]
     explanation: str
     recommended_action: str
+    pattern: str
 
 SIGNALS = {
     "otp": "OTP requested", "pin": "PIN or secret code requested",
@@ -141,9 +142,18 @@ def analyse(request: AnalyseRequest) -> AnalyseResponse:
     signals = list(dict.fromkeys(label for term, label in SIGNALS.items() if term in text))
     if request.kind == "screenshot":
         signals.append("Image submitted for contextual review")
+    if request.kind in ("number", "whatsapp"):
+        signals.append("Reputation data is moderated and does not identify a person as a fraudster")
     if request.kind == "whatsapp":
         signals.append("WhatsApp accounts can be taken over; verify unusual requests through another trusted channel")
-    score = min(90, len(signals) * 18 + (15 if "http" in text else 0))
+    suspicious_hosted_brand = (
+        request.kind == "link"
+        and any(host in text for host in ("vercel.app", "netlify.app", "pages.dev"))
+        and any(brand in text for brand in ("bank", "bnk", "gcb", "momo", "mtn", "ecobank", "login", "verify", "secure", "account"))
+    )
+    if suspicious_hosted_brand:
+        signals.append("Brand-like name on a hosted subdomain")
+    score = min(90, len(signals) * 18 + (15 if "http" in text else 0) + (28 if suspicious_hosted_brand else 0))
     level = "High Risk" if score >= 60 else "Caution" if score >= 30 else "Low Risk" if score == 0 else "Unable to Determine"
     explanation = {
         "High Risk": "Strong fraud indicators were detected in the submitted information.",
@@ -154,4 +164,18 @@ def analyse(request: AnalyseRequest) -> AnalyseResponse:
     action = ("Do not share OTPs, PINs or more money. Pause contact and verify through an official channel."
               if level == "High Risk" else "No strong warning sign was found, but still verify unexpected requests before acting."
               if level == "Low Risk" else "Pause before responding. Verify independently before acting.")
-    return AnalyseResponse(level=level, score=score, signals=signals or ["No deterministic warning signal found"], explanation=explanation, recommended_action=action)
+    pattern = (
+        "Possible brand impersonation" if suspicious_hosted_brand else
+        "WhatsApp account reputation lookup" if request.kind == "whatsapp" else
+        "Phone reputation lookup" if request.kind == "number" else
+        "Suspicious link assessment" if request.kind == "link" else
+        "Contextual fraud assessment"
+    )
+    return AnalyseResponse(
+        level=level,
+        score=score,
+        signals=signals or ["No deterministic warning signal was found in the submitted content."],
+        explanation=explanation,
+        recommended_action=action,
+        pattern=pattern,
+    )

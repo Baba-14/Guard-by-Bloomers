@@ -280,19 +280,16 @@ backend is running.
 
 ## 6. Connecting the Next.js frontend
 
-### Step 1: configure the API URL
+### Step 1: use the same-origin Next.js API
 
-Add this to the root `.env.local` file used by Next.js:
+The browser calls `POST /api/analyse` on the same origin. That Next.js route runs
+at request time and calls FastAPI through the `BACKEND_URL` Vercel service
+binding. Vercel injects the binding; do not add `BACKEND_URL` to project
+environment variables.
 
-```env
-NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
-```
-
-Restart `npm run dev` after changing an environment file.
-
-The backend currently allows browser requests from `http://localhost:3000` via
-CORS. If Next.js uses a different origin, update `CORS_ORIGINS` in
-`backend/.env` and restart FastAPI.
+With `npm run dev`, the server route falls back to `http://127.0.0.1:8000`, so
+run FastAPI locally as described above. `vercel dev` runs both services and
+provides the binding automatically.
 
 ### Step 2: create a frontend API helper
 
@@ -300,7 +297,7 @@ A helper such as `lib/api.ts` can centralize the backend address and error
 handling:
 
 ```ts
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://127.0.0.1:8000';
+const API_URL = '/api';
 
 async function parseResponse(response: Response) {
   const body = await response.json();
@@ -315,7 +312,7 @@ export async function register(input: {
   email: string;
   password: string;
 }) {
-  return parseResponse(await fetch(`${API_URL}/v1/auth/register`, {
+  return parseResponse(await fetch(`${API_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(input),
@@ -324,7 +321,7 @@ export async function register(input: {
 
 export async function login(email: string, password: string) {
   const form = new URLSearchParams({ username: email, password });
-  return parseResponse(await fetch(`${API_URL}/v1/auth/login`, {
+  return parseResponse(await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: form,
@@ -332,7 +329,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function getCurrentUser(accessToken: string) {
-  return parseResponse(await fetch(`${API_URL}/v1/auth/me`, {
+  return parseResponse(await fetch(`${API_URL}/auth/me`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   }));
 }
@@ -366,7 +363,7 @@ then either send the user to login or log them in immediately.
 
 ### Step 5: protect dashboard requests
 
-When the dashboard loads, read the token and call `/v1/auth/me`. If the token is
+When the dashboard loads, read the token and call `/api/auth/me`. If the token is
 missing, expired, or invalid, clear the session and redirect to `/login`.
 
 Frontend redirects improve the experience, but they are not security controls.
@@ -374,8 +371,8 @@ Every sensitive FastAPI endpoint must still validate the JWT and enforce roles.
 
 ### Step 6: connect fraud analysis
 
-The frontend currently calls the Next.js route `/api/analyse`. It can instead
-call FastAPI at `${NEXT_PUBLIC_API_URL}/v1/analyse`.
+The frontend calls the Next.js route `/api/analyse`, which adapts the public
+request and response shape to FastAPI's internal `/v1/analyse` endpoint.
 
 Note the current request-property difference:
 
@@ -389,13 +386,13 @@ The frontend should send:
 ```json
 {
   "kind": "message",
-  "content": "The message to analyse"
+  "input": "The message to analyse"
 }
 ```
 
-The response naming also differs: FastAPI returns `explanation` and
-`recommended_action`, while the current Next.js UI expects `reason` and
-`action`. These contracts should be standardized when the frontend is wired in.
+The Next.js route translates `input` to FastAPI's internal `content` property
+and maps FastAPI's `explanation` and `recommended_action` fields to the UI's
+`reason` and `action` fields.
 
 ## 7. Security requirements already considered
 
@@ -464,4 +461,3 @@ Expected response:
 5. Persist authenticated checks and results.
 6. Add server-side role enforcement for admin APIs.
 7. Introduce Alembic before making the next database schema change.
-

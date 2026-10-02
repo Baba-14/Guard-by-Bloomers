@@ -14,6 +14,21 @@ Development uses `.next`; production builds use `.next-build`, so running a buil
 
 The core check flow works without Supabase credentials using the deterministic MVP analysis route at `POST /api/analyse`. The Supabase migration in `supabase/migrations/001_guard_schema.sql` remains available for a Supabase deployment. Local development uses the FastAPI-owned authentication and PostgreSQL migration described below.
 
+## Deploy on Vercel
+
+The root `vercel.json` deploys two services in one Vercel project:
+
+- `app`: the public Next.js service, routed at every public path.
+- `backend`: the internal FastAPI service, called by `app` through the
+  runtime-injected `BACKEND_URL` service binding.
+
+Set the Vercel project's framework to **Services**, configure the backend's
+`DATABASE_URL`, `JWT_SECRET`, and other secrets in the project environment, and
+deploy normally. Do not create `BACKEND_URL` yourself; Vercel injects it from
+the service binding. Run all services locally with `vercel dev`. When using
+`npm run dev` instead, `POST /api/analyse` falls back to a FastAPI server at
+`http://127.0.0.1:8000`.
+
 ## Local FastAPI and PostgreSQL backend
 
 The local PostgreSQL migration is separate from the Supabase migration because
