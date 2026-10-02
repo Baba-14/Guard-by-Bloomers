@@ -1,4 +1,73 @@
 'use client';
-'use client';
-import { useState } from 'react'; import { useRouter } from 'next/navigation'; import Link from 'next/link'; import { Header,Footer } from '@/components/Header';
-export default function Login(){const router=useRouter(); const [email,setEmail]=useState(''); const [password,setPassword]=useState(''); const [error,setError]=useState(''); const submit=(e:React.FormEvent)=>{e.preventDefault(); if(email==='admin@guard.test'&&password==='guard123'){sessionStorage.setItem('guard-demo-auth','admin');router.push('/admin')}else setError('For this local demo, use admin@guard.test and guard123.');}; return <><Header/><main className="page-shell"><div className="container" style={{maxWidth:560}}><div className="page-title"><div className="eyebrow">Your Guard</div><h1>Sign in to keep your checks together.</h1><p>Save results, review reports and manage your privacy settings.</p></div><form className="form-panel" onSubmit={submit}><label className="label">Email address</label><input className="input" type="email" placeholder="admin@guard.test" value={email} onChange={e=>setEmail(e.target.value)} required/><label className="label">Password</label><input className="input" type="password" placeholder="guard123" value={password} onChange={e=>setPassword(e.target.value)} required/>{error&&<p style={{color:'#b14d46',fontSize:13,marginTop:14}}>{error}</p>}<button className="btn btn-primary" style={{marginTop:22,width:'100%'}}>Sign in</button><button type="button" className="btn btn-outline" style={{marginTop:10,width:'100%'}}>Continue with Google</button><p className="helper" style={{textAlign:'center',marginTop:20}}>New to Guard? <Link href="/register" className="small-link">Create an account</Link></p><div className="notice" style={{marginTop:18}}>Local demo admin: <strong>admin@guard.test</strong> / <strong>guard123</strong></div></form></div></main><Footer/></>}
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { LayoutDashboard, ShieldCheck, UserRound } from 'lucide-react';
+import { Header, Footer } from '@/components/Header';
+
+type DemoRole = 'admin' | 'user';
+
+const accounts = {
+  admin: { email:'admin@guard.test', password:'guard123', destination:'/admin' },
+  user: { email:'user@guard.test', password:'guard123', destination:'/dashboard' },
+} as const;
+
+export default function Login() {
+  const router = useRouter();
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [error,setError] = useState('');
+
+  const signIn = (role:DemoRole) => {
+    sessionStorage.setItem('guard-demo-auth',role);
+    sessionStorage.setItem('guard-demo-role',role);
+    router.push(accounts[role].destination);
+  };
+
+  const submit = (event:React.FormEvent) => {
+    event.preventDefault();
+    const cleanEmail = email.trim().toLowerCase();
+    const role = (Object.keys(accounts) as DemoRole[]).find(key=>accounts[key].email===cleanEmail&&accounts[key].password===password);
+    if (role) signIn(role);
+    else setError('Those details do not match a demo account. Choose an account below or check the email and password.');
+  };
+
+  const chooseAccount = (role:DemoRole) => {
+    setError('');
+    setEmail(accounts[role].email);
+    setPassword(accounts[role].password);
+  };
+
+  return <>
+    <Header/>
+    <main className="page-shell">
+      <div className="container" style={{maxWidth:620}}>
+        <div className="page-title">
+          <div className="eyebrow">Your Guard</div>
+          <h1>Sign in to your workspace.</h1>
+          <p>Use the user dashboard for personal checks and reports, or the admin dashboard for Guard operations.</p>
+        </div>
+        <form className="form-panel" onSubmit={submit}>
+          <label className="label" htmlFor="login-email">Email address</label>
+          <input id="login-email" className="input" type="email" placeholder="you@example.com" value={email} onChange={event=>{setEmail(event.target.value);setError('')}} required/>
+          <label className="label" htmlFor="login-password">Password</label>
+          <input id="login-password" className="input" type="password" placeholder="Your password" value={password} onChange={event=>{setPassword(event.target.value);setError('')}} required/>
+          {error&&<p role="alert" style={{color:'#b14d46',fontSize:13,lineHeight:1.5,marginTop:14}}>{error}</p>}
+          <button type="submit" className="btn btn-primary" style={{marginTop:22,width:'100%'}}>Sign in <ShieldCheck size={16}/></button>
+
+          <div style={{marginTop:24,paddingTop:20,borderTop:'1px solid var(--line)'}}>
+            <strong style={{display:'block',fontSize:13,color:'var(--navy)',marginBottom:10}}>Demo accounts</strong>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+              <button type="button" className="btn btn-outline" style={{borderRadius:10,padding:'13px 12px'}} onClick={()=>chooseAccount('user')}><UserRound size={16}/>User account</button>
+              <button type="button" className="btn btn-outline" style={{borderRadius:10,padding:'13px 12px'}} onClick={()=>chooseAccount('admin')}><LayoutDashboard size={16}/>Admin account</button>
+            </div>
+            <p className="helper" style={{marginTop:12}}>Both demo accounts use the password <strong>guard123</strong>. Select an account, then choose Sign in.</p>
+          </div>
+          <p className="helper" style={{textAlign:'center',marginTop:20}}>New to Guard? <Link href="/register" className="small-link">Create an account</Link></p>
+        </form>
+      </div>
+    </main>
+    <Footer/>
+  </>;
+}

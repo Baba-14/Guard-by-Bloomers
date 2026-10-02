@@ -7,8 +7,11 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [role, setRole] = useState<'admin' | 'user' | null>(null);
   const previousY = useRef(0);
   useEffect(() => {
+    const storedRole = sessionStorage.getItem('guard-demo-role');
+    if (storedRole === 'admin' || storedRole === 'user') setRole(storedRole);
     const onScroll = () => {
       const currentY = window.scrollY;
       setScrolled(currentY > 24);
@@ -24,7 +27,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   return <><header className={headerClass}><div className="container" style={{display:'flex',width:'100%',alignItems:'center',justifyContent:'space-between'}}>
     <Link href="/" className="brand"><span className="brand-mark brand-mark-image"><img src={overlay||scrolled?'/images/guard-white.png':'/images/guard-violet.png'} alt=""/></span><span>Guard</span></Link>
     <button type="button" className="mobile-nav-toggle" aria-label={menuOpen?'Close navigation':'Open navigation'} aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={()=>setMenuOpen(open=>!open)}>{menuOpen?<X size={21}/>:<Menu size={21}/>}</button>
-    <nav id="primary-navigation" className={'nav '+(!overlay?'nav-light':'')+(menuOpen?' nav-open':'')}><Link href="/" onClick={()=>setMenuOpen(false)}>Home</Link><Link href="/detect" onClick={()=>setMenuOpen(false)}>Check Fraud</Link><Link href="/community" onClick={()=>setMenuOpen(false)}>Community</Link><Link href="/business" onClick={()=>setMenuOpen(false)}>Business</Link><Link href="/login" className="btn btn-primary" onClick={()=>setMenuOpen(false)}>Login</Link></nav>
+    <nav id="primary-navigation" className={'nav '+(!overlay?'nav-light':'')+(menuOpen?' nav-open':'')}><Link href="/" onClick={()=>setMenuOpen(false)}>Home</Link><Link href="/detect" onClick={()=>setMenuOpen(false)}>Check Fraud</Link><Link href="/learn" onClick={()=>setMenuOpen(false)}>Learn</Link><Link href="/community" onClick={()=>setMenuOpen(false)}>Community</Link><Link href="/business" onClick={()=>setMenuOpen(false)}>Business</Link><Link href={role==='admin'?'/admin':role==='user'?'/dashboard':'/login'} className="btn btn-primary" onClick={()=>setMenuOpen(false)}>{role==='admin'?'Admin':role==='user'?'Dashboard':'Login'}</Link></nav>
   </div></header></>;
 }
 
