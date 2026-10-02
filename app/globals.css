@@ -29,6 +29,9 @@ button, input, textarea, select { font:inherit; }
 .nav-light a:not(.btn):hover { color:#6d22b7; }
 .nav a:hover { color:var(--lime); }
 .mobile-nav-toggle { display:none; }
+.nav-signout { display:inline-flex; align-items:center; gap:6px; padding:0; border:0; color:inherit; background:transparent; font:inherit; cursor:pointer; }
+.nav-signout:hover { color:#ffb52e; }
+.nav-light .nav-signout:hover { color:#6d22b7; }
 .btn { border:0; border-radius:999px; cursor:pointer; padding:13px 20px; font-weight:700; transition:.18s ease; display:inline-flex; gap:9px; align-items:center; justify-content:center; }
 .btn-primary { background:var(--teal); color:white; box-shadow:0 6px 16px rgba(15,157,140,.18); }
 .btn-primary:hover { background:var(--teal-dark); transform:translateY(-1px); }
@@ -1131,6 +1134,8 @@ h2 { font-size:38px; line-height:1.08; letter-spacing:-.045em; color:var(--navy)
   .nav a:not(.btn) { display:flex!important; align-items:center; min-height:47px; padding:0 14px; border-radius:11px; color:#eee5f4; font-size:15px; }
   .nav a:not(.btn):hover { color:#fff; background:rgba(255,255,255,.08); }
   .nav .btn { width:100%; min-height:48px; margin-top:4px; }
+  .nav .nav-signout { min-height:47px; padding:0 14px; border-radius:11px; color:#eee5f4; font-size:15px; }
+  .nav .nav-signout:hover { color:#fff; background:rgba(255,255,255,.08); }
 
   .home-page>section { min-height:0!important; }
   .home-page>.hero { min-height:100svh!important; padding:104px 0 92px; align-items:center; background-position:61% center; }
