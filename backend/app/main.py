@@ -1,9 +1,51 @@
-"""Guard analysis boundary. Deterministic signals remain authoritative; AI is contextual only."""
-from typing import Literal
-from fastapi import FastAPI
-from pydantic import BaseModel, Field
+"""Guard API: local authentication, database health, and fraud analysis."""
+
+from typing import Annotated, Literal
+from uuid import UUID
+
+from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel, EmailStr, Field
+from sqlalchemy import select, text
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session, selectinload
+
+from .auth import create_access_token, get_current_user, hash_password, verify_password
+from .config import get_settings
+from .database import get_db
+from .models import Profile, User
 
 app = FastAPI(title="Guard Analysis API", version="0.1.0")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=list(get_settings().cors_origins),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+class RegisterRequest(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=8, max_length=128)
+    full_name: str = Field(min_length=2, max_length=120)
+
+
+class UserResponse(BaseModel):
+    id: UUID
+    email: EmailStr
+    full_name: str | None
+    role: str
+    is_active: bool
+    email_verified: bool
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: Literal["bearer"] = "bearer"
+    expires_in: int
+    user: UserResponse
 
 class AnalyseRequest(BaseModel):
     kind: Literal["message", "screenshot", "link", "number", "whatsapp", "payment", "call"]
@@ -24,6 +66,72 @@ SIGNALS = {
     "guarantee": "Guaranteed return or reward", "suspend": "Account-suspension threat",
     "remote": "Remote-access request",
 }
+
+
+def user_response(user: User) -> UserResponse:
+    return UserResponse(
+        id=user.id,
+        email=user.email,
+        full_name=user.profile.full_name,
+        role=user.profile.role.value,
+        is_active=user.is_active,
+        email_verified=user.email_verified,
+    )
+
+
+@app.get("/health")
+def health(db: Annotated[Session, Depends(get_db)]) -> dict[str, str]:
+    db.execute(text("select 1"))
+    return {"status": "ok", "database": "connected"}
+
+
+@app.post("/v1/auth/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+def register(request: RegisterRequest, db: Annotated[Session, Depends(get_db)]) -> UserResponse:
+    email = request.email.lower().strip()
+    if db.scalar(select(User.id).where(User.email == email)) is not None:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email is already registered")
+
+    user = User(email=email, password_hash=hash_password(request.password))
+    user.profile = Profile(full_name=request.full_name.strip())
+    db.add(user)
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Email is already registered")
+    db.refresh(user)
+    return user_response(user)
+
+
+@app.post("/v1/auth/login", response_model=TokenResponse)
+def login(
+    form: Annotated[OAuth2PasswordRequestForm, Depends()],
+    db: Annotated[Session, Depends(get_db)],
+) -> TokenResponse:
+    user = db.scalar(
+        select(User)
+        .options(selectinload(User.profile))
+        .where(User.email == form.username.lower().strip())
+    )
+    if user is None or not verify_password(form.password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    if not user.is_active:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Account is disabled")
+    access_token, expires_in = create_access_token(user)
+    return TokenResponse(
+        access_token=access_token,
+        expires_in=expires_in,
+        user=user_response(user),
+    )
+
+
+@app.get("/v1/auth/me", response_model=UserResponse)
+def me(current_user: Annotated[User, Depends(get_current_user)]) -> UserResponse:
+    return user_response(current_user)
 
 @app.post("/v1/analyse", response_model=AnalyseResponse)
 def analyse(request: AnalyseRequest) -> AnalyseResponse:
