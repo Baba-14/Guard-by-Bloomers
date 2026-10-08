@@ -5,7 +5,8 @@ import { ArrowRight, Check, FileUp, MessageCircle, Network, Radar, ShieldAlert, 
 import { Header, Footer } from './Header';
 
 export type Kind = 'message'|'screenshot'|'link'|'number'|'whatsapp'|'payment'|'call';
-export type AnalysisResult = {level:string;reason:string;signals:string[];action:string;score?:number;pattern?:string};
+export type AnalysisEvidence = {key:string;label:string;source:string;confidence:number;contribution:number;evidence:string};
+export type AnalysisResult = {level:string;reason:string;signals:string[];action:string;score?:number;pattern?:string;confidence?:number;sources?:string[];checkId?:string|null;stored?:boolean;evidence?:AnalysisEvidence[];providerStatus?:string;providerModel?:string|null};
 const meta: Record<Kind,{title:string;prompt:string;placeholder:string;button:string}> = {
  message:{title:'Check a suspicious message',prompt:'Paste the suspicious message',placeholder:'Paste the SMS, WhatsApp message, email, DM or offer here…',button:'Analyse Message'},
  screenshot:{title:'Check a suspicious screenshot',prompt:'Upload the screenshot you want Guard to inspect',placeholder:'',button:'Analyse Screenshot'},

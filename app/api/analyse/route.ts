@@ -10,13 +10,30 @@ type BackendResponse = {
   explanation: string;
   recommended_action: string;
   pattern: string;
+  confidence: number;
+  sources: string[];
+  check_id: string | null;
+  stored: boolean;
+  evidence: Array<{
+    key: string;
+    label: string;
+    source: string;
+    confidence: number;
+    contribution: number;
+    evidence: string;
+  }>;
+  provider_status: string;
+  provider_model: string | null;
 };
 
 export async function POST(request: Request) {
   const { kind, input = '' } = await request.json() as { kind: AnalyseKind; input?: string };
+  const headers = new Headers({ 'Content-Type': 'application/json' });
+  const authorization = request.headers.get('authorization');
+  if (authorization) headers.set('authorization', authorization);
   const response = await fetch(backendEndpoint('v1/analyse'), {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({ kind, content: input }),
     cache: 'no-store',
   });
@@ -34,5 +51,12 @@ export async function POST(request: Request) {
     signals: result.signals,
     action: result.recommended_action,
     pattern: result.pattern,
+    confidence: result.confidence,
+    sources: result.sources,
+    checkId: result.check_id,
+    stored: result.stored,
+    evidence: result.evidence,
+    providerStatus: result.provider_status,
+    providerModel: result.provider_model,
   });
 }

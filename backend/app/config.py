@@ -22,6 +22,20 @@ class Settings:
         for origin in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
         if origin.strip()
     )
+    jev_api_key = os.getenv("JEV_API_KEY", "")
+    jev_base_url = os.getenv("JEV_BASE_URL", "https://api.typesafe.ai").rstrip("/")
+    jev_model = os.getenv("JEV_MODEL", "jev-latest")
+    jev_timeout_seconds = float(os.getenv("JEV_TIMEOUT_SECONDS", "5"))
+    analysis_persistence_enabled = os.getenv(
+        "ANALYSIS_PERSISTENCE_ENABLED", "false"
+    ).lower() in {"1", "true", "yes", "on"}
+    analysis_database_lookup_enabled = os.getenv(
+        "ANALYSIS_DATABASE_LOOKUP_ENABLED",
+        os.getenv("ANALYSIS_PERSISTENCE_ENABLED", "false"),
+    ).lower() in {"1", "true", "yes", "on"}
+    store_analysis_content = os.getenv("STORE_ANALYSIS_CONTENT", "false").lower() in {
+        "1", "true", "yes", "on"
+    }
 
     def require_jwt_secret(self) -> str:
         if len(self.jwt_secret) < 32:

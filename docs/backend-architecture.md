@@ -26,6 +26,48 @@ The browser-facing application is Next.js. FastAPI owns backend validation,
 authentication, authorization, and fraud-analysis endpoints. PostgreSQL is the
 system of record for users and Guard data.
 
+### Fraud-decision architecture
+
+Infrastructure and database design do not decide whether something is risky.
+Guard's analysis pipeline makes that boundary explicit:
+
+```text
+Message or URL
+      |
+      v
+Validation and normalization
+      |
+      +------------------+------------------+------------------+
+      v                  v                  v                  v
+Message rules       URL-shape checks   Guard reputation   Jev typed questions
+      |                  |                  |                  |
+      +------------------+------------------+------------------+
+                         v
+                  Guard risk engine
+                  - deduplicate evidence
+                  - cap AI contribution
+                  - apply Guard thresholds
+                         |
+                         v
+        Classification + reasons + safer action
+                         |
+                         v
+             Optional PostgreSQL persistence
+```
+
+The modules live under `backend/app/analysis/`:
+
+- `rules.py`: deterministic, word-boundary-aware message signals.
+- `urls.py`: local URL structure and deception signals.
+- `knowledge.py`: moderated Guard domain-reputation evidence.
+- `jev.py`: timeout-bounded Jev adapter and typed questions.
+- `engine.py`: Guard-owned score fusion and output language.
+- `persistence.py`: optional check, result, and evidence storage.
+
+Jev never owns the final verdict. Its combined contribution is capped at 30
+points while `High Risk` starts at 55. The route continues with local analysis
+when no key is configured or when Jev times out or fails.
+
 ## 2. Technology stack
 
 ### FastAPI
@@ -58,9 +100,9 @@ The local database is named `guard`.
 SQLAlchemy is the Python database layer. It creates the connection engine,
 provides request-scoped sessions, and maps Python objects to database tables.
 
-The current ORM models cover `users` and `profiles`, which are required for
-authentication. The rest of the tables already exist in PostgreSQL and can be
-mapped as their API features are implemented.
+The ORM models cover authentication, checks and results, signal links, domain
+reputation, fraud reports, and audit logs. Other schema tables remain available
+to map as their product features are implemented.
 
 Relevant files:
 
@@ -263,17 +305,23 @@ Frontend sends Authorization: Bearer <token>
   -> valid users reach the protected route
 ```
 
-`GET /v1/auth/me` is the current example of a protected route.
+`GET /v1/auth/me`, `GET /v1/history`, and the analyst routes are protected.
 
 ## 5. Current API surface
 
 | Method | Endpoint | Authentication | Purpose |
 | --- | --- | --- | --- |
 | `GET` | `/health` | No | Confirms API and database availability |
+| `GET` | `/health/live` | No | Confirms the API process is responsive |
 | `POST` | `/v1/auth/register` | No | Creates a user and profile |
 | `POST` | `/v1/auth/login` | No | Verifies credentials and issues a JWT |
 | `GET` | `/v1/auth/me` | Bearer JWT | Returns the current user |
-| `POST` | `/v1/analyse` | No | Runs deterministic fraud analysis |
+| `POST` | `/v1/analyse` | Optional JWT | Runs Guard rules, URL and database checks, optional Jev, and score fusion |
+| `GET` | `/v1/history` | Bearer JWT | Returns the current user's stored checks |
+| `POST` | `/v1/reports` | Optional JWT | Accepts an anonymous or owned fraud report |
+| `GET` | `/v1/admin/checks` | Analyst/admin JWT | Reviews recent stored checks |
+| `GET` | `/v1/admin/reports` | Analyst/admin JWT | Lists the report review queue |
+| `PATCH` | `/v1/admin/reports/{id}` | Analyst/admin JWT | Changes report status and writes an audit log |
 
 The interactive version is available at `http://127.0.0.1:8000/docs` while the
 backend is running.
@@ -412,8 +460,8 @@ and maps FastAPI's `explanation` and `recommended_action` fields to the UI's
 The foundation works, but the following features have not been implemented yet:
 
 - Connect the Next.js login and registration forms to FastAPI.
-- Persist fraud checks and analysis results from `/v1/analyse`.
-- Add role-check dependencies and protected admin endpoints.
+- Associate optionally authenticated users with their fraud checks.
+- Connect the existing admin interface to the protected recent-checks endpoint.
 - Add email verification.
 - Add password reset and password change flows.
 - Decide on refresh tokens or shorter cookie-backed sessions.
@@ -421,7 +469,7 @@ The foundation works, but the following features have not been implemented yet:
 - Add login rate limiting and account lockout protections.
 - Add audit logging for authentication and administrative actions.
 - Add evidence file validation and private object storage.
-- Add automated API and database tests.
+- Add database integration tests in addition to the risk-engine regression suite.
 - Configure Alembic for future incremental migrations.
 - Replace the development JWT secret before any deployment.
 - Deploy PostgreSQL and FastAPI behind TLS/HTTPS.
@@ -454,10 +502,9 @@ Expected response:
 
 ## 10. Recommended next implementation order
 
-1. Standardize the FastAPI and frontend fraud-analysis request/response types.
-2. Create `lib/api.ts` and connect registration.
-3. Connect login and `/v1/auth/me`.
-4. Add a reusable frontend auth provider and route guards.
-5. Persist authenticated checks and results.
-6. Add server-side role enforcement for admin APIs.
-7. Introduce Alembic before making the next database schema change.
+1. Build and review the Ghana-focused labelled evaluation set in `DATA.md`.
+2. Measure local-only and local-plus-Jev results against the same examples.
+3. Add a dedicated URL-reputation provider behind the URL analyzer boundary.
+4. Connect login, registration, and authenticated check ownership.
+5. Connect the admin interface to `/v1/admin/checks`.
+6. Introduce Alembic before making the next database schema change.

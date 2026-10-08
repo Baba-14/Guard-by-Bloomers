@@ -1,22 +1,29 @@
 """Guard API: local authentication, database health, and fraud analysis."""
 
+from datetime import datetime
+from decimal import Decimal
+import logging
 from typing import Annotated, Literal
 from uuid import UUID
 
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from sqlalchemy import select, text
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session, selectinload
 
-from .auth import create_access_token, get_current_user, hash_password, verify_password
+from .analysis import AnalysisEngine
+from .analysis.knowledge import analyse_known_data
+from .analysis.persistence import persist_outcome
+from .auth import create_access_token, get_current_user, get_optional_user, hash_password, verify_password
 from .config import get_settings
 from .database import get_db
-from .models import Profile, User
+from .models import AuditLog, Check, FraudReport, Profile, ReportStatus, User, UserRole
 
-app = FastAPI(title="Guard Analysis API", version="0.1.0")
+app = FastAPI(title="Guard Analysis API", version="0.2.0")
+logger = logging.getLogger(__name__)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(get_settings().cors_origins),
@@ -47,9 +54,19 @@ class TokenResponse(BaseModel):
     expires_in: int
     user: UserResponse
 
+
 class AnalyseRequest(BaseModel):
     kind: Literal["message", "screenshot", "link", "number", "whatsapp", "payment", "call"]
-    content: str = Field(default="", max_length=20000)
+    content: str = Field(min_length=1, max_length=20000)
+
+    @field_validator("content")
+    @classmethod
+    def content_must_not_be_blank(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("content must not be blank")
+        return value
+
 
 class AnalyseResponse(BaseModel):
     level: Literal["Low Risk", "Caution", "High Risk", "Unable to Determine"]
@@ -58,15 +75,92 @@ class AnalyseResponse(BaseModel):
     explanation: str
     recommended_action: str
     pattern: str
+    confidence: float = Field(ge=0, le=1)
+    sources: list[str]
+    check_id: str | None = None
+    stored: bool
+    evidence: list["EvidenceResponse"]
+    provider_status: str
+    provider_model: str | None
 
-SIGNALS = {
-    "otp": "OTP requested", "pin": "PIN or secret code requested",
-    "password": "Password requested", "urgent": "Urgency or pressure to act",
-    "immediately": "Urgency or pressure to act", "click": "Link or click-through request",
-    "pay": "Payment request", "fee": "Advance fee or delivery charge",
-    "guarantee": "Guaranteed return or reward", "suspend": "Account-suspension threat",
-    "remote": "Remote-access request",
-}
+
+class EvidenceResponse(BaseModel):
+    key: str
+    label: str
+    source: str
+    confidence: float = Field(ge=0, le=1)
+    contribution: int = Field(ge=0, le=100)
+    evidence: str
+
+
+class AdminCheckResponse(BaseModel):
+    id: UUID
+    check_type: str
+    status: str
+    content: str | None
+    content_sha256: str | None
+    risk_level: str | None
+    risk_score: int | None
+    pattern: str | None
+    created_at: datetime
+
+
+class HistoryResponse(BaseModel):
+    id: UUID
+    check_type: str
+    status: str
+    risk_level: str | None
+    risk_score: int | None
+    confidence: float | None
+    pattern: str | None
+    created_at: datetime
+
+
+class ReportCreateRequest(BaseModel):
+    description: str = Field(min_length=20, max_length=10000)
+    entity_type: Literal["message", "link", "phone", "whatsapp", "payment", "other"] | None = None
+    entity_value: str | None = Field(default=None, max_length=2048)
+    amount_requested: Decimal | None = Field(default=None, ge=0)
+    amount_lost: Decimal | None = Field(default=None, ge=0)
+    incident_at: datetime | None = None
+
+    @field_validator("description")
+    @classmethod
+    def description_must_not_be_blank(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("description must not be blank")
+        return value
+
+
+class ReportResponse(BaseModel):
+    id: UUID
+    status: ReportStatus
+    created_at: datetime
+
+
+class AdminReportResponse(ReportResponse):
+    reporter_id: UUID | None
+    description: str
+    entity_type: str | None
+    entity_value: str | None
+    amount_requested: Decimal | None
+    amount_lost: Decimal | None
+    incident_at: datetime | None
+
+
+class ReportReviewRequest(BaseModel):
+    status: Literal[
+        "under_review",
+        "verified_signal",
+        "insufficient_evidence",
+        "rejected",
+        "archived",
+    ]
+
+
+analysis_engine = AnalysisEngine()
+ANALYST_ROLES = {UserRole.super_admin, UserRole.fraud_analyst}
 
 
 def user_response(user: User) -> UserResponse:
@@ -80,10 +174,65 @@ def user_response(user: User) -> UserResponse:
     )
 
 
+def require_analyst(user: User) -> None:
+    if user.profile.role not in ANALYST_ROLES:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Analyst access required")
+
+
 @app.get("/health")
 def health(db: Annotated[Session, Depends(get_db)]) -> dict[str, str]:
-    db.execute(text("select 1"))
+    try:
+        db.execute(text("select 1"))
+    except SQLAlchemyError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database is unavailable",
+        ) from exc
     return {"status": "ok", "database": "connected"}
+
+
+@app.get("/health/live")
+def liveness() -> dict[str, str]:
+    return {"status": "ok"}
+
+
+@app.get("/users", response_model=list[UserResponse], include_in_schema=False)
+def get_all_users(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> list[UserResponse]:
+    require_analyst(current_user)
+    users = db.scalars(select(User).options(selectinload(User.profile))).all()
+    return [user_response(user) for user in users]
+
+
+@app.get("/v1/admin/checks", response_model=list[AdminCheckResponse])
+def get_recent_checks(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+    limit: Annotated[int, Query(ge=1, le=100)] = 50,
+) -> list[AdminCheckResponse]:
+    require_analyst(current_user)
+    checks = db.scalars(
+        select(Check)
+        .options(selectinload(Check.analysis_result))
+        .order_by(Check.created_at.desc())
+        .limit(limit)
+    ).all()
+    return [
+        AdminCheckResponse(
+            id=check.id,
+            check_type=check.check_type,
+            status=check.status,
+            content=check.input_metadata.get("content"),
+            content_sha256=check.input_metadata.get("sha256"),
+            risk_level=check.analysis_result.risk_level.value if check.analysis_result else None,
+            risk_score=check.analysis_result.risk_score if check.analysis_result else None,
+            pattern=check.analysis_result.likely_pattern if check.analysis_result else None,
+            created_at=check.created_at,
+        )
+        for check in checks
+    ]
 
 
 @app.post("/v1/auth/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
@@ -134,48 +283,183 @@ def login(
 def me(current_user: Annotated[User, Depends(get_current_user)]) -> UserResponse:
     return user_response(current_user)
 
-@app.post("/v1/analyse", response_model=AnalyseResponse)
-def analyse(request: AnalyseRequest) -> AnalyseResponse:
-    # Uploaded content is data, never instructions. The production adapter can call an
-    # AI model for intent/context, but the score must still be fused with these rules.
-    text = request.content.lower()
-    signals = list(dict.fromkeys(label for term, label in SIGNALS.items() if term in text))
-    if request.kind == "screenshot":
-        signals.append("Image submitted for contextual review")
-    if request.kind in ("number", "whatsapp"):
-        signals.append("Reputation data is moderated and does not identify a person as a fraudster")
-    if request.kind == "whatsapp":
-        signals.append("WhatsApp accounts can be taken over; verify unusual requests through another trusted channel")
-    suspicious_hosted_brand = (
-        request.kind == "link"
-        and any(host in text for host in ("vercel.app", "netlify.app", "pages.dev"))
-        and any(brand in text for brand in ("bank", "bnk", "gcb", "momo", "mtn", "ecobank", "login", "verify", "secure", "account"))
+
+@app.get("/v1/history", response_model=list[HistoryResponse])
+def history(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+    limit: Annotated[int, Query(ge=1, le=100)] = 50,
+) -> list[HistoryResponse]:
+    checks = db.scalars(
+        select(Check)
+        .options(selectinload(Check.analysis_result))
+        .where(Check.user_id == current_user.id)
+        .order_by(Check.created_at.desc())
+        .limit(limit)
+    ).all()
+    return [
+        HistoryResponse(
+            id=check.id,
+            check_type=check.check_type,
+            status=check.status,
+            risk_level=check.analysis_result.risk_level.value if check.analysis_result else None,
+            risk_score=check.analysis_result.risk_score if check.analysis_result else None,
+            confidence=(check.analysis_result.model_metadata.get("confidence")
+                        if check.analysis_result else None),
+            pattern=check.analysis_result.likely_pattern if check.analysis_result else None,
+            created_at=check.created_at,
+        )
+        for check in checks
+    ]
+
+
+@app.post("/v1/reports", response_model=ReportResponse, status_code=status.HTTP_201_CREATED)
+def create_report(
+    request: ReportCreateRequest,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User | None, Depends(get_optional_user)],
+) -> ReportResponse:
+    report = FraudReport(
+        reporter_id=current_user.id if current_user else None,
+        description=request.description,
+        entity_type=request.entity_type,
+        entity_value=request.entity_value.strip() if request.entity_value else None,
+        amount_requested=request.amount_requested,
+        amount_lost=request.amount_lost,
+        incident_at=request.incident_at,
     )
-    if suspicious_hosted_brand:
-        signals.append("Brand-like name on a hosted subdomain")
-    score = min(90, len(signals) * 18 + (15 if "http" in text else 0) + (28 if suspicious_hosted_brand else 0))
-    level = "High Risk" if score >= 60 else "Caution" if score >= 30 else "Low Risk" if score == 0 else "Unable to Determine"
-    explanation = {
-        "High Risk": "Strong fraud indicators were detected in the submitted information.",
-        "Caution": "Some suspicious or unverifiable signals were detected.",
-        "Low Risk": "No strong deterministic fraud signal was detected in the information submitted.",
-        "Unable to Determine": "Not enough information was available to make a confident assessment.",
-    }[level]
-    action = ("Do not share OTPs, PINs or more money. Pause contact and verify through an official channel."
-              if level == "High Risk" else "No strong warning sign was found, but still verify unexpected requests before acting."
-              if level == "Low Risk" else "Pause before responding. Verify independently before acting.")
-    pattern = (
-        "Possible brand impersonation" if suspicious_hosted_brand else
-        "WhatsApp account reputation lookup" if request.kind == "whatsapp" else
-        "Phone reputation lookup" if request.kind == "number" else
-        "Suspicious link assessment" if request.kind == "link" else
-        "Contextual fraud assessment"
+    db.add(report)
+    try:
+        db.commit()
+        db.refresh(report)
+    except SQLAlchemyError as exc:
+        db.rollback()
+        logger.exception("Fraud report could not be stored")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Report storage is temporarily unavailable",
+        ) from exc
+    return ReportResponse(id=report.id, status=report.status, created_at=report.created_at)
+
+
+@app.get("/v1/admin/reports", response_model=list[AdminReportResponse])
+def get_reports(
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+    report_status: Annotated[ReportStatus | None, Query(alias="status")] = None,
+    limit: Annotated[int, Query(ge=1, le=100)] = 50,
+) -> list[AdminReportResponse]:
+    require_analyst(current_user)
+    statement = select(FraudReport).order_by(FraudReport.created_at.desc()).limit(limit)
+    if report_status is not None:
+        statement = statement.where(FraudReport.status == report_status)
+    reports = db.scalars(statement).all()
+    return [
+        AdminReportResponse(
+            id=report.id,
+            status=report.status,
+            created_at=report.created_at,
+            reporter_id=report.reporter_id,
+            description=report.description,
+            entity_type=report.entity_type,
+            entity_value=report.entity_value,
+            amount_requested=report.amount_requested,
+            amount_lost=report.amount_lost,
+            incident_at=report.incident_at,
+        )
+        for report in reports
+    ]
+
+
+@app.patch("/v1/admin/reports/{report_id}", response_model=AdminReportResponse)
+def review_report(
+    report_id: UUID,
+    request: ReportReviewRequest,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(get_current_user)],
+) -> AdminReportResponse:
+    require_analyst(current_user)
+    report = db.get(FraudReport, report_id)
+    if report is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Report not found")
+    previous_status = report.status.value
+    report.status = ReportStatus(request.status)
+    db.add(AuditLog(
+        actor_id=current_user.id,
+        action="fraud_report.status_changed",
+        target_type="fraud_report",
+        target_id=report.id,
+        metadata_={"from": previous_status, "to": request.status},
+    ))
+    try:
+        db.commit()
+        db.refresh(report)
+    except SQLAlchemyError as exc:
+        db.rollback()
+        logger.exception("Fraud report review could not be stored")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Report review is temporarily unavailable",
+        ) from exc
+    return AdminReportResponse(
+        id=report.id,
+        status=report.status,
+        created_at=report.created_at,
+        reporter_id=report.reporter_id,
+        description=report.description,
+        entity_type=report.entity_type,
+        entity_value=report.entity_value,
+        amount_requested=report.amount_requested,
+        amount_lost=report.amount_lost,
+        incident_at=report.incident_at,
+    )
+
+
+@app.post("/v1/analyse", response_model=AnalyseResponse)
+def analyse(
+    request: AnalyseRequest,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User | None, Depends(get_optional_user)],
+) -> AnalyseResponse:
+    settings = get_settings()
+    try:
+        database_signals = analyse_known_data(db, settings, request.kind, request.content)
+        outcome = analysis_engine.analyse(request.kind, request.content, database_signals)
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(exc)) from exc
+    check_id = persist_outcome(
+        db,
+        request.kind,
+        request.content,
+        outcome,
+        settings,
+        user_id=current_user.id if current_user else None,
     )
     return AnalyseResponse(
-        level=level,
-        score=score,
-        signals=signals or ["No deterministic warning signal was found in the submitted content."],
-        explanation=explanation,
-        recommended_action=action,
-        pattern=pattern,
+        level=outcome.level,
+        score=outcome.score,
+        signals=[signal.label for signal in outcome.signals]
+        or (["This analysis capability is not yet available in the MVP."]
+            if outcome.level == "Unable to Determine"
+            else ["No strong warning signal was found in the submitted content."]),
+        explanation=outcome.explanation,
+        recommended_action=outcome.recommended_action,
+        pattern=outcome.pattern,
+        confidence=outcome.confidence,
+        sources=sorted({signal.source for signal in outcome.signals}),
+        check_id=check_id,
+        stored=check_id is not None,
+        evidence=[
+            EvidenceResponse(
+                key=signal.key,
+                label=signal.label,
+                source=signal.source,
+                confidence=signal.confidence,
+                contribution=signal.contribution,
+                evidence=signal.evidence,
+            )
+            for signal in outcome.signals
+        ],
+        provider_status=outcome.provider.status,
+        provider_model=outcome.provider.model,
     )

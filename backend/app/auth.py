@@ -18,7 +18,7 @@ from .models import User
 
 
 password_hash = PasswordHash.recommended()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/v1/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/v1/auth/login", auto_error=False)
 
 
 def hash_password(password: str) -> str:
@@ -41,15 +41,16 @@ def create_access_token(user: User) -> tuple[str, int]:
     return token, expires_in
 
 
-def get_current_user(
-    token: Annotated[str, Depends(oauth2_scheme)],
-    db: Annotated[Session, Depends(get_db)],
-) -> User:
+def _user_from_token(token: str | None, db: Session, *, required: bool) -> User | None:
     credentials_error = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid or expired access token",
         headers={"WWW-Authenticate": "Bearer"},
     )
+    if token is None:
+        if required:
+            raise credentials_error
+        return None
     try:
         settings = get_settings()
         payload = jwt.decode(
@@ -67,3 +68,19 @@ def get_current_user(
     if user is None or not user.is_active:
         raise credentials_error
     return user
+
+
+def get_current_user(
+    token: Annotated[str | None, Depends(oauth2_scheme)],
+    db: Annotated[Session, Depends(get_db)],
+) -> User:
+    user = _user_from_token(token, db, required=True)
+    assert user is not None
+    return user
+
+
+def get_optional_user(
+    token: Annotated[str | None, Depends(oauth2_scheme)],
+    db: Annotated[Session, Depends(get_db)],
+) -> User | None:
+    return _user_from_token(token, db, required=False)
