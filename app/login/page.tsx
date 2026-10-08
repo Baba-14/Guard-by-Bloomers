@@ -18,19 +18,31 @@ export default function Login() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [error,setError] = useState('');
+  const [loading,setLoading] = useState(false);
 
   const signIn = (role:DemoRole) => {
+    sessionStorage.removeItem('guard-api-token');
     sessionStorage.setItem('guard-demo-auth',role);
     sessionStorage.setItem('guard-demo-role',role);
     router.push(accounts[role].destination);
   };
 
-  const submit = (event:React.FormEvent) => {
+  const submit = async (event:React.FormEvent) => {
     event.preventDefault();
     const cleanEmail = email.trim().toLowerCase();
     const role = (Object.keys(accounts) as DemoRole[]).find(key=>accounts[key].email===cleanEmail&&accounts[key].password===password);
-    if (role) signIn(role);
-    else setError('Those details do not match a demo account. Choose an account below or check the email and password.');
+    if (role) { signIn(role); return; }
+    setLoading(true); setError('');
+    try {
+      const form = new URLSearchParams({ username:cleanEmail, password });
+      const response = await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:form});
+      const body = await response.json();
+      if(!response.ok) throw new Error(body.detail||'Sign in failed.');
+      sessionStorage.setItem('guard-api-token',body.access_token);
+      sessionStorage.setItem('guard-demo-role',body.user.role);
+      router.push(['super_admin','fraud_analyst','support_admin'].includes(body.user.role)?'/admin':'/dashboard');
+    } catch(reason) { setError(reason instanceof Error?reason.message:'Sign in failed.'); }
+    finally { setLoading(false); }
   };
 
   const chooseAccount = (role:DemoRole) => {
@@ -54,7 +66,7 @@ export default function Login() {
           <label className="label" htmlFor="login-password">Password</label>
           <input id="login-password" className="input" type="password" placeholder="Your password" value={password} onChange={event=>{setPassword(event.target.value);setError('')}} required/>
           {error&&<p role="alert" style={{color:'#b14d46',fontSize:13,lineHeight:1.5,marginTop:14}}>{error}</p>}
-          <button type="submit" className="btn btn-primary" style={{marginTop:22,width:'100%'}}>Sign in <ShieldCheck size={16}/></button>
+          <button type="submit" className="btn btn-primary" disabled={loading} style={{marginTop:22,width:'100%'}}>{loading?'Signing in…':'Sign in'} <ShieldCheck size={16}/></button>
 
           <div style={{marginTop:24,paddingTop:20,borderTop:'1px solid var(--line)'}}>
             <strong style={{display:'block',fontSize:13,color:'var(--navy)',marginBottom:10}}>Demo accounts</strong>

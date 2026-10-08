@@ -197,6 +197,25 @@ uuid_generate_v4()         -> gen_random_uuid()
 The original Supabase migration was not overwritten, so a future Supabase
 deployment remains possible.
 
+The additive Guard Intelligence schema is in `backend/migrations/002_guard_intelligence.sql`
+and `supabase/migrations/002_guard_intelligence.sql`. It adds provenance-aware
+dataset items and sources, review queue decisions, brands, URL/phone intelligence,
+model predictions, and dataset/model versions while continuing to reference the
+existing `fraud_reports`, `checks`, `fraud_categories`, `phone_entities`, and
+`domain_entities` tables.
+
+Private analysis and data contribution are intentionally separate:
+
+```text
+POST /v1/analyse -> fused risk result, never persisted
+POST /v1/contributions -> consented report -> de-identification -> pending review
+pending review -> analyst decision -> verified dataset
+verified dataset -> explicit dataset version/split -> offline evaluation/training
+```
+
+There is no route or database trigger that trains or deploys a model from pending
+or newly verified records.
+
 ### Authentication tables
 
 `users` contains security-related account data:

@@ -41,6 +41,7 @@ authentication is owned by FastAPI instead of `auth.users` and `auth.uid()`.
 createdb guard                         # skip when the database already exists
 psql -d guard -f backend/migrations/001_guard_postgres.sql
 psql -d guard -f backend/migrations/002_analysis_signals.sql
+psql -d guard -f backend/migrations/002_guard_intelligence.sql
 python3 -m venv backend/.venv
 backend/.venv/bin/pip install -r backend/requirements.txt
 cp backend/.env.example backend/.env  # keep the real file private
@@ -100,6 +101,30 @@ development secret or commit `backend/.env`.
 - Detection experience: `/detect` and the six `/detect/[kind]` screens
 - User dashboard shell: `/dashboard`
 - Admin intelligence dashboard: `/admin`
+
+## Intelligence pipeline
+
+`POST /v1/analyse` is the shared analysis endpoint for the web app, future
+browser/mobile clients and partner integrations. Private checks are not dataset
+contributions. `POST /v1/contributions` requires explicit contribution consent
+and creates a de-identified candidate in the human review queue.
+
+Analyst-only routes under `/v1/intelligence` provide the overview, review
+decisions, dataset filters, manual entry, CSV/XLSX/JSON imports, provenance,
+brands, URL and phone intelligence. Imported and reported records remain pending
+until an analyst marks them fraud, legitimate or uncertain and approves them.
+Model and dataset version tables deliberately do not trigger automatic training.
+
+After registering the first real administrator, promote that account once from a
+trusted database session (replace the example email):
+
+```sql
+update profiles set role = 'super_admin'
+where id = (select id from users where email = 'admin@example.com');
+```
+
+The hard-coded demo admin continues to show safe preview data; live Intelligence
+writes require a real JWT-backed `super_admin` or `fraud_analyst` account.
 
 ## Security notes
 

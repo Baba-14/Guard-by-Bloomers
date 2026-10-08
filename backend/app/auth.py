@@ -14,7 +14,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from .config import get_settings
 from .database import get_db
-from .models import User
+from .models import User, UserRole
 
 
 password_hash = PasswordHash.recommended()
@@ -84,3 +84,12 @@ def get_optional_user(
     db: Annotated[Session, Depends(get_db)],
 ) -> User | None:
     return _user_from_token(token, db, required=False)
+
+
+def require_analyst(current_user: Annotated[User, Depends(get_current_user)]) -> User:
+    if current_user.profile.role not in (UserRole.super_admin, UserRole.fraud_analyst):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Fraud analyst or super administrator access is required",
+        )
+    return current_user

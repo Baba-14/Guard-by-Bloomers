@@ -20,6 +20,7 @@ from .analysis.persistence import persist_outcome
 from .auth import create_access_token, get_current_user, get_optional_user, hash_password, verify_password
 from .config import get_settings
 from .database import get_db
+from .intelligence_routes import router as intelligence_router
 from .models import AuditLog, Check, FraudReport, Profile, ReportStatus, User, UserRole
 
 app = FastAPI(title="Guard Analysis API", version="0.2.0")
@@ -31,6 +32,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(intelligence_router)
 
 
 class RegisterRequest(BaseModel):
