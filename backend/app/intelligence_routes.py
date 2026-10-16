@@ -7,11 +7,11 @@ import io
 import json
 from datetime import datetime, timedelta, timezone
 from typing import Annotated, Literal
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, UploadFile, status
 from pydantic import BaseModel, Field
-from sqlalchemy import func, select
+from sqlalchemy import func, insert, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, selectinload
 
@@ -558,6 +558,12 @@ async def import_dataset(db: Db, _: Analyst, source_id: UUID, file: UploadFile =
     except (ValueError, json.JSONDecodeError, StopIteration) as error:
         raise HTTPException(status_code=422, detail=f"Could not parse dataset: {error}")
     imported, skipped, errors = 0, 0, []
+    prepared: list[dict] = []
+    category_cache: dict[str, FraudCategory | None] = {"": None}
+    for category in db.scalars(select(FraudCategory)).all():
+        category_cache[category.name.casefold()] = category
+        category_cache[category.slug.casefold()] = category
+    seen_hashes: set[str] = set()
     for index, row in enumerate(rows, start=2):
         row = {str(key).strip().lower().replace(" ", "_"): value for key, value in row.items() if key is not None}
         content = str(row.get("content") or row.get("message") or "").strip()
@@ -569,7 +575,21 @@ async def import_dataset(db: Db, _: Analyst, source_id: UUID, file: UploadFile =
             errors.append({"row": index, "error": "label must be fraud, legitimate or uncertain"})
             continue
         label = DatasetLabel(raw_label)
-        category = category_for(db, str(row.get("category") or row.get("fraud_category") or "")) if (row.get("category") or row.get("fraud_category")) else None
+        category_name = str(row.get("category") or row.get("fraud_category") or "").strip()
+        category_key = category_name.casefold()
+        if category_key not in category_cache:
+            canonical_name = next((name for name in REPORT_CATEGORY_DESCRIPTIONS if name.casefold() == category_key), None)
+            if canonical_name:
+                category_cache[category_key] = FraudCategory(
+                    name=canonical_name,
+                    slug=canonical_name.lower().replace(" ", "-"),
+                    description=REPORT_CATEGORY_DESCRIPTIONS[canonical_name],
+                )
+                db.add(category_cache[category_key])
+                db.flush()
+            else:
+                category_cache[category_key] = None
+        category = category_cache[category_key]
         raw_country = str(row.get("country_code") or row.get("country") or "GH").strip().upper()
         country_code = raw_country[:2] if raw_country else None
         ghana_value = str(row.get("ghana_specific") or row.get("is_ghana_specific") or "").lower().strip()
@@ -578,19 +598,46 @@ async def import_dataset(db: Db, _: Analyst, source_id: UUID, file: UploadFile =
         channel = str(row.get("channel") or "").strip().lower() or None
         language = str(row.get("language") or "en").strip().lower() or None
         notes = str(row.get("notes") or "").strip()
-        try:
-            with db.begin_nested():
-                create_candidate(
-                    db, content=content, source=source, label=label,
-                    category_id=category.id if category else None, channel=channel,
-                    country_code=country_code, is_ghana_specific=is_ghana_specific,
-                    content_type=content_type, language=language, consent=True,
-                    metadata={"import_file": file.filename, "import_row": index, "notes": notes or None},
-                )
-            imported += 1
-        except IntegrityError:
+        clean_content, had_pii = deidentify(content)
+        content_hash = item_hash(clean_content)
+        if content_hash in seen_hashes:
             skipped += 1
-    db.commit()
+            continue
+        seen_hashes.add(content_hash)
+        prepared.append({
+            "content": clean_content, "content_hash": content_hash, "content_type": content_type,
+            "channel": channel, "label": label, "category_id": category.id if category else None,
+            "source_id": source.id, "country_code": country_code,
+            "is_ghana_specific": is_ghana_specific, "language": language,
+            "verification_status": ReviewStatus.pending, "contribution_consent": True,
+            "privacy_status": "deidentified" if had_pii else "reviewed_no_direct_pii",
+            "metadata_json": {
+                "import_file": file.filename, "import_row": index, "notes": notes or None,
+                "extracted_signals": [signal.key for signal in analyse_text(clean_content)],
+            },
+        })
+
+    existing_hashes = set(db.scalars(
+        select(DatasetItem.content_hash).where(
+            DatasetItem.content_hash.in_([item["content_hash"] for item in prepared])
+        )
+    ).all()) if prepared else set()
+    new_items = [item for item in prepared if item["content_hash"] not in existing_hashes]
+    skipped += len(prepared) - len(new_items)
+    for item in new_items:
+        item["id"] = uuid4()
+    try:
+        if new_items:
+            db.execute(insert(DatasetItem), new_items)
+            db.execute(insert(ReviewQueueItem), [
+                {"id": uuid4(), "dataset_item_id": item["id"], "status": ReviewStatus.pending}
+                for item in new_items
+            ])
+        db.commit()
+    except IntegrityError as error:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="The dataset changed during import; retry the upload") from error
+    imported = len(new_items)
     return {"imported": imported, "duplicates_skipped": skipped, "errors": errors[:100], "status": "pending_review"}
 
 

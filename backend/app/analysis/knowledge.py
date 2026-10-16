@@ -46,7 +46,7 @@ def analyse_report_patterns(db: Session, content: str) -> list[EvidenceSignal]:
         normalized_content, _ = deidentify(content)
         exact_item = db.scalar(
             select(DatasetItem).where(
-                DatasetItem.content_hash == sha256(normalized_content.strip().lower().encode()).hexdigest(),
+                DatasetItem.content_hash == sha256(" ".join(normalized_content.lower().split()).encode()).hexdigest(),
                 DatasetItem.contribution_consent.is_(True),
                 DatasetItem.verification_status.in_([ReviewStatus.pending, ReviewStatus.verified]),
             )
