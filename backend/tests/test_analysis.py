@@ -79,7 +79,33 @@ class AnalysisEngineTests(unittest.TestCase):
             if signal.key in {"otp_request", "jev_sensitive_request"}
         }
         self.assertEqual(credential_keys, {"otp_request"})
-        self.assertEqual(result.score, 35)
+        self.assertEqual(result.score, 55)
+
+    def test_decisive_credential_requests_are_high_risk(self):
+        examples = (
+            "Read the OTP sent to your phone to the support agent.",
+            "Please provide your PIN so the wallet can be restored.",
+            "Send your card CVV to receive the refund.",
+        )
+        for content in examples:
+            with self.subTest(content=content):
+                self.assertEqual(self.engine().analyse("message", content).level, "High Risk")
+
+    def test_embedded_url_is_analysed_inside_a_message(self):
+        result = self.engine().analyse(
+            "message",
+            "Your bank account is locked. Open https://gcb-secure-check.vercel.app/login to restore access.",
+        )
+        self.assertEqual(result.level, "High Risk")
+        self.assertIn("suspicious_domain", {signal.key for signal in result.signals})
+
+    def test_investment_profit_pattern_is_extracted(self):
+        result = self.engine().analyse(
+            "message",
+            "Invest GH₵500 in this forex plan and earn guaranteed daily returns with no risk.",
+        )
+        self.assertEqual(result.level, "High Risk")
+        self.assertIn("investment_solicitation", {signal.key for signal in result.signals})
 
     def test_weak_warning_is_not_presented_as_low_risk(self):
         signals = [EvidenceSignal("weak", "Weak warning", 8, 0.7, "jev", "test")]
@@ -168,6 +194,29 @@ class AnalysisEngineTests(unittest.TestCase):
         signals, provider = JevAnalyzer(settings).analyse("hello", "message")
         self.assertEqual(signals, [])
         self.assertEqual(provider.status, "failed")
+
+    @patch("backend.app.analysis.jev.httpx.post")
+    def test_jev_receives_deidentified_content(self, post: Mock):
+        post.return_value.raise_for_status.return_value = None
+        post.return_value.json.return_value = {
+            "model": "jev-latest",
+            "answers": {"requests_payment": {"type": "noul", "noul": 0.1}},
+        }
+        settings = SimpleNamespace(
+            jev_api_key="secret",
+            jev_base_url="https://api.typesafe.ai",
+            jev_model="jev-latest",
+            jev_timeout_seconds=5,
+        )
+        JevAnalyzer(settings).analyse(
+            "Email ama@example.com or call 024 123 4567 about this payment.",
+            "message",
+        )
+        sent_content = post.call_args.kwargs["json"]["state"]["content"]
+        self.assertNotIn("ama@example.com", sent_content)
+        self.assertNotIn("024 123 4567", sent_content)
+        self.assertIn("[email removed]", sent_content)
+        self.assertIn("[phone removed]", sent_content)
 
     def test_database_lookup_returns_only_moderated_reputation_evidence(self):
         reputation = SimpleNamespace(score=80, independent_reporters=3)

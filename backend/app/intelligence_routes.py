@@ -125,6 +125,7 @@ def serialize_item(item: DatasetItem) -> dict:
         "category_id": str(item.category_id) if item.category_id else None,
         "source": item.source.name, "source_type": item.source.source_type.value,
         "country_code": item.country_code, "is_ghana_specific": item.is_ghana_specific,
+        "language": item.language,
         "verification_status": item.verification_status.value, "privacy_status": item.privacy_status,
         "created_at": item.created_at,
     }
@@ -146,16 +147,18 @@ def create_candidate(
     db: Session, *, content: str, source: DatasetSource, label: DatasetLabel = DatasetLabel.uncertain,
     category_id: UUID | None = None, report_id: UUID | None = None, channel: str | None = None,
     country_code: str | None = "GH", is_ghana_specific: bool = True, consent: bool = False,
-    metadata: dict | None = None,
+    content_type: str = "message", language: str | None = "en", metadata: dict | None = None,
 ) -> DatasetItem:
     clean_content, had_pii = deidentify(content)
     extracted_signals = [signal.key for signal in analyse_text(clean_content)]
     item_metadata = dict(metadata or {})
     item_metadata.setdefault("extracted_signals", extracted_signals)
     item = DatasetItem(
-        content=clean_content, content_hash=item_hash(clean_content), channel=channel, label=label,
+        content=clean_content, content_hash=item_hash(clean_content), content_type=content_type,
+        channel=channel, label=label,
         category_id=category_id, source_id=source.id, fraud_report_id=report_id,
         country_code=country_code, is_ghana_specific=is_ghana_specific,
+        language=language,
         verification_status=ReviewStatus.pending, contribution_consent=consent,
         privacy_status="deidentified" if had_pii else "reviewed_no_direct_pii",
         metadata_json=item_metadata,
@@ -516,7 +519,7 @@ def add_dataset_item(request: ManualDatasetRequest, db: Db, _: Analyst) -> dict:
         item = create_candidate(
             db, content=request.content, source=source, label=request.label,
             category_id=request.category_id, channel=request.channel, country_code=request.country_code,
-            is_ghana_specific=request.is_ghana_specific, consent=True,
+            is_ghana_specific=request.is_ghana_specific, consent=True, language=request.language,
             metadata={"notes": request.notes} if request.notes else {},
         )
         db.commit()
@@ -556,21 +559,33 @@ async def import_dataset(db: Db, _: Analyst, source_id: UUID, file: UploadFile =
         raise HTTPException(status_code=422, detail=f"Could not parse dataset: {error}")
     imported, skipped, errors = 0, 0, []
     for index, row in enumerate(rows, start=2):
+        row = {str(key).strip().lower().replace(" ", "_"): value for key, value in row.items() if key is not None}
         content = str(row.get("content") or row.get("message") or "").strip()
         if not content:
             errors.append({"row": index, "error": "content/message is required"})
             continue
         raw_label = str(row.get("label") or row.get("fraud_status") or "uncertain").lower().strip()
-        label = DatasetLabel(raw_label) if raw_label in {item.value for item in DatasetLabel} else DatasetLabel.uncertain
+        if raw_label not in {item.value for item in DatasetLabel}:
+            errors.append({"row": index, "error": "label must be fraud, legitimate or uncertain"})
+            continue
+        label = DatasetLabel(raw_label)
         category = category_for(db, str(row.get("category") or row.get("fraud_category") or "")) if (row.get("category") or row.get("fraud_category")) else None
+        raw_country = str(row.get("country_code") or row.get("country") or "GH").strip().upper()
+        country_code = raw_country[:2] if raw_country else None
+        ghana_value = str(row.get("ghana_specific") or row.get("is_ghana_specific") or "").lower().strip()
+        is_ghana_specific = ghana_value in ("1", "true", "yes", "gh") if ghana_value else country_code == "GH"
+        content_type = str(row.get("content_type") or "message").strip().lower() or "message"
+        channel = str(row.get("channel") or "").strip().lower() or None
+        language = str(row.get("language") or "en").strip().lower() or None
+        notes = str(row.get("notes") or "").strip()
         try:
             with db.begin_nested():
                 create_candidate(
                     db, content=content, source=source, label=label,
-                    category_id=category.id if category else None, channel=str(row.get("channel") or "") or None,
-                    country_code=str(row.get("country") or row.get("country_code") or "").upper()[:2] or None,
-                    is_ghana_specific=str(row.get("ghana_specific") or "").lower() in ("1", "true", "yes", "gh"),
-                    consent=True, metadata={"import_file": file.filename, "import_row": index},
+                    category_id=category.id if category else None, channel=channel,
+                    country_code=country_code, is_ghana_specific=is_ghana_specific,
+                    content_type=content_type, language=language, consent=True,
+                    metadata={"import_file": file.filename, "import_row": index, "notes": notes or None},
                 )
             imported += 1
         except IntegrityError:

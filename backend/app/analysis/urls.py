@@ -11,7 +11,8 @@ SHORTENERS = {
     "bit.ly", "cutt.ly", "is.gd", "rb.gy", "shorturl.at", "tiny.cc", "tinyurl.com", "t.co"
 }
 HOSTED_PLATFORMS = ("vercel.app", "netlify.app", "pages.dev", "github.io")
-BRAND_TERMS = ("bank", "ecobank", "fidelity", "gcb", "momo", "mtn", "telecel")
+BRAND_TERMS = ("bank", "ecobank", "fidelity", "gcb", "momo", "mobilemoney", "mtn", "telecel", "ghana", "gra", "ecg")
+CREDENTIAL_PATH_TERMS = ("login", "signin", "verify", "verification", "unlock", "secure", "update-account", "enter-otp", "approve")
 
 
 def _signal(key: str, label: str, weight: int, evidence: str) -> EvidenceSignal:
@@ -53,5 +54,9 @@ def analyse_url(content: str) -> list[EvidenceSignal]:
     hosted = next((suffix for suffix in HOSTED_PLATFORMS if hostname == suffix or hostname.endswith(f".{suffix}")), None)
     brand_context = f"{hostname}{parsed.path}".lower()
     if hosted and any(term in brand_context for term in BRAND_TERMS):
-        signals.append(_signal("suspicious_domain", "Uses a brand-like name on a general hosting domain", 28, "The named organization does not control the underlying hosting domain."))
+        signals.append(_signal("suspicious_domain", "Uses a brand-like name on a general hosting domain", 38, "The named organization does not control the underlying hosting domain."))
+    if any(term in parsed.path.lower() for term in CREDENTIAL_PATH_TERMS):
+        signals.append(_signal("credential_url_path", "Uses a credential or account-verification path", 18, "The URL path asks for login, verification, approval, or account-security action."))
+    if hostname.count("-") >= 3:
+        signals.append(_signal("deceptive_hostname_shape", "Uses an unusually hyphenated domain name", 8, "Long, heavily hyphenated hostnames can be used to imitate a trusted service."))
     return signals

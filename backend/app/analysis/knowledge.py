@@ -2,13 +2,14 @@
 
 import logging
 import re
+from hashlib import sha256
 
 from sqlalchemy import and_, func, select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from ..config import Settings
-from ..intelligence import PHONE_PATTERN, normalize_phone, normalize_url
+from ..intelligence import PHONE_PATTERN, deidentify, normalize_phone, normalize_url
 from ..models import DatasetItem, DatasetLabel, DomainEntity, PhoneIntelligence, ReputationScore, ReviewStatus, UrlIntelligence
 from .schemas import EvidenceSignal
 from .rules import analyse_text
@@ -42,12 +43,20 @@ def analyse_report_patterns(db: Session, content: str) -> list[EvidenceSignal]:
     if len(current_tokens) < 2 and not current_keys:
         return []
     try:
+        normalized_content, _ = deidentify(content)
+        exact_item = db.scalar(
+            select(DatasetItem).where(
+                DatasetItem.content_hash == sha256(normalized_content.strip().lower().encode()).hexdigest(),
+                DatasetItem.contribution_consent.is_(True),
+                DatasetItem.verification_status.in_([ReviewStatus.pending, ReviewStatus.verified]),
+            )
+        )
         item_result = db.scalars(
             select(DatasetItem).where(
                 DatasetItem.contribution_consent.is_(True),
                 DatasetItem.verification_status.in_([ReviewStatus.pending, ReviewStatus.verified]),
                 DatasetItem.label.in_([DatasetLabel.fraud, DatasetLabel.uncertain]),
-            ).order_by(DatasetItem.created_at.desc()).limit(300)
+            ).order_by(DatasetItem.created_at.desc()).limit(2000)
         )
         items = item_result.all()
         # Keep the lookup optional for lightweight callers that provide a
@@ -58,6 +67,24 @@ def analyse_report_patterns(db: Session, content: str) -> list[EvidenceSignal]:
         db.rollback()
         logger.warning("Guard report-pattern lookup unavailable: %s", exc)
         return []
+
+    signals: list[EvidenceSignal] = []
+    if exact_item is not None and exact_item.label == DatasetLabel.fraud:
+        verified = exact_item.verification_status == ReviewStatus.verified
+        signals.append(EvidenceSignal(
+            key="exact_dataset_fraud_match" if verified else "pending_dataset_fraud_match",
+            label=(
+                "Exact match to verified Guard fraud intelligence"
+                if verified else "Exact match to a labelled fraud example awaiting review"
+            ),
+            weight=48 if verified else 18,
+            confidence=0.95 if verified else 0.65,
+            source="database",
+            evidence=(
+                "The submitted content exactly matches a verified fraud record."
+                if verified else "The submitted content exactly matches an imported fraud candidate that still requires analyst approval."
+            ),
+        ))
 
     verified_matches = 0
     pending_matches = 0
@@ -78,7 +105,6 @@ def analyse_report_patterns(db: Session, content: str) -> list[EvidenceSignal]:
         else:
             pending_matches += 1
 
-    signals: list[EvidenceSignal] = []
     if verified_matches:
         signals.append(EvidenceSignal(
             key="verified_report_pattern",

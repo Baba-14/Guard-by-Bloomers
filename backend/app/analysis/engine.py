@@ -10,10 +10,16 @@ from .schemas import AnalysisOutcome, EvidenceSignal, ProviderMetadata
 from .urls import analyse_url
 
 
+EMBEDDED_URL_PATTERN = re.compile(
+    r"https?://[^\s<>\"']+|\b(?:[a-z0-9-]+\.)+(?:com|org|net|app|dev|io|co|gh|info|xyz|invalid)(?:/[^\s<>\"']*)?",
+    re.I,
+)
+
+
 PATTERNS = (
-    ("credential", {"otp_request", "pin_request", "password_request", "jev_sensitive_request"}, "Possible credential theft"),
+    ("credential", {"otp_request", "pin_request", "password_request", "card_security_code_request", "card_details_request", "identity_details_request", "jev_sensitive_request"}, "Possible credential theft"),
     ("advance", {"advance_payment", "jev_payment_request"}, "Possible advance-fee or payment scam"),
-    ("investment", {"guaranteed_return", "jev_category_investment_scam"}, "Possible prize or investment scam"),
+    ("investment", {"guaranteed_return", "investment_solicitation", "jev_category_investment_scam"}, "Possible prize or investment scam"),
     ("link", {"suspicious_domain", "punycode_domain", "ip_address_url", "url_credentials", "known_risky_domain", "known_risky_url"}, "Suspicious link assessment"),
     ("remote", {"remote_access_request"}, "Possible remote-access scam"),
     ("reversal", {"momo_reversal"}, "Possible Mobile Money reversal scam"),
@@ -27,6 +33,8 @@ DEDUPE_GROUPS = {
     "pin_request": "credential_request",
     "password_request": "credential_request",
     "jev_sensitive_request": "credential_request",
+    "card_security_code_request": "card_security_request",
+    "card_details_request": "card_security_request",
     "urgency": "urgency",
     "fear_or_threat": "coercion",
     "jev_urgency": "urgency",
@@ -65,6 +73,10 @@ class AnalysisEngine:
         signals = analyse_text(content)
         if kind == "link":
             signals.extend(analyse_url(content))
+        else:
+            # Inspect links wherever they appear, not only in the dedicated URL checker.
+            for candidate in EMBEDDED_URL_PATTERN.findall(content)[:3]:
+                signals.extend(analyse_url(candidate.rstrip(".,;!?)]}")))
         signals.extend(database_signals or [])
 
         # Number-only lookups should be decided by moderated reputation data, not

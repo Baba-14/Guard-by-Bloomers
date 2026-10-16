@@ -1,11 +1,11 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { BrainCircuit, Building2, Check, Database, FileUp, Globe2, Inbox, LayoutDashboard, Link2, Loader2, Phone, Plus, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Building2, Check, Database, Download, FileUp, Globe2, Inbox, LayoutDashboard, Link2, Loader2, Phone, Plus, ShieldCheck } from 'lucide-react';
 
 type Section = 'Overview'|'Incoming Reports'|'Review Queue'|'Dataset'|'Training'|'URLs'|'Phone Numbers'|'Brands'|'Sources';
 type Label = 'fraud'|'legitimate'|'uncertain';
-type DatasetRow = {id:string;content:string;label:Label;category:string|null;source:string;source_type:string;country_code:string|null;is_ghana_specific:boolean;verification_status:string;channel?:string|null};
+type DatasetRow = {id:string;content:string;content_type?:string;label:Label;category:string|null;source:string;source_type:string;country_code:string|null;is_ghana_specific:boolean;verification_status:string;channel?:string|null;language?:string|null};
 type ReviewRow = DatasetRow & {queue_id:string};
 type Source = {id:string;name:string;source_type:string;description?:string;authoritative:boolean};
 type Category = {id:string;name:string;slug:string};
@@ -13,6 +13,7 @@ type IntelligenceReport = {id:string;created_at:string;report_type:string|null;i
 type TrainingVersion = {id:string;name:string;version:string;status:string;notes:string|null;item_count:number;created_at:string};
 type OverviewData = {total_items:number;pending_review:number;verified:number;ghana_specific:number;labels:Record<Label,number>;reports:{total:number;registered_reporters:number;anonymous_reports:number;training_ready:number;training_labels:{fraud:number;legitimate:number};by_type:{type:string;count:number}[];by_category:{category:string;reports:number;registered_reporters:number;verified:number}[]}};
 type Notice = {kind:'ok'|'error';text:string}|null;
+type ImportResult = {imported:number;duplicates_skipped:number;errors:{row:number;error:string}[];status:string};
 
 const sections:[Section,React.ElementType][]=[['Overview',LayoutDashboard],['Incoming Reports',Inbox],['Review Queue',ShieldCheck],['Dataset',Database],['Training',BrainCircuit],['URLs',Link2],['Phone Numbers',Phone],['Brands',Building2],['Sources',Globe2]];
 const previewDataset:DatasetRow[]=[
@@ -32,9 +33,17 @@ async function api<T>(path:string,init:RequestInit={}):Promise<T>{
   const headers=new Headers(init.headers);
   if(init.body&&!(init.body instanceof FormData)) headers.set('Content-Type','application/json');
   const response=await fetch(`/api/intelligence/${path}`,{...init,headers});
-  const body=await response.json();
-  if(!response.ok) throw new Error(body.detail||'The intelligence request failed.');
-  return body;
+  const raw=await response.text();
+  let body:unknown={};
+  try{body=raw?JSON.parse(raw):{}}catch{body={detail:raw}}
+  if(!response.ok){
+    const detail=(body as {detail?:unknown}).detail;
+    const message=Array.isArray(detail)
+      ?detail.map(item=>typeof item==='object'&&item&&'msg' in item?String(item.msg):String(item)).join(' · ')
+      :typeof detail==='string'?detail:'The intelligence request failed.';
+    throw new Error(message);
+  }
+  return body as T;
 }
 
 function Pill({value}:{value:string}){return <span className={`gi-pill gi-${value.replaceAll('_','-')}`}>{value.replaceAll('_',' ')}</span>}
@@ -58,17 +67,30 @@ export default function IntelligenceWorkspace(){
   const [showAdd,setShowAdd]=useState(false);
   const [manual,setManual]=useState({content:'',label:'uncertain' as Label,source_id:'',category_id:'',channel:'sms',ghana:true});
   const [file,setFile]=useState<File|null>(null);
+  const [importResult,setImportResult]=useState<ImportResult|null>(null);
 
   const refresh=useCallback(async()=>{
     setLoading(true);
-    try{
-      const [summary,items,reviews,sourceRows,categoryRows,reportRows,versions]=await Promise.all([
-        api<OverviewData>('overview'),api<DatasetRow[]>('dataset?limit=200'),api<ReviewRow[]>('review-queue'),api<Source[]>('sources'),api<Category[]>('categories'),api<IntelligenceReport[]>('reports'),api<TrainingVersion[]>('training-datasets'),
-      ]);
-      setOverview(summary);setDataset(items);setQueue(reviews);setSources(sourceRows);setCategories(categoryRows);setReports(reportRows);setTrainingVersions(versions);setConnected(true);
-      setManual(value=>({...value,source_id:value.source_id||sourceRows.find(x=>x.source_type==='manual')?.id||sourceRows[0]?.id||''}));
-    }catch(error){setNotice({kind:'error',text:error instanceof Error?error.message:'Could not load intelligence data.'});}
-    finally{setLoading(false)}
+    const results=await Promise.allSettled([
+      api<OverviewData>('overview'),api<DatasetRow[]>('dataset?limit=500'),api<ReviewRow[]>('review-queue?limit=200'),api<Source[]>('sources'),api<Category[]>('categories'),api<IntelligenceReport[]>('reports'),api<TrainingVersion[]>('training-datasets'),
+    ]);
+    const [summaryResult,itemsResult,reviewsResult,sourcesResult,categoriesResult,reportsResult,versionsResult]=results;
+    if(summaryResult.status==='fulfilled')setOverview(summaryResult.value);
+    if(itemsResult.status==='fulfilled')setDataset(itemsResult.value);
+    if(reviewsResult.status==='fulfilled')setQueue(reviewsResult.value);
+    if(categoriesResult.status==='fulfilled')setCategories(categoriesResult.value);
+    if(reportsResult.status==='fulfilled')setReports(reportsResult.value);
+    if(versionsResult.status==='fulfilled')setTrainingVersions(versionsResult.value);
+    if(sourcesResult.status==='fulfilled'){
+      const sourceRows=sourcesResult.value;
+      setSources(sourceRows);
+      setManual(value=>({...value,source_id:sourceRows.some(source=>source.id===value.source_id)?value.source_id:sourceRows.find(source=>source.source_type==='manual')?.id||sourceRows[0]?.id||''}));
+    }
+    const coreConnected=summaryResult.status==='fulfilled'&&itemsResult.status==='fulfilled'&&sourcesResult.status==='fulfilled';
+    setConnected(coreConnected);
+    const failure=results.find(result=>result.status==='rejected');
+    if(failure?.status==='rejected')setNotice({kind:'error',text:failure.reason instanceof Error?failure.reason.message:'Some intelligence data could not be refreshed.'});
+    setLoading(false);
   },[]);
   useEffect(()=>{refresh()},[refresh]);
 
@@ -95,8 +117,11 @@ export default function IntelligenceWorkspace(){
   };
   const upload=async()=>{
     if(!file||!manual.source_id)return;
-    const body=new FormData();body.append('file',file);setLoading(true);
-    try{const result=await api<{imported:number;duplicates_skipped:number}>(`dataset/import?source_id=${manual.source_id}`,{method:'POST',body});setNotice({kind:'ok',text:`Imported ${result.imported} candidates; ${result.duplicates_skipped} duplicates skipped. All are pending review.`});setFile(null);await refresh();}
+    if(!connected){setNotice({kind:'error',text:'The live intelligence database is not connected. Sign in again, then refresh before importing.'});return}
+    const selectedSource=sources.find(source=>source.id===manual.source_id);
+    if(!selectedSource||manual.source_id.startsWith('preview-')){setNotice({kind:'error',text:'Choose a live database source before importing.'});return}
+    const body=new FormData();body.append('file',file);setLoading(true);setImportResult(null);
+    try{const result=await api<ImportResult>(`dataset/import?source_id=${manual.source_id}`,{method:'POST',body});setImportResult(result);setFilter({label:'',source:selectedSource.source_type,ghana:false,verified:'pending'});setNotice({kind:result.errors.length?'error':'ok',text:result.imported?`Imported ${result.imported} candidates; ${result.duplicates_skipped} duplicates skipped${result.errors.length?`; ${result.errors.length} rows need correction`:'. They are now visible below and in the review queue.'}`:`No new rows were added. ${result.duplicates_skipped} matching records are already in the database.`});setFile(null);await refresh();setSection('Dataset');}
     catch(error){setNotice({kind:'error',text:error instanceof Error?error.message:'Could not import the dataset.'});}
     finally{setLoading(false)}
   };
@@ -121,7 +146,7 @@ export default function IntelligenceWorkspace(){
 
     {section==='Review Queue'&&<section className="gi-review">{currentReview?<><div className="gi-review-copy"><span className="gi-kicker">{currentReview.source_type.replaceAll('_',' ')} · {currentReview.channel||'message'}</span><blockquote>{currentReview.content}</blockquote><dl><div><dt>Source</dt><dd>{currentReview.source}</dd></div><div><dt>Country</dt><dd>{currentReview.country_code||'Not set'}</dd></div><div><dt>Privacy</dt><dd>De-identified candidate</dd></div><div><dt>Status</dt><dd><Pill value={currentReview.verification_status}/></dd></div></dl></div><aside><span className="gi-kicker">Reviewer decision</span><div className="gi-decisions">{(['fraud','legitimate','uncertain'] as Label[]).map(label=><button key={label} className={decision===label?'active':''} onClick={()=>setDecision(label)}>{label}</button>)}</div><label>Fraud category<select value={categoryId} onChange={event=>setCategoryId(event.target.value)} disabled={decision!=='fraud'}><option value="">Choose category</option>{categories.map(item=><option value={item.id} key={item.id}>{item.name}</option>)}</select></label><label>Review notes<textarea value={notes} onChange={event=>setNotes(event.target.value)} placeholder="Evidence and reasoning for the audit trail"/></label><button className="gi-primary" onClick={review} disabled={loading}><Check size={15}/>Approve and verify</button><small>Approval moves this item into the verified dataset. It does not retrain or deploy a model.</small></aside></>:<div className="gi-empty"><ShieldCheck size={28}/><strong>Review queue is clear</strong><span>New reports and imports will appear here.</span></div>}</section>}
 
-    {section==='Dataset'&&<><div className="gi-toolbar"><div><select value={filter.label} onChange={e=>setFilter({...filter,label:e.target.value})}><option value="">All labels</option><option value="fraud">Fraud</option><option value="legitimate">Legitimate</option><option value="uncertain">Uncertain</option></select><select value={filter.source} onChange={e=>setFilter({...filter,source:e.target.value})}><option value="">All provenance</option>{['public_dataset','user_report','partner','authoritative_pattern','synthetic','manual'].map(x=><option key={x}>{x}</option>)}</select><select value={filter.verified} onChange={e=>setFilter({...filter,verified:e.target.value})}><option value="">All statuses</option><option value="verified">Verified</option><option value="pending">Pending</option></select><label><input type="checkbox" checked={filter.ghana} onChange={e=>setFilter({...filter,ghana:e.target.checked})}/>Ghana-specific</label></div><button className="gi-primary" onClick={()=>setShowAdd(!showAdd)}><Plus size={14}/>Add data</button></div>{showAdd&&<form className="gi-add" onSubmit={addManual}><label>Content<textarea required value={manual.content} onChange={e=>setManual({...manual,content:e.target.value})}/></label><label>Label<select value={manual.label} onChange={e=>setManual({...manual,label:e.target.value as Label})}><option>fraud</option><option>legitimate</option><option>uncertain</option></select></label><label>Source<select required value={manual.source_id} onChange={e=>setManual({...manual,source_id:e.target.value})}><option value="">Choose source</option>{sources.map(x=><option value={x.id} key={x.id}>{x.name}</option>)}</select></label><label>Category<select value={manual.category_id} onChange={e=>setManual({...manual,category_id:e.target.value})}><option value="">No category</option>{categories.map(x=><option value={x.id} key={x.id}>{x.name}</option>)}</select></label><button className="gi-primary" disabled={loading}>Add to review queue</button></form>}<div className="gi-import"><FileUp size={18}/><div><strong>Bulk import CSV, XLSX or JSON</strong><span>Expected fields: content/message, label, category, channel, country, ghana_specific.</span></div><select value={manual.source_id} onChange={e=>setManual({...manual,source_id:e.target.value})}><option value="">Choose provenance</option>{sources.map(x=><option value={x.id} key={x.id}>{x.name}</option>)}</select><input type="file" accept=".csv,.xlsx,.json" onChange={e=>setFile(e.target.files?.[0]||null)}/><button onClick={upload} disabled={!file||!manual.source_id||loading}>Import</button></div><div className="gi-table"><table><thead><tr><th>Content</th><th>Label</th><th>Category</th><th>Provenance</th><th>Ghana</th><th>Status</th></tr></thead><tbody>{filtered.map(row=><tr key={row.id}><td><strong>{row.content}</strong><small>{row.channel||'message'} · {row.country_code||'—'}</small></td><td><Pill value={row.label}/></td><td>{row.category||'—'}</td><td>{row.source}<small>{row.source_type.replaceAll('_',' ')}</small></td><td>{row.is_ghana_specific?'Yes':'No'}</td><td><Pill value={row.verification_status}/></td></tr>)}</tbody></table></div></>}
+    {section==='Dataset'&&<><div className="gi-toolbar"><div><select value={filter.label} onChange={e=>setFilter({...filter,label:e.target.value})}><option value="">All labels</option><option value="fraud">Fraud</option><option value="legitimate">Legitimate</option><option value="uncertain">Uncertain</option></select><select value={filter.source} onChange={e=>setFilter({...filter,source:e.target.value})}><option value="">All provenance</option>{['public_dataset','user_report','partner','authoritative_pattern','synthetic','manual'].map(x=><option key={x}>{x}</option>)}</select><select value={filter.verified} onChange={e=>setFilter({...filter,verified:e.target.value})}><option value="">All statuses</option><option value="verified">Verified</option><option value="pending">Pending</option></select><label><input type="checkbox" checked={filter.ghana} onChange={e=>setFilter({...filter,ghana:e.target.checked})}/>Ghana-specific</label></div><button className="gi-primary" onClick={()=>setShowAdd(!showAdd)}><Plus size={14}/>Add data</button></div>{showAdd&&<form className="gi-add" onSubmit={addManual}><label>Content<textarea required value={manual.content} onChange={e=>setManual({...manual,content:e.target.value})}/></label><label>Label<select value={manual.label} onChange={e=>setManual({...manual,label:e.target.value as Label})}><option>fraud</option><option>legitimate</option><option>uncertain</option></select></label><label>Source<select required value={manual.source_id} onChange={e=>setManual({...manual,source_id:e.target.value})}><option value="">Choose source</option>{sources.map(x=><option value={x.id} key={x.id}>{x.name}</option>)}</select></label><label>Category<select value={manual.category_id} onChange={e=>setManual({...manual,category_id:e.target.value})}><option value="">No category</option>{categories.map(x=><option value={x.id} key={x.id}>{x.name}</option>)}</select></label><button className="gi-primary" disabled={loading}>Add to review queue</button></form>}<section className="gi-import-card"><div className="gi-import-guide"><span className="gi-import-icon"><Database size={20}/></span><div><span className="gi-kicker">Training-data intake</span><h2>Import a fraud intelligence dataset</h2><p>Download the CSV template, replace its examples with your records, then upload it here. Every imported row is de-identified and held for analyst review before it can enter a training version.</p><div className="gi-import-fields"><span>content</span><span>label</span><span>category</span><span>content type</span><span>channel</span><span>country</span><span>language</span></div></div><a className="gi-template-download" href="/templates/guard-intelligence-import-template.csv" download><Download size={15}/>Download CSV template</a></div><div className="gi-import"><FileUp size={20}/><div><strong>Upload your populated file</strong><span>CSV, XLSX or JSON · maximum 10 MB</span></div><label><span>Data source</span><select value={manual.source_id} onChange={e=>setManual({...manual,source_id:e.target.value})} disabled={!connected}><option value="">Choose provenance</option>{sources.map(x=><option value={x.id} key={x.id}>{x.name}</option>)}</select></label><label className="gi-file-picker"><span>{file?file.name:'Choose dataset file'}</span><input type="file" accept=".csv,.xlsx,.json" disabled={!connected} onChange={e=>setFile(e.target.files?.[0]||null)}/></label><button onClick={upload} disabled={!connected||!file||!manual.source_id||loading}>{loading?'Importing…':'Import dataset'}</button></div>{importResult&&<div className="gi-import-result"><div><Check size={17}/><span><strong>{importResult.imported?`${importResult.imported} rows added to the review queue`:`All ${importResult.duplicates_skipped} rows are already in the database`}</strong><small>{importResult.duplicates_skipped} duplicates skipped · {importResult.errors.length} rows need correction</small></span></div><button onClick={()=>setSection('Review Queue')}>Review imported data <ArrowRight size={14}/></button>{importResult.errors.length>0&&<ul>{importResult.errors.slice(0,5).map(error=><li key={`${error.row}-${error.error}`}>Row {error.row}: {error.error}</li>)}</ul>}</div>}</section><div className="gi-dataset-summary"><span><strong>{filtered.length}</strong> records shown</span><span><strong>{overview.total_items}</strong> total in Supabase</span>{overview.total_items>dataset.length&&<small>Showing the newest {dataset.length} records. Use the filters to narrow the view.</small>}</div><div className="gi-table"><table><thead><tr><th>Content</th><th>Label</th><th>Category</th><th>Provenance</th><th>Ghana</th><th>Status</th></tr></thead><tbody>{filtered.map(row=><tr key={row.id}><td><strong>{row.content}</strong><small>{row.content_type||'message'} · {row.channel||'unspecified channel'} · {row.language||'—'} · {row.country_code||'—'}</small></td><td><Pill value={row.label}/></td><td>{row.category||'—'}</td><td>{row.source}<small>{row.source_type.replaceAll('_',' ')}</small></td><td>{row.is_ghana_specific?'Yes':'No'}</td><td><Pill value={row.verification_status}/></td></tr>)}</tbody></table>{filtered.length===0&&<div className="gi-empty gi-empty-compact"><Database size={22}/><strong>No records match these filters</strong><button className="gi-primary" onClick={()=>setFilter({label:'',source:'',ghana:false,verified:''})}>Clear filters</button></div>}</div></>}
 
     {section==='Training'&&<><section className="gi-training-hero"><div><span className="gi-kicker">Governed model preparation</span><h2>Prepare reviewed intelligence for training</h2><p>Create an immutable dataset version from consented records that analysts have labelled fraud or legitimate. Pending and uncertain submissions are excluded.</p><div className="gi-training-facts"><span><strong>{overview.reports.training_ready}</strong> eligible records</span><span><strong>{overview.reports.training_labels.fraud}</strong> fraud labels</span><span><strong>{overview.reports.training_labels.legitimate}</strong> legitimate labels</span></div></div><button className="gi-primary" onClick={prepareTrainingDataset} disabled={loading||overview.reports.training_ready===0}><BrainCircuit size={16}/>{loading?'Preparing…':'Prepare training dataset'}</button></section><div className="gi-training-note"><ShieldCheck size={18}/><div><strong>Dataset preparation is not model deployment.</strong><span>This creates reproducible train, validation, test and holdout splits. A training runner and evaluation gate must be connected before Guard can train or release a model.</span></div></div><section className="gi-table"><table><thead><tr><th>Dataset version</th><th>Records</th><th>Status</th><th>Created</th></tr></thead><tbody>{trainingVersions.map(version=><tr key={version.id}><td><strong>{version.name}</strong><small>{version.version}</small></td><td>{version.item_count}</td><td><Pill value={version.status}/></td><td>{new Intl.DateTimeFormat('en-GH',{dateStyle:'medium',timeStyle:'short'}).format(new Date(version.created_at))}</td></tr>)}</tbody></table>{trainingVersions.length===0&&<div className="gi-empty"><BrainCircuit size={28}/><strong>No training dataset versions yet</strong><span>Review community reports, then prepare the first governed dataset version.</span></div>}</section></>}
 

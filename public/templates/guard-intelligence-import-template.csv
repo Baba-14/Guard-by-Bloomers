@@ -1,0 +1,3 @@
+content,label,category,content_type,channel,country_code,ghana_specific,language,notes
+"Urgent: verify your bank account through this link immediately",fraud,Phishing,message,sms,GH,true,en,"Example fraud message; replace or remove this row"
+"Your monthly statement is available in the official banking app",legitimate,,message,push_notification,GH,true,en,"Example legitimate message; replace or remove this row"

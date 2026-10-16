@@ -7,6 +7,7 @@ from typing import Any
 import httpx
 
 from ..config import Settings
+from ..intelligence import deidentify
 from .schemas import EvidenceSignal, ProviderMetadata
 
 
@@ -62,9 +63,10 @@ class JevAnalyzer:
         if not self.settings.jev_api_key:
             return [], ProviderMetadata(provider="jev", model=self.settings.jev_model, status="disabled")
 
+        safe_content, _ = deidentify(content)
         payload = {
             "model": self.settings.jev_model,
-            "state": {"submission_type": kind, "content": content},
+            "state": {"submission_type": kind, "content": safe_content},
             "questions": QUESTIONS,
         }
         started_at = perf_counter()

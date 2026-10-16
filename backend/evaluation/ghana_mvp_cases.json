@@ -3,7 +3,7 @@
   {"id":"msg-normal","kind":"message","content":"The team meeting has moved to three o'clock tomorrow.","expected":"Low Risk"},
   {"id":"msg-suspension","kind":"message","content":"Your account will be suspended. Act now to keep access.","expected":"Caution"},
   {"id":"link-shortener","kind":"link","content":"https://bit.ly/claim-now","expected":"Caution"},
-  {"id":"link-hosted-brand","kind":"link","content":"https://gcb-secure.vercel.app/login","expected":"Caution"},
+  {"id":"link-hosted-brand","kind":"link","content":"https://gcb-secure.vercel.app/login","expected":"High Risk"},
   {"id":"link-ip-http","kind":"link","content":"http://192.0.2.10/login","expected":"Caution"},
   {"id":"link-ordinary","kind":"link","content":"https://example.org/community","expected":"Low Risk"},
   {"id":"payment-reversal","kind":"payment","content":"Urgent: I sent Mobile Money to the wrong number. Send the money back to a different MoMo account immediately.","expected":"High Risk"},
