@@ -76,13 +76,7 @@ export function GuardDemo() {
   return (
     <section className="guard-demo-section">
       <div className="container">
-        <div className="guard-demo-heading">
-          <div>
-            <span className="eyebrow">See Guard in the moment</span>
-            <h2>Fraud moves fast.<br/>Your answer should be clear.</h2>
-          </div>
-          <p>Explore a familiar situation and see how Guard turns a suspicious request into signals you can understand and an action you can take.</p>
-        </div>
+        <div className="guard-demo-heading"><h2>See how Guard explains the risk.</h2></div>
 
         <div className="guard-demo-tabs" role="tablist" aria-label="Fraud examples">
           {scenarios.map((item, index) => {
@@ -93,9 +87,7 @@ export function GuardDemo() {
 
         <div className="guard-demo-stage" data-tone={scenario.tone}>
           <div className="guard-demo-copy">
-            <span className="guard-demo-step">01 / What reached you</span>
             <h3>It looks believable.<br/>That is the point.</h3>
-            <p>Pressure, a familiar name, and a small change in behaviour can be enough to make someone act before they verify.</p>
             <div className="guard-demo-signal"><ShieldAlert size={19}/><span><small>Signal Guard noticed</small><strong>{scenario.signal}</strong></span></div>
             <Link href={scenario.href} className="btn btn-primary">Check something like this <ArrowRight size={16}/></Link>
           </div>
@@ -121,10 +113,8 @@ export function GuardDemo() {
           </div>
 
           <div className="guard-demo-outcome">
-            <span className="guard-demo-step">02 / What you can do</span>
-            <div className="guard-demo-outcome-mark"><img src="/images/guard-yellow.png" alt=""/></div>
-            <h3>Pause with a reason,<br/>not just a warning.</h3>
-            <p>Guard shows what raised concern, what to avoid, and how to verify safely through another channel.</p>
+            <div className="guard-demo-outcome-mark"><img src="/images/guard-violet.png" alt=""/></div>
+            <h3>Know what to do next.</h3>
             <ul><li><CheckCircle2 size={15}/> Plain-language assessment</li><li><CheckCircle2 size={15}/> Visible risk signals</li><li><CheckCircle2 size={15}/> A practical next step</li></ul>
           </div>
         </div>

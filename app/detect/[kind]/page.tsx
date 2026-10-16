@@ -1,4 +1,4 @@
 import { Checker } from '@/components/Checker';
 import { notFound } from 'next/navigation';
 const valid=['message','screenshot','link','number','whatsapp','payment','call'] as const;
-export default function Page({params,searchParams}:{params:{kind:string};searchParams:{input?:string;auto?:string}}){if(!valid.includes(params.kind as any))notFound(); return <Checker kind={params.kind as typeof valid[number]} initialInput={searchParams.input || ''} autoStart={searchParams.auto === '1'}/>}
+export default async function Page({params,searchParams}:{params:Promise<{kind:string}>;searchParams:Promise<{input?:string;auto?:string}>}){const route=await params;const query=await searchParams;if(!valid.includes(route.kind as any))notFound(); return <Checker kind={route.kind as typeof valid[number]} initialInput={query.input || ''} autoStart={query.auto === '1'}/>}

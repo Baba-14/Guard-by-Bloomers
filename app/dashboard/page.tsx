@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import {
   ArrowRight, Bell, Bookmark, CheckCircle2, ChevronRight, CircleAlert, LayoutDashboard,
@@ -9,11 +10,15 @@ import {
 } from 'lucide-react';
 import { Header, Footer } from '@/components/Header';
 import styles from './dashboard.module.css';
+import { authenticatedHeaders, responseJson } from '@/lib/client-api';
 
 type Risk = 'High risk' | 'Caution' | 'Low risk' | 'Unable to determine';
 type Filter = 'All' | 'High risk' | 'Caution' | 'Low risk';
 
-const checks: Array<{type:string; subject:string; result:Risk; time:string; icon:typeof MessageCircle}> = [
+type CheckItem = {type:string;subject:string;result:Risk;time:string;icon:typeof MessageCircle};
+type HistoryItem = {id:string;check_type:string;risk_level:string|null;risk_score:number|null;pattern:string|null;created_at:string};
+
+const sampleChecks: CheckItem[] = [
   { type:'WhatsApp message', subject:'Urgent request from a known contact', result:'High risk', time:'Today, 10:42', icon:MessageCircle },
   { type:'Phone number', subject:'+233 24 ••• ••18', result:'Caution', time:'Yesterday', icon:Phone },
   { type:'Payment request', subject:'Mobile Money recipient details', result:'Low risk', time:'22 Sep', icon:WalletCards },
@@ -38,10 +43,29 @@ function RiskBadge({result}:{result:Risk}) {
 }
 
 export default function Dashboard() {
+  const router = useRouter();
   const [filter,setFilter] = useState<Filter>('All');
   const [isAdmin,setIsAdmin] = useState(false);
-  const filteredChecks = useMemo(()=>filter==='All'?checks:checks.filter(check=>check.result===filter),[filter]);
-  useEffect(()=>setIsAdmin(sessionStorage.getItem('guard-demo-role')==='admin'),[]);
+  const [checks,setChecks] = useState<CheckItem[]>([]);
+  const [demo,setDemo] = useState(false);
+  const [historyError,setHistoryError] = useState('');
+  const filteredChecks = useMemo(()=>filter==='All'?checks:checks.filter(check=>check.result===filter),[filter,checks]);
+  useEffect(()=>{
+    const demoRole=sessionStorage.getItem('guard-demo-auth');
+    if(demoRole){setDemo(true);setChecks(sampleChecks);setIsAdmin(demoRole==='admin');return}
+    fetch('/api/auth/me')
+      .then(response=>responseJson<{role:string}>(response))
+      .then(user=>{setIsAdmin(['super_admin','fraud_analyst'].includes(user.role));return fetch('/api/history',{headers:authenticatedHeaders(false)})})
+      .then(response=>responseJson<HistoryItem[]>(response))
+      .then(rows=>setChecks(rows.map(row=>({
+        type:row.check_type.replace(/^./,value=>value.toUpperCase()),
+        subject:row.pattern||'Guard risk assessment',
+        result:row.risk_level==='high'?'High risk':row.risk_level==='caution'?'Caution':row.risk_level==='low'?'Low risk':'Unable to determine',
+        time:new Intl.DateTimeFormat('en-GH',{dateStyle:'medium',timeStyle:'short'}).format(new Date(row.created_at)),
+        icon:row.check_type==='link'?Link2:row.check_type==='number'?Phone:row.check_type==='payment'?WalletCards:MessageCircle,
+      }))))
+      .catch(()=>router.replace('/login'));
+  },[router]);
 
   return <>
     <Header/>
@@ -54,26 +78,26 @@ export default function Dashboard() {
             <p>Check suspicious requests, revisit past decisions and keep track of every report in one place.</p>
             <div className={styles.heroActions}>
               <Link href="/detect" className={styles.primaryAction}><Search size={18}/>Start a new check</Link>
-              <Link href="/report" className={styles.secondaryAction}><Flag size={17}/>Report fraud</Link>
+              <Link href="/reports" className={styles.secondaryAction}><Flag size={17}/>Report fraud</Link>
               {isAdmin&&<Link href="/admin" className={styles.adminAction}><LayoutDashboard size={17}/>Admin dashboard</Link>}
             </div>
           </div>
           <div className={styles.heroSummary}>
-            <div className={styles.heroSummaryTop}><span><Sparkles size={15}/> Your month with Guard</span><span className={styles.demoLabel}>Prototype data</span></div>
-            <strong>4 risky requests</strong>
-            <p>Guard highlighted four requests that needed more care before you acted.</p>
+            <div className={styles.heroSummaryTop}><span><Sparkles size={15}/> Your recent Guard activity</span>{demo&&<span className={styles.demoLabel}>Prototype data</span>}</div>
+            <strong>{checks.filter(item=>item.result==='High risk'||item.result==='Caution').length} risky requests</strong>
+            <p>Guard highlights requests that need more care before you act.</p>
             <div className={styles.summaryTrack}><span/></div>
-            <div className={styles.summaryMeta}><span>24 checks completed</span><b>Safer decisions</b></div>
+            <div className={styles.summaryMeta}><span>{checks.length} recent checks</span><b>Safer decisions</b></div>
           </div>
         </div>
       </section>
 
       <div className={`container ${styles.content}`}>
         <section className={styles.metrics} aria-label="Account overview">
-          <article><span className={styles.metricIcon}><Search size={18}/></span><div><small>Total checks</small><strong>24</strong><p><b>+4</b> this month</p></div></article>
-          <article><span className={styles.metricIcon}><TriangleAlert size={18}/></span><div><small>Warnings found</small><strong>7</strong><p>Across recent checks</p></div></article>
-          <article><span className={styles.metricIcon}><Flag size={18}/></span><div><small>Reports submitted</small><strong>3</strong><p><b>1</b> under review</p></div></article>
-          <article><span className={styles.metricIcon}><Bookmark size={18}/></span><div><small>Saved results</small><strong>8</strong><p>Ready when needed</p></div></article>
+          <article><span className={styles.metricIcon}><Search size={18}/></span><div><small>Recent checks</small><strong>{checks.length}</strong><p>Latest saved history</p></div></article>
+          <article><span className={styles.metricIcon}><TriangleAlert size={18}/></span><div><small>Warnings found</small><strong>{checks.filter(item=>item.result==='High risk'||item.result==='Caution').length}</strong><p>Across recent checks</p></div></article>
+          <article><span className={styles.metricIcon}><Flag size={18}/></span><div><small>Reports submitted</small><strong>{demo?'3':'—'}</strong><p>{demo?'1 under review':'Report tracking is coming next'}</p></div></article>
+          <article><span className={styles.metricIcon}><Bookmark size={18}/></span><div><small>Saved results</small><strong>{checks.length}</strong><p>Ready when needed</p></div></article>
         </section>
 
         <div className={styles.layout}>
@@ -94,22 +118,22 @@ export default function Dashboard() {
                   <time><Clock3 size={13}/>{check.time}</time>
                   <Link href="/detect" className={styles.rowAction} aria-label={`Check another ${check.type}`}><ChevronRight size={18}/></Link>
                 </article>})}
-                {filteredChecks.length===0&&<div className={styles.emptyState}>No checks match this filter.</div>}
+                {filteredChecks.length===0&&<div className={styles.emptyState}>{historyError||'No checks match this filter yet.'}</div>}
               </div>
-              <footer className={styles.panelFooter}><span>Showing recent prototype activity</span><button type="button" onClick={()=>setFilter('All')}>View all checks <ArrowRight size={14}/></button></footer>
+              <footer className={styles.panelFooter}><span>{demo?'Showing prototype activity':'Showing your saved checks'}</span><button type="button" onClick={()=>setFilter('All')}>View all checks <ArrowRight size={14}/></button></footer>
             </section>
 
             <section className={styles.panel}>
               <header className={styles.panelHeader}>
                 <div><span className={styles.sectionLabel}>Follow-up</span><h2>Your fraud reports</h2></div>
-                <Link href="/report" className={styles.textLink}>Submit report <Plus size={15}/></Link>
+                <Link href="/reports" className={styles.textLink}>Submit report <Plus size={15}/></Link>
               </header>
-              <div className={styles.reportList}>{reportItems.map(item=><article key={item.ref}>
+              <div className={styles.reportList}>{demo?reportItems.map(item=><article key={item.ref}>
                 <span className={styles.reportIcon}><FileText size={17}/></span>
                 <div><strong>{item.title}</strong><span>{item.ref} · {item.date}</span></div>
                 <span className={item.status==='Under review'?styles.reviewStatus:styles.receivedStatus}>{item.status}</span>
                 <ChevronRight size={17}/>
-              </article>)}</div>
+              </article>):<div className={styles.emptyState}>Report status tracking is not part of this MVP yet. Keep the reference shown after submission.</div>}</div>
             </section>
           </div>
 
@@ -137,7 +161,7 @@ export default function Dashboard() {
             </section>
           </aside>
         </div>
-        <div className={styles.dataNote}><CircleAlert size={15}/><span>This dashboard currently uses sample data while account history and reporting services are connected.</span></div>
+        {demo&&<div className={styles.dataNote}><CircleAlert size={15}/><span>This demo account uses sample data. Sign in with a registered account to see persisted check history.</span></div>}
       </div>
     </main>
     <Footer/>

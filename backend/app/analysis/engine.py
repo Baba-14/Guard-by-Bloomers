@@ -1,6 +1,7 @@
 """Orchestrates analyzers and owns Guard's final risk decision."""
 
 from collections import defaultdict
+import re
 
 from ..config import Settings, get_settings
 from .jev import JevAnalyzer
@@ -13,8 +14,12 @@ PATTERNS = (
     ("credential", {"otp_request", "pin_request", "password_request", "jev_sensitive_request"}, "Possible credential theft"),
     ("advance", {"advance_payment", "jev_payment_request"}, "Possible advance-fee or payment scam"),
     ("investment", {"guaranteed_return", "jev_category_investment_scam"}, "Possible prize or investment scam"),
-    ("link", {"suspicious_domain", "punycode_domain", "ip_address_url", "url_credentials", "known_risky_domain"}, "Suspicious link assessment"),
+    ("link", {"suspicious_domain", "punycode_domain", "ip_address_url", "url_credentials", "known_risky_domain", "known_risky_url"}, "Suspicious link assessment"),
     ("remote", {"remote_access_request"}, "Possible remote-access scam"),
+    ("reversal", {"momo_reversal"}, "Possible Mobile Money reversal scam"),
+    ("fake_payment", {"fake_payment_claim"}, "Possible fake payment confirmation"),
+    ("takeover", {"account_takeover"}, "Possible account takeover"),
+    ("impersonation", {"impersonation_claim", "unusual_payment_destination"}, "Possible impersonation scam"),
 )
 
 DEDUPE_GROUPS = {
@@ -43,15 +48,18 @@ class AnalysisEngine:
         content: str,
         database_signals: list[EvidenceSignal] | None = None,
     ) -> AnalysisOutcome:
-        if kind not in {"message", "link"}:
+        supported_kinds = {"message", "screenshot", "link", "number", "whatsapp", "payment", "call"}
+        if kind not in supported_kinds:
+            raise ValueError("Unsupported analysis type")
+        if kind == "screenshot" and len(re.findall(r"\b[A-Za-z]{2,}\b", content)) < 3:
             return AnalysisOutcome(
                 level="Unable to Determine",
                 score=0,
                 confidence=0.0,
                 signals=[],
-                explanation=f"{kind.title()} analysis is not part of the validated message-and-link MVP yet.",
-                recommended_action="Do not rely on this result. Verify the request through a separate trusted or official channel.",
-                pattern="Analysis capability not yet available",
+                explanation="Not enough readable screenshot text was provided for a reliable assessment.",
+                recommended_action="Try a clearer screenshot or paste the relevant visible text, then verify through an official channel.",
+                pattern="Screenshot text review",
                 provider=ProviderMetadata(provider="jev", model=self.settings.jev_model, status="disabled"),
             )
         signals = analyse_text(content)
@@ -59,7 +67,13 @@ class AnalysisEngine:
             signals.extend(analyse_url(content))
         signals.extend(database_signals or [])
 
-        jev_signals, provider = self.jev.analyse(content, kind)
+        # Number-only lookups should be decided by moderated reputation data, not
+        # by asking a text classifier to infer risk from a phone number.
+        if kind in {"number", "whatsapp"} and not re.search(r"[A-Za-z]{3,}", content):
+            jev_signals = []
+            provider = ProviderMetadata(provider="jev", model=self.settings.jev_model, status="disabled")
+        else:
+            jev_signals, provider = self.jev.analyse(content, kind)
         signals.extend(jev_signals)
         signals = self._deduplicate(signals)
 
@@ -73,7 +87,7 @@ class AnalysisEngine:
             level = "High Risk"
         elif score >= 20:
             level = "Caution"
-        elif signals:
+        elif signals or kind in {"number", "whatsapp"}:
             level = "Unable to Determine"
         else:
             level = "Low Risk"
@@ -84,7 +98,7 @@ class AnalysisEngine:
             score=score,
             confidence=confidence,
             signals=signals,
-            explanation=self._explanation(level, signals, provider),
+            explanation=self._explanation(level, signals, provider, kind),
             recommended_action=self._action(level),
             pattern=self._pattern(signals, kind),
             provider=provider,
@@ -109,8 +123,10 @@ class AnalysisEngine:
         return round(min(0.98, average * (0.82 + 0.08 * independent_sources)), 2)
 
     @staticmethod
-    def _explanation(level: str, signals: list[EvidenceSignal], provider: ProviderMetadata) -> str:
+    def _explanation(level: str, signals: list[EvidenceSignal], provider: ProviderMetadata, kind: str) -> str:
         if not signals:
+            if kind in {"number", "whatsapp"}:
+                return "No verified reputation evidence was found for this number. That does not prove the caller or account is safe."
             suffix = " Jev was not used, so this result relies on local checks only." if provider.status != "used" else ""
             return "No strong warning signs were found, but this does not prove the submission is safe." + suffix
         top = sorted(signals, key=lambda item: item.contribution, reverse=True)[:2]
@@ -141,4 +157,14 @@ class AnalysisEngine:
                 return label
         if kind == "link":
             return "Link risk review"
+        if kind == "number":
+            return "Phone reputation review"
+        if kind == "whatsapp":
+            return "WhatsApp account review"
+        if kind == "payment":
+            return "Payment request review"
+        if kind == "call":
+            return "Suspicious call review"
+        if kind == "screenshot":
+            return "Screenshot text review"
         return "Contextual fraud assessment"

@@ -1,0 +1,18 @@
+[
+  {"id":"msg-otp-fee","kind":"message","content":"Urgent: you won GH₵5,000. Pay the processing fee and send your OTP immediately.","expected":"High Risk"},
+  {"id":"msg-normal","kind":"message","content":"The team meeting has moved to three o'clock tomorrow.","expected":"Low Risk"},
+  {"id":"msg-suspension","kind":"message","content":"Your account will be suspended. Act now to keep access.","expected":"Caution"},
+  {"id":"link-shortener","kind":"link","content":"https://bit.ly/claim-now","expected":"Caution"},
+  {"id":"link-hosted-brand","kind":"link","content":"https://gcb-secure.vercel.app/login","expected":"Caution"},
+  {"id":"link-ip-http","kind":"link","content":"http://192.0.2.10/login","expected":"Caution"},
+  {"id":"link-ordinary","kind":"link","content":"https://example.org/community","expected":"Low Risk"},
+  {"id":"payment-reversal","kind":"payment","content":"Urgent: I sent Mobile Money to the wrong number. Send the money back to a different MoMo account immediately.","expected":"High Risk"},
+  {"id":"payment-normal","kind":"payment","content":"Invoice for the agreed catering order, payable after delivery and confirmation.","expected":"Low Risk"},
+  {"id":"call-bank-pin","kind":"call","content":"The bank agent said my account will be blocked and asked me to share my PIN immediately.","expected":"High Risk"},
+  {"id":"call-normal","kind":"call","content":"The clinic called to confirm my appointment time tomorrow.","expected":"Low Risk"},
+  {"id":"whatsapp-takeover","kind":"whatsapp","content":"I have a new number. Urgent, send your OTP so I can regain the account.","expected":"High Risk"},
+  {"id":"whatsapp-unknown","kind":"whatsapp","content":"+233240000000","expected":"Unable to Determine"},
+  {"id":"number-unknown","kind":"number","content":"+233550000000","expected":"Unable to Determine"},
+  {"id":"screenshot-fake-payment","kind":"screenshot","content":"Urgent payment alert. I have already paid, release the goods immediately.","expected":"Caution"},
+  {"id":"screenshot-normal","kind":"screenshot","content":"Your monthly statement is ready in the official banking application.","expected":"Low Risk"}
+]

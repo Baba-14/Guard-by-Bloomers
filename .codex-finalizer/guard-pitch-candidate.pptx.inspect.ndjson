@@ -1,0 +1,278 @@
+{"kind":"deck","id":"pr/wm0xhm","name":"Deck"}
+{"kind":"layout","layoutId":"b6adc5c3-9dd6-4d05-9b2a-0e4d88fe53b8","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"2cf9626a-7fd5-485e-a529-fe5a8fcb35b5","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/ka54xd","slide":1,"title":"Guard","textShapes":5}
+{"kind":"shape","id":"sh/al0relcf","slide":1,"bbox":[620,0,110,720]}
+{"kind":"textbox","id":"sh/bm98nqtk","slide":1,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"textbox","id":"sh/lcbad0b2","slide":1,"text":"EVERYDAY DIGITAL\nFRAUD PROTECTION","textPreview":"EVERYDAY DIGITAL | FRAUD PROTECTION","textChars":33,"textLines":2,"bbox":[54,184,630,150]}
+{"kind":"textbox","id":"sh/y9krilcb","slide":1,"text":"Guard detects suspicious calls, SMS, email, links and supported app notifications before the user acts.","textPreview":"Guard detects suspicious calls, SMS, email, links and supported app notifications before the user acts.","textChars":103,"textLines":1,"bbox":[58,365,510,94]}
+{"kind":"shape","id":"sh/zatsbqtw","slide":1,"bbox":[58,526,238,44]}
+{"kind":"textbox","id":"sh/8f29ofud","slide":1,"text":"INVESTOR PITCH 2026","textPreview":"INVESTOR PITCH 2026","textChars":19,"textLines":1,"bbox":[76,538,210,18]}
+{"kind":"textbox","id":"sh/tgbah0by","slide":1,"text":"Permission based. Explainable. Present when risk appears.","textPreview":"Permission based. Explainable. Present when risk appears.","textChars":57,"textLines":1,"bbox":[58,613,520,40]}
+{"kind":"image","id":"im/4v6lwrq1","slide":1,"name":"","alt":"Ghanaian professional checking a suspicious message","bbox":[660,0,620,720]}
+{"kind":"image","id":"im/hsv2lc7a","slide":1,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/ka54xd","slide":1,"text":"Design inspired by the supplied Hydrogo Pitch Deck 2025. Product statements are based on the Guard project and the product direction provided by the founder."}
+{"kind":"slide","id":"sl/gb2b4d","slide":2,"title":"Guard","textShapes":11}
+{"kind":"textbox","id":"sh/xwzu1cbe","slide":2,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/buxcz2t8","slide":2,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/kzqdw7a5","slide":2,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/l0zu5cra","slide":2,"text":"PRIMARY USER","textPreview":"PRIMARY USER","textChars":12,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/yx8buxsz","slide":2,"text":"The everyday digital user","textPreview":"The everyday digital user","textChars":25,"textLines":1,"bbox":[54,135,690,68]}
+{"kind":"textbox","id":"sh/036tknal","slide":2,"text":"WHO GUARD SERVES","textPreview":"WHO GUARD SERVES","textChars":16,"textLines":1,"bbox":[58,242,300,24]}
+{"kind":"textbox","id":"sh/14futsb6","slide":2,"text":"Anyone who receives calls, messages, email or links and needs to know whether they can trust them.","textPreview":"Anyone who receives calls, messages, email or links and needs to know whether they can trust them.","textChars":98,"textLines":1,"bbox":[58,276,610,103]}
+{"kind":"shape","id":"sh/xobqpwfy","slide":2,"bbox":[58,404,608,0]}
+{"kind":"textbox","id":"sh/wnipgred","slide":2,"text":"Common pressure","textPreview":"Common pressure","textChars":15,"textLines":1,"bbox":[58,426,220,24]}
+{"kind":"textbox","id":"sh/vm9on6xs","slide":2,"text":"Fraud appears inside familiar channels and often looks legitimate long enough to trigger a response.","textPreview":"Fraud appears inside familiar channels and often looks legitimate long enough to trigger a response.","textChars":100,"textLines":1,"bbox":[58,458,270,112]}
+{"kind":"textbox","id":"sh/al07e1w7","slide":2,"text":"Desired outcome","textPreview":"Desired outcome","textChars":15,"textLines":1,"bbox":[376,426,220,24]}
+{"kind":"textbox","id":"sh/5sbqtgvu","slide":2,"text":"A warning at the moment of risk, with a reason and a safe action that protects their information and money.","textPreview":"A warning at the moment of risk, with a reason and a safe action that protects their information and money.","textChars":107,"textLines":1,"bbox":[376,458,282,112]}
+{"kind":"shape","id":"sh/kr2pkbep","slide":2,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/jqt8r6x4","slide":2,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/ipk7i1wj","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/jyt4f2t8","slide":2,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"image","id":"im/a9k3ixcb","slide":2,"name":"","geometry":"roundRect","alt":"Small business owner reviewing a phone message","bbox":[760,110,466,522]}
+{"kind":"notes","id":"nt/gb2b4d","slide":2,"text":"The user profile is an archetype based on Guard's intended everyday-user market. It does not represent a named customer or completed research participant."}
+{"kind":"slide","id":"sl/zdbqte","slide":3,"title":"Guard","textShapes":12}
+{"kind":"textbox","id":"sh/qlg7ulgf","slide":3,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/cnypwvyl","slide":3,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/3i58z6xo","slide":3,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/2hw7qlg3","slide":3,"text":"PROBLEM","textPreview":"PROBLEM","textChars":7,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/pk7q1gfu","slide":3,"text":"Fraud reaches users through every digital channel","textPreview":"Fraud reaches users through every digital channel","textChars":49,"textLines":1,"bbox":[54,135,700,68]}
+{"kind":"textbox","id":"sh/ne98bax8","slide":3,"text":"1,799","textPreview":"1,799","textChars":5,"textLines":1,"bbox":[58,245,360,72]}
+{"kind":"textbox","id":"sh/md0725gn","slide":3,"text":"online fraud incidents confirmed by Ghana's Cyber Security Authority in 2025","textPreview":"online fraud incidents confirmed by Ghana's Cyber Security Authority in 2025","textChars":76,"textLines":1,"bbox":[60,323,500,58]}
+{"kind":"textbox","id":"sh/cf21kb6x","slide":3,"text":"39%","textPreview":"39%","textChars":3,"textLines":1,"bbox":[58,414,210,58]}
+{"kind":"textbox","id":"sh/dgbidw7i","slide":3,"text":"of confirmed cyber incidents in 2025","textPreview":"of confirmed cyber incidents in 2025","textChars":36,"textLines":1,"bbox":[60,470,225,44]}
+{"kind":"textbox","id":"sh/qd0ji1or","slide":3,"text":"47%","textPreview":"47%","textChars":3,"textLines":1,"bbox":[330,414,260,58]}
+{"kind":"textbox","id":"sh/bet0b6pc","slide":3,"text":"of incidents from January to July 2026","textPreview":"of incidents from January to July 2026","textChars":38,"textLines":1,"bbox":[332,470,270,44]}
+{"kind":"shape","id":"sh/obi1gr6l","slide":3,"bbox":[58,551,620,58]}
+{"kind":"textbox","id":"sh/pcri9w76","slide":3,"text":"Users need protection inside the channel, before a click, reply or disclosure.","textPreview":"Users need protection inside the channel, before a click, reply or disclosure.","textChars":78,"textLines":1,"bbox":[78,568,580,28]}
+{"kind":"shape","id":"sh/290jehov","slide":3,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/3a907mpg","slide":3,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/g7i1c76p","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/472dg7yh","slide":3,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"image","id":"im/h4belcz6","slide":3,"name":"","geometry":"roundRect","alt":"Ghanaian woman reviewing a suspicious phone message","bbox":[760,142,466,455]}
+{"kind":"notes","id":"nt/zdbqte","slide":3,"text":"Sources: Ghana Cyber Security Authority, 2025 confirmed incidents and online fraud share. https://www.csa.gov.gh/cybercrime-is-not-smart-work-csa-boss-warns-youth.php. Ghana Cyber Security Authority, January to July 2026 incident share. https://csa.gov.gh/2026-national-cyber-security-awareness-month-launched-to-build-digital-trust.php"}
+{"kind":"slide","id":"sl/tiwo2a","slide":4,"title":"Guard","textShapes":21}
+{"kind":"textbox","id":"sh/ipgbalc3","slide":4,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/4rytcvut","slide":4,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/vm5cz6dc","slide":4,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/alwb61cr","slide":4,"text":"SOLUTION","textPreview":"SOLUTION","textChars":8,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/ho7u1gvi","slide":4,"text":"Always-on protection with user permission","textPreview":"Always-on protection with user permission","textChars":41,"textLines":1,"bbox":[54,135,1080,68]}
+{"kind":"textbox","id":"sh/wnet8bux","slide":4,"text":"Guard monitors the signals each platform permits, assesses risk and returns a warning where the user can act on it.","textPreview":"Guard monitors the signals each platform permits, assesses risk and returns a warning where the user can act on it.","textChars":115,"textLines":1,"bbox":[58,210,1120,58]}
+{"kind":"textbox","id":"sh/fi9cbadg","slide":4,"text":"CALLS","textPreview":"CALLS","textChars":5,"textLines":1,"bbox":[58,307,95,22]}
+{"kind":"textbox","id":"sh/eh0vi5cb","slide":4,"text":"Caller ID or screening","textPreview":"Caller ID or screening","textChars":22,"textLines":1,"bbox":[160,305,280,27]}
+{"kind":"shape","id":"sh/gne9oril","slide":4,"bbox":[450,317,100,0]}
+{"kind":"textbox","id":"sh/honaxwz6","slide":4,"text":"SMS","textPreview":"SMS","textChars":3,"textLines":1,"bbox":[58,364,95,22]}
+{"kind":"textbox","id":"sh/ulwrmh0f","slide":4,"text":"Inbox filtering","textPreview":"Inbox filtering","textChars":15,"textLines":1,"bbox":[160,362,280,27]}
+{"kind":"shape","id":"sh/vm5svmh0","slide":4,"bbox":[450,374,100,0]}
+{"kind":"textbox","id":"sh/8ju9k7i9","slide":4,"text":"EMAIL","textPreview":"EMAIL","textChars":5,"textLines":1,"bbox":[58,421,95,22]}
+{"kind":"textbox","id":"sh/tk3atczu","slide":4,"text":"Authorized mailbox connection","textPreview":"Authorized mailbox connection","textChars":29,"textLines":1,"bbox":[160,419,280,27]}
+{"kind":"shape","id":"sh/mhcrih0j","slide":4,"bbox":[450,431,100,0]}
+{"kind":"textbox","id":"sh/7ilsrmh4","slide":4,"text":"LINKS","textPreview":"LINKS","textChars":5,"textLines":1,"bbox":[58,478,95,22]}
+{"kind":"textbox","id":"sh/kvu9g7id","slide":4,"text":"Share sheet or browser check","textPreview":"Share sheet or browser check","textChars":28,"textLines":1,"bbox":[160,476,280,27]}
+{"kind":"shape","id":"sh/lw3qpczy","slide":4,"bbox":[450,488,100,0]}
+{"kind":"textbox","id":"sh/1cvqt8rm","slide":4,"text":"APPS","textPreview":"APPS","textChars":4,"textLines":1,"bbox":[58,535,95,22]}
+{"kind":"textbox","id":"sh/0bmpk3a1","slide":4,"text":"Supported notifications","textPreview":"Supported notifications","textChars":23,"textLines":1,"bbox":[160,533,280,27]}
+{"kind":"shape","id":"sh/zqdory9g","slide":4,"bbox":[450,545,100,0]}
+{"kind":"shape","id":"sh/ep47itsb","slide":4,"bbox":[555,292,284,300]}
+{"kind":"textbox","id":"sh/cn2pgja5","slide":4,"text":"GUARD PROTECTION LAYER","textPreview":"GUARD PROTECTION LAYER","textChars":22,"textLines":1,"bbox":[580,432,234,24]}
+{"kind":"textbox","id":"sh/rmtonetk","slide":4,"text":"Identity, content, link and reputation signals","textPreview":"Identity, content, link and reputation signals","textChars":46,"textLines":1,"bbox":[592,474,210,62]}
+{"kind":"shape","id":"sh/qlk7e9sz","slide":4,"bbox":[839,441,90,0]}
+{"kind":"shape","id":"sh/xkfq1sru","slide":4,"bbox":[930,330,270,222]}
+{"kind":"textbox","id":"sh/wj6psna9","slide":4,"text":"FRAUD WARNING","textPreview":"FRAUD WARNING","textChars":13,"textLines":1,"bbox":[956,358,218,22]}
+{"kind":"textbox","id":"sh/upgnm58r","slide":4,"text":"High risk","textPreview":"High risk","textChars":9,"textLines":1,"bbox":[956,402,218,44]}
+{"kind":"textbox","id":"sh/fq94vapc","slide":4,"text":"This message asks for a security code and creates false urgency.","textPreview":"This message asks for a security code and creates false urgency.","textChars":64,"textLines":1,"bbox":[958,462,214,58]}
+{"kind":"shape","id":"sh/gri5ofqx","slide":4,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/hsrmxk7i","slide":4,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/6lg3i58v","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/87e103ax","slide":4,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"image","id":"im/a9wf2lw7","slide":4,"name":"","alt":"Guard mark","bbox":[654,320,86,86]}
+{"kind":"notes","id":"nt/tiwo2a","slide":4,"text":"Technical feasibility varies by surface and operating system. Android supports user-selected call screening and permissioned notification listeners. Apple provides Call Directory, Live Caller ID and Message Filter extensions. Gmail supports authorized mailbox access and change notifications. Third-party messaging coverage depends on exposed notifications, share actions, integrations and platform policy. Sources: https://developer.android.com/reference/android/telecom/CallScreeningService, https://developer.android.com/reference/android/service/notification/NotificationListenerService, https://developer.apple.com/documentation/IdentityLookup, https://developers.google.com/workspace/gmail/api/guides/push"}
+{"kind":"slide","id":"sl/ftcj8v","slide":5,"title":"Guard","textShapes":18}
+{"kind":"textbox","id":"sh/twzmt4nq","slide":5,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/ruh4ru5k","slide":5,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/gzq54jmh","slide":5,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/10j6xon2","slide":5,"text":"USER EXPERIENCE","textPreview":"USER EXPERIENCE","textChars":15,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/ex8n294b","slide":5,"text":"The warning appears where the risk appears","textPreview":"The warning appears where the risk appears","textChars":42,"textLines":1,"bbox":[54,135,1040,68]}
+{"kind":"shape","id":"sh/fyh4ve5w","slide":5,"bbox":[58,246,266,294]}
+{"kind":"textbox","id":"sh/ona58jmd","slide":5,"text":"CALL","textPreview":"CALL","textChars":4,"textLines":1,"bbox":[78,267,100,24]}
+{"kind":"textbox","id":"sh/poj61ony","slide":5,"text":"Caller warning","textPreview":"Caller warning","textChars":14,"textLines":1,"bbox":[78,319,224,62]}
+{"kind":"shape","id":"sh/t8vmtwfq","slide":5,"bbox":[78,396,72,0]}
+{"kind":"textbox","id":"sh/s7m5kry5","slide":5,"text":"Identify or screen suspicious callers before the user answers.","textPreview":"Identify or screen suspicious callers before the user answers.","textChars":62,"textLines":1,"bbox":[78,423,224,88]}
+{"kind":"shape","id":"sh/76d4rmhk","slide":5,"bbox":[352,246,266,294]}
+{"kind":"textbox","id":"sh/654nihgz","slide":5,"text":"SMS","textPreview":"SMS","textChars":3,"textLines":1,"bbox":[372,267,100,24]}
+{"kind":"textbox","id":"sh/hcfmxgfm","slide":5,"text":"Inbox flag","textPreview":"Inbox flag","textChars":10,"textLines":1,"bbox":[372,319,224,62]}
+{"kind":"shape","id":"sh/gbm5oby1","slide":5,"bbox":[372,396,72,0]}
+{"kind":"textbox","id":"sh/fad4v6xg","slide":5,"text":"Label likely fraud and explain the request that raised concern.","textPreview":"Label likely fraud and explain the request that raised concern.","textChars":63,"textLines":1,"bbox":[372,423,224,88]}
+{"kind":"shape","id":"sh/u94nm1gv","slide":5,"bbox":[646,246,266,294]}
+{"kind":"textbox","id":"sh/xgbmlczi","slide":5,"text":"EMAIL","textPreview":"EMAIL","textChars":5,"textLines":1,"bbox":[666,267,100,24]}
+{"kind":"textbox","id":"sh/wf2lc7yx","slide":5,"text":"Message alert","textPreview":"Message alert","textChars":13,"textLines":1,"bbox":[666,319,224,62]}
+{"kind":"shape","id":"sh/8v6dobap","slide":5,"bbox":[666,396,72,0]}
+{"kind":"textbox","id":"sh/9wzehgba","slide":5,"text":"Assess a connected inbox and warn before the user replies or clicks.","textPreview":"Assess a connected inbox and warn before the user replies or clicks.","textChars":68,"textLines":1,"bbox":[666,423,224,88]}
+{"kind":"shape","id":"sh/mtovm1sz","slide":5,"bbox":[940,246,266,294]}
+{"kind":"textbox","id":"sh/nuxwf6tk","slide":5,"text":"APPS","textPreview":"APPS","textChars":4,"textLines":1,"bbox":[960,267,100,24]}
+{"kind":"textbox","id":"sh/wzqdsba1","slide":5,"text":"Risk notification","textPreview":"Risk notification","textChars":17,"textLines":1,"bbox":[960,319,224,62]}
+{"kind":"shape","id":"sh/x0zelgbm","slide":5,"bbox":[960,396,72,0]}
+{"kind":"textbox","id":"sh/ax8vqlsv","slide":5,"text":"Use supported notification data or a share action to assess the content.","textPreview":"Use supported notification data or a share action to assess the content.","textChars":72,"textLines":1,"bbox":[960,423,224,88]}
+{"kind":"textbox","id":"sh/vyhwj6tg","slide":5,"text":"Every surface requires explicit permission. Coverage depends on operating-system and platform capabilities.","textPreview":"Every surface requires explicit permission. Coverage depends on operating-system and platform capabilities.","textChars":107,"textLines":1,"bbox":[58,589,960,28]}
+{"kind":"shape","id":"sh/knaxwvax","slide":5,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/5ojep0bi","slide":5,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/filgfudk","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/bql8jedg","slide":5,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/ftcj8v","slide":5,"text":"The user experience represents the intended product. Exact warning placement and available content vary by operating system, app integration and user-granted permission."}
+{"kind":"slide","id":"sl/a45mu2","slide":6,"title":"Guard","textShapes":6}
+{"kind":"textbox","id":"sh/i1onmtc3","slide":6,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/43q5o3u9","slide":6,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/vex4bydc","slide":6,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/udonitcr","slide":6,"text":"POSITIONING","textPreview":"POSITIONING","textChars":11,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/h0fmd8vi","slide":6,"text":"Guard protects across channels and explains the risk","textPreview":"Guard protects across channels and explains the risk","textChars":52,"textLines":1,"bbox":[54,135,1120,68]}
+{"kind":"textbox","id":"sh/7ad47edg","slide":6,"text":"Positioning hypothesis for investor discussion. Named competitors and feature validation should follow pilot interviews.","textPreview":"Positioning hypothesis for investor discussion. Named competitors and feature validation should follow pilot interviews.","textChars":120,"textLines":1,"bbox":[58,585,1040,26]}
+{"kind":"shape","id":"sh/694ne9wv","slide":6,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/cbylsba9","slide":6,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/dcrmlgbu","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"table","id":"tb/9wf6dorm","slide":6,"name":"","rows":6,"cols":5,"preview":"Approach | Calls + SMS | Email + links | App signals | Explains risk","bbox":[58,248,1168,300]}
+{"kind":"image","id":"im/wzehk3ih","slide":6,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/a45mu2","slide":6,"text":"This comparison uses product categories, not audited claims about named companies. It describes Guard's intended positioning and requires competitor and customer validation."}
+{"kind":"slide","id":"sl/0bmzf7","slide":7,"title":"Guard","textShapes":16}
+{"kind":"textbox","id":"sh/0fep8nm1","slide":7,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/edc76x4v","slide":7,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/pknq5cni","slide":7,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/ojepc7md","slide":7,"text":"MARKET","textPreview":"MARKET","textChars":6,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/ni58325s","slide":7,"text":"Ghana is a strong mobile launch market","textPreview":"Ghana is a strong mobile launch market","textChars":38,"textLines":1,"bbox":[54,135,1040,68]}
+{"kind":"textbox","id":"sh/2hw7ax47","slide":7,"text":"30.5m","textPreview":"30.5m","textChars":5,"textLines":1,"bbox":[58,263,250,72]}
+{"kind":"textbox","id":"sh/x87q9cnu","slide":7,"text":"mobile data subscriptions\nin June 2026","textPreview":"mobile data subscriptions | in June 2026","textChars":38,"textLines":2,"bbox":[60,339,250,64]}
+{"kind":"shape","id":"sh/c7ypg7m9","slide":7,"bbox":[388,370,210,178]}
+{"kind":"textbox","id":"sh/mxk7mx0n","slide":7,"text":"89.5%","textPreview":"89.5%","textChars":5,"textLines":1,"bbox":[399,410,188,48]}
+{"kind":"textbox","id":"sh/7yt8vih8","slide":7,"text":"mobile data penetration","textPreview":"mobile data penetration","textChars":23,"textLines":1,"bbox":[410,475,166,42]}
+{"kind":"shape","id":"sh/8z2ponit","slide":7,"bbox":[622,318,210,230]}
+{"kind":"textbox","id":"sh/90bqxsze","slide":7,"text":"1,799","textPreview":"1,799","textChars":5,"textLines":1,"bbox":[643,365,168,48]}
+{"kind":"textbox","id":"sh/u1k7qx0z","slide":7,"text":"confirmed online fraud incidents in 2025","textPreview":"confirmed online fraud incidents in 2025","textChars":40,"textLines":1,"bbox":[644,430,166,62]}
+{"kind":"shape","id":"sh/v2d8z2hk","slide":7,"bbox":[856,252,210,296]}
+{"kind":"textbox","id":"sh/w3m9s7ip","slide":7,"text":"47%","textPreview":"47%","textChars":3,"textLines":1,"bbox":[877,330,168,65]}
+{"kind":"textbox","id":"sh/hovq1cza","slide":7,"text":"share of reported incidents that were online fraud, Jan-Jul 2026","textPreview":"share of reported incidents that were online fraud, Jan-Jul 2026","textChars":64,"textLines":1,"bbox":[878,416,166,78]}
+{"kind":"textbox","id":"sh/a507et0f","slide":7,"text":"ENTRY WEDGE","textPreview":"ENTRY WEDGE","textChars":11,"textLines":1,"bbox":[1094,267,128,22]}
+{"kind":"textbox","id":"sh/b698nyh0","slide":7,"text":"Start with Android personal protection, followed by email connections, iOS extensions and partner distribution.","textPreview":"Start with Android personal protection, followed by email connections, iOS extensions and partner distribution.","textChars":111,"textLines":1,"bbox":[1090,305,136,175]}
+{"kind":"textbox","id":"sh/fa54vuxs","slide":7,"text":"Subscriptions are connections, not unique people. Market sizing still requires conversion and pricing evidence.","textPreview":"Subscriptions are connections, not unique people. Market sizing still requires conversion and pricing evidence.","textChars":111,"textLines":1,"bbox":[58,595,1030,30]}
+{"kind":"shape","id":"sh/e9wnm9g7","slide":7,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/1c7mx4fy","slide":7,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/0be5ozyd","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/eh4v6hcz","slide":7,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/0bmzf7","slide":7,"text":"Sources: National Communications Authority homepage, June 2026 telecom data subscriptions and penetration. https://nca.org.gh/. Ghana Cyber Security Authority, 2025 online fraud incidents. https://www.csa.gov.gh/cybercrime-is-not-smart-work-csa-boss-warns-youth.php. Ghana Cyber Security Authority, January to July 2026 incident share. https://csa.gov.gh/2026-national-cyber-security-awareness-month-launched-to-build-digital-trust.php. Subscriptions are not unique people."}
+{"kind":"slide","id":"sl/jf8kwt","slide":8,"title":"Guard","textShapes":18}
+{"kind":"textbox","id":"sh/8b2d4vud","slide":8,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/69kv2lc7","slide":8,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/l8be90bm","slide":8,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/k72d0vu1","slide":8,"text":"REVENUE MODEL","textPreview":"REVENUE MODEL","textChars":13,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/j6tw7qtw","slide":8,"text":"Personal protection builds reach while partners fund scale","textPreview":"Personal protection builds reach while partners fund scale","textChars":58,"textLines":1,"bbox":[54,135,1120,68]}
+{"kind":"textbox","id":"sh/y50vylcb","slide":8,"text":"PERSONAL","textPreview":"PERSONAL","textChars":8,"textLines":1,"bbox":[58,243,125,20]}
+{"kind":"textbox","id":"sh/p4velkb6","slide":8,"text":"Free protection","textPreview":"Free protection","textChars":15,"textLines":1,"bbox":[202,236,280,34]}
+{"kind":"textbox","id":"sh/43mxcful","slide":8,"text":"Core warnings for supported calls, messages, links and connected email.","textPreview":"Core warnings for supported calls, messages, links and connected email.","textChars":71,"textLines":1,"bbox":[510,237,650,52]}
+{"kind":"shape","id":"sh/yd43ux4r","slide":8,"bbox":[58,306,1168,0]}
+{"kind":"textbox","id":"sh/jedkn2lc","slide":8,"text":"PREMIUM","textPreview":"PREMIUM","textChars":7,"textLines":1,"bbox":[58,334,125,20]}
+{"kind":"textbox","id":"sh/kf6lw7mx","slide":8,"text":"Personal or family plan","textPreview":"Personal or family plan","textChars":23,"textLines":1,"bbox":[202,327,280,34]}
+{"kind":"textbox","id":"sh/lgfmpc3i","slide":8,"text":"Broader monitoring, shared protection, history and recovery guidance.","textPreview":"Broader monitoring, shared protection, history and recovery guidance.","textChars":69,"textLines":1,"bbox":[510,328,650,52]}
+{"kind":"shape","id":"sh/ap43qx4v","slide":8,"bbox":[58,397,1168,0]}
+{"kind":"textbox","id":"sh/bqdkj2lg","slide":8,"text":"BUSINESS","textPreview":"BUSINESS","textChars":8,"textLines":1,"bbox":[58,425,125,20]}
+{"kind":"textbox","id":"sh/wrmls7m1","slide":8,"text":"Seats + API usage","textPreview":"Seats + API usage","textChars":17,"textLines":1,"bbox":[202,418,280,34]}
+{"kind":"textbox","id":"sh/xcv2ls36","slide":8,"text":"Fraud detection for staff, customers, support teams and digital workflows.","textPreview":"Fraud detection for staff, customers, support teams and digital workflows.","textChars":74,"textLines":1,"bbox":[510,419,650,52]}
+{"kind":"shape","id":"sh/ulo32h4z","slide":8,"bbox":[58,488,1168,0]}
+{"kind":"textbox","id":"sh/fmh4vmlk","slide":8,"text":"PARTNERS","textPreview":"PARTNERS","textChars":8,"textLines":1,"bbox":[58,516,125,20]}
+{"kind":"textbox","id":"sh/rep87uxk","slide":8,"text":"License + distribution","textPreview":"License + distribution","textChars":22,"textLines":1,"bbox":[202,509,280,34]}
+{"kind":"textbox","id":"sh/qdgrypgf","slide":8,"text":"Telecom, financial, device and platform partnerships with local intelligence.","textPreview":"Telecom, financial, device and platform partnerships with local intelligence.","textChars":77,"textLines":1,"bbox":[510,510,650,52]}
+{"kind":"shape","id":"sh/dg7a94fq","slide":8,"bbox":[58,608,1168,42]}
+{"kind":"textbox","id":"sh/sfy90zy5","slide":8,"text":"Pricing remains a test variable. Pilot contracts should validate willingness to pay before external forecasts use fixed rates.","textPreview":"Pricing remains a test variable. Pilot contracts should validate willingness to pay before external forecasts use fixed rates.","textChars":126,"textLines":1,"bbox":[78,621,1128,20]}
+{"kind":"shape","id":"sh/fi9sbuxw","slide":8,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/ehgr2pgb","slide":8,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/1krad4f2","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/mhgnids3","slide":8,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/jf8kwt","slide":8,"text":"The revenue model is a proposed strategy. The workspace includes a pricing route but does not document validated price points, signed contracts or revenue."}
+{"kind":"slide","id":"sl/vc0l14","slide":9,"title":"Guard","textShapes":18}
+{"kind":"textbox","id":"sh/cn61cbyh","slide":9,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/al4jalgr","slide":9,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/pkv21gz6","slide":9,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/ojm18byl","slide":9,"text":"PRODUCT READINESS","textPreview":"PRODUCT READINESS","textChars":17,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/nidkz6h0","slide":9,"text":"The MVP proves the engine. Native protection comes next","textPreview":"The MVP proves the engine. Native protection comes next","textChars":55,"textLines":1,"bbox":[54,135,1120,68]}
+{"kind":"shape","id":"sh/1gvixwzu","slide":9,"bbox":[632,238,270,146]}
+{"kind":"textbox","id":"sh/0fm14rip","slide":9,"text":"NOW","textPreview":"NOW","textChars":3,"textLines":1,"bbox":[650,256,232,42]}
+{"kind":"textbox","id":"sh/65cbu5c7","slide":9,"text":"Web and API","textPreview":"Web and API","textChars":11,"textLines":1,"bbox":[650,300,232,24]}
+{"kind":"textbox","id":"sh/r6lc3ats","slide":9,"text":"Manual checks already cover messages, screenshots, links, numbers, payments and calls","textPreview":"Manual checks already cover messages, screenshots, links, numbers, payments and calls","textChars":85,"textLines":1,"bbox":[650,330,232,43]}
+{"kind":"shape","id":"sh/s7utwfud","slide":9,"bbox":[924,238,270,146]}
+{"kind":"textbox","id":"sh/t8nu5kby","slide":9,"text":"NEXT","textPreview":"NEXT","textChars":4,"textLines":1,"bbox":[942,256,232,42]}
+{"kind":"textbox","id":"sh/ihcbq5cb","slide":9,"text":"Android app","textPreview":"Android app","textChars":11,"textLines":1,"bbox":[942,300,232,24]}
+{"kind":"textbox","id":"sh/jilszatg","slide":9,"text":"Call screening, notification access and link assessment with permission","textPreview":"Call screening, notification access and link assessment with permission","textChars":71,"textLines":1,"bbox":[942,330,232,43]}
+{"kind":"shape","id":"sh/4jutsvu1","slide":9,"bbox":[632,408,270,146]}
+{"kind":"textbox","id":"sh/543u10bm","slide":9,"text":"CONNECT","textPreview":"CONNECT","textChars":7,"textLines":1,"bbox":[650,426,232,42]}
+{"kind":"textbox","id":"sh/adsbmlcz","slide":9,"text":"Email and iOS","textPreview":"Email and iOS","textChars":13,"textLines":1,"bbox":[650,470,232,24]}
+{"kind":"textbox","id":"sh/ve1svqtk","slide":9,"text":"Authorized email access plus iOS call and message extensions","textPreview":"Authorized email access plus iOS call and message extensions","textChars":60,"textLines":1,"bbox":[650,500,232,43]}
+{"kind":"shape","id":"sh/zih83m9c","slide":9,"bbox":[924,408,270,146]}
+{"kind":"textbox","id":"sh/yh8ruhsr","slide":9,"text":"CONTROL","textPreview":"CONTROL","textChars":7,"textLines":1,"bbox":[942,426,232,42]}
+{"kind":"textbox","id":"sh/lkzq5wri","slide":9,"text":"Privacy by design","textPreview":"Privacy by design","textChars":17,"textLines":1,"bbox":[942,470,232,24]}
+{"kind":"textbox","id":"sh/0jq9wrax","slide":9,"text":"Clear permissions, local processing choices and consented contributions","textPreview":"Clear permissions, local processing choices and consented contributions","textChars":71,"textLines":1,"bbox":[942,500,232,43]}
+{"kind":"textbox","id":"sh/nmh87698","slide":9,"text":"Current evidence proves the analysis workflow. Native integration, accuracy and user trust still require measured pilots.","textPreview":"Current evidence proves the analysis workflow. Native integration, accuracy and user trust still require measured pilots.","textChars":121,"textLines":1,"bbox":[632,592,594,42]}
+{"kind":"shape","id":"sh/ml8ry1s3","slide":9,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/9ozq9wre","slide":9,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/8nq90bat","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/2dc7u94n","slide":9,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"image","id":"im/faloze5w","slide":9,"name":"","geometry":"roundRect","alt":"Guard product team reviewing a phone","bbox":[58,240,520,330]}
+{"kind":"notes","id":"nt/vc0l14","slide":9,"text":"Sources: README.md, components/Checker.tsx, backend/app/intelligence.py and backend/app/intelligence_routes.py in the current Guard workspace. Platform capability sources: https://developer.android.com/reference/android/telecom/CallScreeningService, https://developer.android.com/reference/android/service/notification/NotificationListenerService, https://developer.apple.com/documentation/IdentityLookup, https://developers.google.com/workspace/gmail/api/guides/push. No user, revenue or accuracy traction has been inferred."}
+{"kind":"slide","id":"sl/4tbkfa","slide":10,"title":"Guard","textShapes":22}
+{"kind":"textbox","id":"sh/cz6dknet","slide":10,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/qx4vidwn","slide":10,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/1ofexsfa","slide":10,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/0n6donep","slide":10,"text":"ROADMAP","textPreview":"ROADMAP","textChars":7,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/z2xwvixk","slide":10,"text":"The next 12 months move Guard into the user's daily digital life","textPreview":"The next 12 months move Guard into the user's daily digital life","textChars":64,"textLines":1,"bbox":[54,135,1120,68]}
+{"kind":"shape","id":"sh/e1ovmdwz","slide":10,"bbox":[126,318,1030,0]}
+{"kind":"shape","id":"sh/hsvel8f6","slide":10,"bbox":[100,293,34,34]}
+{"kind":"textbox","id":"sh/gr2dc3el","slide":10,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[100,301,34,17]}
+{"kind":"textbox","id":"sh/ud8jelgf","slide":10,"text":"0-3 MONTHS","textPreview":"0-3 MONTHS","textChars":10,"textLines":1,"bbox":[58,355,250,20]}
+{"kind":"textbox","id":"sh/vehknqh0","slide":10,"text":"Android","textPreview":"Android","textChars":7,"textLines":1,"bbox":[58,390,250,38]}
+{"kind":"textbox","id":"sh/gfq1gbyl","slide":10,"text":"Call screening, notification access, link checks and permission controls","textPreview":"Call screening, notification access, link checks and permission controls","textChars":72,"textLines":1,"bbox":[58,445,250,94]}
+{"kind":"shape","id":"sh/h0z2pgz6","slide":10,"bbox":[394,293,34,34]}
+{"kind":"textbox","id":"sh/i18jilgb","slide":10,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[394,301,34,17]}
+{"kind":"textbox","id":"sh/321krqhw","slide":10,"text":"3-6 MONTHS","textPreview":"3-6 MONTHS","textChars":10,"textLines":1,"bbox":[352,355,250,20]}
+{"kind":"textbox","id":"sh/43a1kvyh","slide":10,"text":"Email","textPreview":"Email","textChars":5,"textLines":1,"bbox":[352,390,250,38]}
+{"kind":"textbox","id":"sh/54j2t0z2","slide":10,"text":"Authorized Gmail connection and measured consumer pilots","textPreview":"Authorized Gmail connection and measured consumer pilots","textChars":56,"textLines":1,"bbox":[352,445,250,94]}
+{"kind":"shape","id":"sh/q5sjm5gn","slide":10,"bbox":[688,293,34,34]}
+{"kind":"textbox","id":"sh/r61kvah8","slide":10,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[688,301,34,17]}
+{"kind":"textbox","id":"sh/nal0jadg","slide":10,"text":"6-9 MONTHS","textPreview":"6-9 MONTHS","textChars":10,"textLines":1,"bbox":[646,355,250,20]}
+{"kind":"textbox","id":"sh/29sja5wv","slide":10,"text":"iOS","textPreview":"iOS","textChars":3,"textLines":1,"bbox":[646,390,250,38]}
+{"kind":"textbox","id":"sh/pc3ilkv6","slide":10,"text":"Call identification, SMS filtering and share-based link checks","textPreview":"Call identification, SMS filtering and share-based link checks","textChars":62,"textLines":1,"bbox":[646,445,250,94]}
+{"kind":"shape","id":"sh/obu1cfel","slide":10,"bbox":[982,293,34,34]}
+{"kind":"textbox","id":"sh/f610fqd4","slide":10,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[982,301,34,17]}
+{"kind":"textbox","id":"sh/e5sj6lwj","slide":10,"text":"9-12 MONTHS","textPreview":"9-12 MONTHS","textChars":11,"textLines":1,"bbox":[940,355,250,20]}
+{"kind":"textbox","id":"sh/18jih0va","slide":10,"text":"Partners","textPreview":"Partners","textChars":8,"textLines":1,"bbox":[940,390,250,38]}
+{"kind":"textbox","id":"sh/07a18vep","slide":10,"text":"Telecom and financial distribution with moderated local intelligence","textPreview":"Telecom and financial distribution with moderated local intelligence","textChars":68,"textLines":1,"bbox":[940,445,250,94]}
+{"kind":"shape","id":"sh/r210bqd8","slide":10,"bbox":[58,584,1168,50]}
+{"kind":"textbox","id":"sh/qh8z2lwn","slide":10,"text":"Success gate: useful warnings, measured false-positive rates and permissions users understand and trust.","textPreview":"Success gate: useful warnings, measured false-positive rates and permissions users understand and trust.","textChars":104,"textLines":1,"bbox":[80,599,1124,24]}
+{"kind":"shape","id":"sh/wbmpwnq9","slide":10,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/hcv6ps7u","slide":10,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/u947ud83","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/eh4bah4b","slide":10,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/4tbkfa","slide":10,"text":"Proposed roadmap based on current MVP state and official platform capabilities. Android call screening and notification access require user selection or permission. iOS uses narrower call and message extensions. Email access requires account authorization. Third-party messaging coverage depends on platform policy and exposed integration points."}
+{"kind":"slide","id":"sl/chbiv6","slide":11,"title":"Guard","textShapes":17}
+{"kind":"textbox","id":"sh/436x4jy9","slide":11,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[101,37,120,34]}
+{"kind":"shape","id":"sh/i1ov29g3","slide":11,"bbox":[54,84,68,5]}
+{"kind":"shape","id":"sh/h0fet4fi","slide":11,"bbox":[122,84,90,5]}
+{"kind":"textbox","id":"sh/gz6d0zyx","slide":11,"text":"TEAM AND ASK","textPreview":"TEAM AND ASK","textChars":12,"textLines":1,"bbox":[54,104,250,23]}
+{"kind":"textbox","id":"sh/vyxwruhc","slide":11,"text":"Guard is ready to protect everyday digital life","textPreview":"Guard is ready to protect everyday digital life","textChars":47,"textLines":1,"bbox":[54,135,1080,68]}
+{"kind":"textbox","id":"sh/udovy9gr","slide":11,"text":"FOUNDING TEAM","textPreview":"FOUNDING TEAM","textChars":13,"textLines":1,"bbox":[58,231,260,22]}
+{"kind":"shape","id":"sh/1wje58fm","slide":11,"bbox":[58,267,540,190]}
+{"kind":"textbox","id":"sh/0vaxc3yh","slide":11,"text":"Add founder names, roles and one proof point each","textPreview":"Add founder names, roles and one proof point each","textChars":49,"textLines":1,"bbox":[84,298,488,52]}
+{"kind":"textbox","id":"sh/m1s3udk7","slide":11,"text":"Recommended coverage: product and engineering, fraud operations, partnerships and regulated financial services.","textPreview":"Recommended coverage: product and engineering, fraud operations, partnerships and regulated financial services.","textChars":111,"textLines":1,"bbox":[84,371,470,58]}
+{"kind":"textbox","id":"sh/n2l4nils","slide":11,"text":"THE ASK","textPreview":"THE ASK","textChars":7,"textLines":1,"bbox":[666,231,220,22]}
+{"kind":"shape","id":"sh/o3ulwn2d","slide":11,"bbox":[666,275,40,40]}
+{"kind":"textbox","id":"sh/943mps3y","slide":11,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[666,285,40,18]}
+{"kind":"textbox","id":"sh/exs3qd4b","slide":11,"text":"Consumer pilot groups for Android and connected email","textPreview":"Consumer pilot groups for Android and connected email","textChars":53,"textLines":1,"bbox":[728,277,460,55]}
+{"kind":"shape","id":"sh/zy14jilg","slide":11,"bbox":[666,358,40,40]}
+{"kind":"textbox","id":"sh/0zalsn21","slide":11,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[666,368,40,18]}
+{"kind":"textbox","id":"sh/10jml83m","slide":11,"text":"Telecom, email and fraud intelligence partners","textPreview":"Telecom, email and fraud intelligence partners","textChars":46,"textLines":1,"bbox":[728,360,460,55]}
+{"kind":"shape","id":"sh/ytwn2xkf","slide":11,"bbox":[666,441,40,40]}
+{"kind":"textbox","id":"sh/ju54v2l0","slide":11,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[666,451,40,18]}
+{"kind":"textbox","id":"sh/fex0nu1c","slide":11,"text":"Pre-seed capital: insert target amount and runway","textPreview":"Pre-seed capital: insert target amount and runway","textChars":49,"textLines":1,"bbox":[728,443,460,55]}
+{"kind":"shape","id":"sh/udojupkr","slide":11,"bbox":[58,518,1130,74]}
+{"kind":"textbox","id":"sh/h0fip4ji","slide":11,"text":"Guard can warn people before a fraudulent call, message, email or link becomes a loss.","textPreview":"Guard can warn people before a fraudulent call, message, email or link becomes a loss.","textChars":86,"textLines":1,"bbox":[84,539,1080,34]}
+{"kind":"textbox","id":"sh/gz61gz2x","slide":11,"text":"Contact: [name]  -  [email]  -  [phone]","textPreview":"Contact: [name]  -  [email]  -  [phone]","textChars":39,"textLines":1,"bbox":[58,625,1130,24]}
+{"kind":"shape","id":"sh/32h0re18","slide":11,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/21oji903","slide":11,"text":"Guard - Ghana-first fraud prevention","textPreview":"Guard - Ghana-first fraud prevention","textChars":36,"textLines":1,"bbox":[54,687,430,18]}
+{"kind":"textbox","id":"sh/p4zitoje","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1180,685,46,20]}
+{"kind":"image","id":"im/yl4vmtkn","slide":11,"name":"","alt":"Guard shield mark","bbox":[54,34,40,40]}
+{"kind":"notes","id":"nt/chbiv6","slide":11,"text":"Founder information, contact details and funding target were not available in the supplied materials, so this slide retains explicit placeholders that must be completed before external circulation."}

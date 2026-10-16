@@ -53,7 +53,7 @@ class ApiTests(unittest.TestCase):
         )
         self.assertEqual(response.status_code, 422)
 
-    def test_unvalidated_mode_returns_unable_to_determine(self):
+    def test_screenshot_without_ocr_text_returns_unable_to_determine(self):
         response = self.client.post(
             "/v1/analyse",
             json={"kind": "screenshot", "content": "image.png"},

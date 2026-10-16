@@ -62,6 +62,67 @@ RULES: tuple[tuple[str, str, int, re.Pattern[str], str], ...] = (
         re.compile(r"\b(?:anydesk|teamviewer|remote access|screen share|install this app)\b", re.I),
         "Remote-access software can expose accounts, messages, and payment apps.",
     ),
+    (
+        "impersonation_claim",
+        "Claims to represent a trusted institution or authority",
+        16,
+        re.compile(
+            r"\b(?:calling|message|contact(?:ing)? you|writing) (?:from|on behalf of)\b.{0,45}"
+            r"\b(?:bank|mtn|telecel|vodafone|government|police|court|ghana revenue|gra|ecg|school)\b|"
+            r"\b(?:bank|mtn|telecel|vodafone|government|police|court|gra|ecg) (?:agent|official|support|team)\b",
+            re.I,
+        ),
+        "The sender claims authority or a trusted identity that should be verified independently.",
+    ),
+    (
+        "secrecy_request",
+        "Asks you to keep the request secret",
+        14,
+        re.compile(r"\b(?:do not tell|don't tell|keep (?:this|it) secret|between (?:you and me|us)|tell nobody)\b", re.I),
+        "Secrecy can isolate a target from people who could challenge the story.",
+    ),
+    (
+        "momo_reversal",
+        "Uses a Mobile Money reversal or mistaken-transfer story",
+        32,
+        re.compile(
+            r"\b(?:wrong|mistaken|accidental) (?:momo|mobile money|transfer|number)\b|"
+            r"\b(?:reverse|reversal|return|send back)\b.{0,45}\b(?:momo|mobile money|money|transfer|amount)\b",
+            re.I,
+        ),
+        "Unexpected transfer and reversal stories should be verified with the provider before any money is returned.",
+    ),
+    (
+        "fake_payment_claim",
+        "Claims payment was made before independent confirmation",
+        28,
+        re.compile(
+            r"\b(?:i have|we have|already) (?:paid|sent|transferred)\b.{0,65}\b(?:release|send|deliver|return|goods|item|money)\b|"
+            r"\bpayment (?:alert|screenshot|proof|confirmation)\b.{0,45}\b(?:release|send|deliver)\b",
+            re.I,
+        ),
+        "Payment screenshots and messages can be forged; confirm the balance in the official account or wallet.",
+    ),
+    (
+        "account_takeover",
+        "Shows a possible account-takeover request",
+        24,
+        re.compile(
+            r"\b(?:new number|phone (?:is|was) lost|account (?:is|was) locked|help me receive|send (?:the )?code)\b",
+            re.I,
+        ),
+        "A familiar account may have been taken over; verify with the person through another channel.",
+    ),
+    (
+        "unusual_payment_destination",
+        "Requests payment to a different or personal account",
+        18,
+        re.compile(
+            r"\b(?:different|another|personal|my assistant'?s|my friend'?s)\b.{0,35}\b(?:number|account|wallet|momo)\b",
+            re.I,
+        ),
+        "A changed payment destination can be a sign of impersonation or account compromise.",
+    ),
 )
 
 

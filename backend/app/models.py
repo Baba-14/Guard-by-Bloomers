@@ -356,6 +356,17 @@ class DatasetVersion(Base):
     __table_args__ = (UniqueConstraint("name", "version", name="dataset_versions_name_version_key"),)
 
 
+class DatasetVersionItem(Base):
+    __tablename__ = "dataset_version_items"
+    dataset_version_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("dataset_versions.id", ondelete="CASCADE"), primary_key=True
+    )
+    dataset_item_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("dataset_items.id", ondelete="RESTRICT"), primary_key=True
+    )
+    split: Mapped[str] = mapped_column(Text)
+
+
 class UrlIntelligence(Base):
     __tablename__ = "url_intelligence"
     id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), primary_key=True, default=uuid4)

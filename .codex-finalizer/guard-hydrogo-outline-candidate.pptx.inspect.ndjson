@@ -1,0 +1,281 @@
+{"kind":"deck","id":"pr/pse41k","name":"Deck"}
+{"kind":"layout","layoutId":"43e91fbf-b7d7-48b9-af41-770e54128257","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"c37a98ee-8267-437e-ba6d-f360329d6f32","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/ywl0l5","slide":1,"title":"GUARD","textShapes":6}
+{"kind":"shape","id":"sh/kbehs3i9","slide":1,"bbox":[54,112,505,584]}
+{"kind":"shape","id":"sh/lcny18je","slide":1,"bbox":[54,618,1015,78]}
+{"kind":"textbox","id":"sh/bmlgve1c","slide":1,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[181.45,160.3,138,28.75]}
+{"kind":"textbox","id":"sh/wnuhojix","slide":1,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[182.6,186.75,138,14.95]}
+{"kind":"textbox","id":"sh/xonyxoji","slide":1,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[132,315,500,83]}
+{"kind":"textbox","id":"sh/uhgzyd0b","slide":1,"text":"Digital safety for everyday life","textPreview":"Digital safety for everyday life","textChars":32,"textLines":1,"bbox":[134,397,430,62]}
+{"kind":"textbox","id":"sh/vipg7ihw","slide":1,"text":"Protection before the click, reply or payment","textPreview":"Protection before the click, reply or payment","textChars":45,"textLines":1,"bbox":[134,485,390,48]}
+{"kind":"shape","id":"sh/fe58zu1c","slide":1,"bbox":[793,640,205,42]}
+{"kind":"textbox","id":"sh/edwrq907","slide":1,"text":"GUARD v1.0","textPreview":"GUARD v1.0","textChars":10,"textLines":1,"bbox":[793,653,205,18]}
+{"kind":"image","id":"im/a9crehg3","slide":1,"name":"","alt":"Ghanaian digital user checking a suspicious message","bbox":[54,112,1015,584]}
+{"kind":"image","id":"im/jy5srmxk","slide":1,"name":"","alt":"Guard logo","bbox":[132,158,39.1,39.1]}
+{"kind":"notes","id":"nt/ywl0l5","slide":1,"text":"Layout follows slide 1 of the supplied Hydrogo Pitch Deck 2025. Guard product statement is based on the founder's stated vision. Image is an existing Guard brand asset."}
+{"kind":"slide","id":"sl/trt87s","slide":2,"title":"TARGET USER","textShapes":16}
+{"kind":"textbox","id":"sh/i1g7mpsf","slide":2,"text":"TARGET USER","textPreview":"TARGET USER","textChars":11,"textLines":1,"bbox":[130,122,420,54]}
+{"kind":"textbox","id":"sh/54r6h4r6","slide":2,"text":"Name:","textPreview":"Name:","textChars":5,"textLines":1,"bbox":[130,222,90,24]}
+{"kind":"textbox","id":"sh/43ipozal","slide":2,"text":"Ama Mensah","textPreview":"Ama Mensah","textChars":10,"textLines":1,"bbox":[217,222,250,24]}
+{"kind":"textbox","id":"sh/r69oju9c","slide":2,"text":"Occupation:","textPreview":"Occupation:","textChars":11,"textLines":1,"bbox":[130,251,105,24]}
+{"kind":"textbox","id":"sh/6507q9sr","slide":2,"text":"Small business owner","textPreview":"Small business owner","textChars":20,"textLines":1,"bbox":[238,251,250,24]}
+{"kind":"textbox","id":"sh/tsr6l4r2","slide":2,"text":"Location:","textPreview":"Location:","textChars":9,"textLines":1,"bbox":[130,280,95,24]}
+{"kind":"textbox","id":"sh/s7ipszah","slide":2,"text":"Accra, Ghana","textPreview":"Accra, Ghana","textChars":12,"textLines":1,"bbox":[219,280,250,24]}
+{"kind":"textbox","id":"sh/futone98","slide":2,"text":"Main device:","textPreview":"Main device:","textChars":12,"textLines":1,"bbox":[130,309,110,24]}
+{"kind":"textbox","id":"sh/et07u9sn","slide":2,"text":"Android smartphone","textPreview":"Android smartphone","textChars":18,"textLines":1,"bbox":[244,309,245,24]}
+{"kind":"textbox","id":"sh/ofq90ret","slide":2,"text":"Pain Points","textPreview":"Pain Points","textChars":11,"textLines":1,"bbox":[130,415,180,25]}
+{"kind":"textbox","id":"sh/pgza9wve","slide":2,"text":"• Suspicious calls and messages\n• No quick way to verify them\n• Fear of losing money or data","textPreview":"• Suspicious calls and messages | • No quick way to verify them | • Fear of losing money or data","textChars":92,"textLines":3,"bbox":[130,450,300,110]}
+{"kind":"textbox","id":"sh/2dory1wn","slide":2,"text":"Goals","textPreview":"Goals","textChars":5,"textLines":1,"bbox":[377,415,140,25]}
+{"kind":"textbox","id":"sh/nehs76d8","slide":2,"text":"• Know what to trust\n• Stop fraud before acting\n• Protect family and business","textPreview":"• Know what to trust | • Stop fraud before acting | • Protect family and business","textChars":77,"textLines":3,"bbox":[377,450,270,110]}
+{"kind":"shape","id":"sh/x4zadgva","slide":2,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/ah8r21cz","slide":2,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/k7at8bu1","slide":2,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/l8jahgvm","slide":2,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/9cvi5wje","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/bupwzap0","slide":2,"name":"","alt":"Illustrative everyday digital user","bbox":[655,138,350,496]}
+{"kind":"image","id":"im/wvyd8fq5","slide":2,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/trt87s","slide":2,"text":"Layout follows Hydrogo slide 2. Ama Mensah is an illustrative persona, not a named customer. The persona captures Guard's intended everyday-user segment."}
+{"kind":"slide","id":"sl/gj5hs8","slide":3,"title":"PROBLEM","textShapes":8}
+{"kind":"shape","id":"sh/nipc7ex4","slide":3,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/ojyt0jep","slide":3,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/9k7u9ofa","slide":3,"text":"PROBLEM","textPreview":"PROBLEM","textChars":7,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"textbox","id":"sh/etwbu9wn","slide":3,"text":"24,778","textPreview":"24,778","textChars":6,"textLines":1,"bbox":[122,283,305,72]}
+{"kind":"textbox","id":"sh/ze5c3ux8","slide":3,"text":"reported financial-sector fraud cases in Ghana in 2025, up 48% from 2024.","textPreview":"reported financial-sector fraud cases in Ghana in 2025, up 48% from 2024.","textChars":73,"textLines":1,"bbox":[122,356,425,103]}
+{"kind":"textbox","id":"sh/0fetwzet","slide":3,"text":"Fraud reaches users through calls, SMS, email, links and chat before money changes hands.","textPreview":"Fraud reaches users through calls, SMS, email, links and chat before money changes hands.","textChars":89,"textLines":1,"bbox":[122,482,430,88]}
+{"kind":"textbox","id":"sh/1g7u54fe","slide":3,"text":"Bank of Ghana Fraud Report 2025","textPreview":"Bank of Ghana Fraud Report 2025","textChars":31,"textLines":1,"bbox":[122,586,360,22]}
+{"kind":"shape","id":"sh/rq5szuxw","slide":3,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/7idg7a9o","slide":3,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/tkvy90ru","slide":3,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/8jmh0fq9","slide":3,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/vmdgba90","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/3ap8z2t8","slide":3,"name":"","alt":"Everyday Ghanaian user exposed to digital fraud","bbox":[644,112,425,574]}
+{"kind":"image","id":"im/lsbipo7q","slide":3,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/gj5hs8","slide":3,"text":"Layout follows Hydrogo slide 3. Source: Bank of Ghana Fraud Report 2025, 24,778 cases in 2025 versus 16,733 in 2024. https://www.bog.gov.gh/wp-content/uploads/2026/07/FRAUD-REPORT-2025.pdf. Fraud-channel description reflects Guard's product scope and does not claim every reported case used every channel."}
+{"kind":"slide","id":"sl/21mbai","slide":4,"title":"SOLUTION","textShapes":12}
+{"kind":"shape","id":"sh/69wze9kn","slide":4,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/tc7y94jy","slide":4,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/8byhgz2t","slide":4,"text":"SOLUTION","textPreview":"SOLUTION","textChars":8,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"textbox","id":"sh/jm5gju1w","slide":4,"text":"Guard is a permission-based digital safety companion that assesses suspicious calls, SMS, email, links and supported app notifications.","textPreview":"Guard is a permission-based digital safety companion that assesses suspicious calls, SMS, email, links and supported app notifications.","textChars":135,"textLines":1,"bbox":[124,285,505,112]}
+{"kind":"textbox","id":"sh/ylwfapkb","slide":4,"text":"When risk appears, Guard explains the warning and gives the user a safer next action before they click, reply, share a code or send money.","textPreview":"When risk appears, Guard explains the warning and gives the user a safer next action before they click, reply, share a code or send money.","textChars":138,"textLines":1,"bbox":[124,420,500,100]}
+{"kind":"textbox","id":"sh/l8nyl4j2","slide":4,"text":"Current product: working web checker and shared analysis API","textPreview":"Current product: working web checker and shared analysis API","textChars":60,"textLines":1,"bbox":[124,553,490,25]}
+{"kind":"textbox","id":"sh/ihgzmtkv","slide":4,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[820,260,70,17]}
+{"kind":"textbox","id":"sh/03u5or2x","slide":4,"text":"SMS alert","textPreview":"SMS alert","textChars":9,"textLines":1,"bbox":[773,317,126,20]}
+{"kind":"shape","id":"sh/1o3mxwji","slide":4,"bbox":[770,347,132,73]}
+{"kind":"textbox","id":"sh/e1cnmhk7","slide":4,"text":"Your account is blocked.\nSend the OTP now.","textPreview":"Your account is blocked. | Send the OTP now.","textChars":42,"textLines":2,"bbox":[782,363,108,44]}
+{"kind":"shape","id":"sh/f2l4vm1c","slide":4,"bbox":[764,439,144,78]}
+{"kind":"textbox","id":"sh/szu5k721","slide":4,"text":"HIGH RISK","textPreview":"HIGH RISK","textChars":9,"textLines":1,"bbox":[775,451,122,15]}
+{"kind":"textbox","id":"sh/d03mtcjm","slide":4,"text":"Do not share the code.\nVerify independently.","textPreview":"Do not share the code. | Verify independently.","textChars":44,"textLines":2,"bbox":[776,476,120,31]}
+{"kind":"shape","id":"sh/qxsnixkv","slide":4,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/ry14r21g","slide":4,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/5wjmpcja","slide":4,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/lgrux4r2","slide":4,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/kfit4zqh","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/pcjep87u","slide":4,"name":"","alt":"Guard mobile product concept","bbox":[720,190,235,400]}
+{"kind":"image","id":"im/idov298z","slide":4,"name":"","alt":"Guard app mark","bbox":[786,254,28,28]}
+{"kind":"image","id":"im/vepszid0","slide":4,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/21mbai","slide":4,"text":"Layout follows Hydrogo slide 4. The web checker and API exist today. Background and in-channel protection represents the intended native product. Android, iOS, email and third-party app coverage depends on user permission, official APIs and platform policy."}
+{"kind":"slide","id":"sl/5c8g8y","slide":5,"title":"IMPACT","textShapes":12}
+{"kind":"shape","id":"sh/w7alo3eh","slide":5,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/v6h4vydw","slide":5,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/a583mtwb","slide":5,"text":"IMPACT","textPreview":"IMPACT","textChars":6,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"shape","id":"sh/5wjm18vy","slide":5,"bbox":[122,244,200,49]}
+{"kind":"textbox","id":"sh/kvals3ed","slide":5,"text":"Financial Safety","textPreview":"Financial Safety","textChars":16,"textLines":1,"bbox":[132,259,180,22]}
+{"kind":"shape","id":"sh/ja14zid8","slide":5,"bbox":[122,302,200,218]}
+{"kind":"textbox","id":"sh/i9s3qdwn","slide":5,"text":"Warn users before a fraudulent interaction becomes a financial loss.","textPreview":"Warn users before a fraudulent interaction becomes a financial loss.","textChars":68,"textLines":1,"bbox":[138,352,168,122]}
+{"kind":"shape","id":"sh/t03m5sva","slide":5,"bbox":[343,244,200,49]}
+{"kind":"textbox","id":"sh/szulwnep","slide":5,"text":"Digital Trust","textPreview":"Digital Trust","textChars":13,"textLines":1,"bbox":[353,259,180,22]}
+{"kind":"shape","id":"sh/ehc3a5kv","slide":5,"bbox":[343,302,200,218]}
+{"kind":"textbox","id":"sh/fil4jal0","slide":5,"text":"Explain the signals so people can decide with more confidence.","textPreview":"Explain the signals so people can decide with more confidence.","textChars":62,"textLines":1,"bbox":[359,352,168,122]}
+{"kind":"shape","id":"sh/0julcf2l","slide":5,"bbox":[564,244,200,49]}
+{"kind":"textbox","id":"sh/1k3mlk36","slide":5,"text":"Inclusion","textPreview":"Inclusion","textChars":9,"textLines":1,"bbox":[574,259,180,22]}
+{"kind":"shape","id":"sh/2lc3epkr","slide":5,"bbox":[564,302,200,218]}
+{"kind":"textbox","id":"sh/nml4nu1c","slide":5,"text":"Make fraud guidance clear for everyday users, families and small businesses.","textPreview":"Make fraud guidance clear for everyday users, families and small businesses.","textChars":76,"textLines":1,"bbox":[580,352,168,122]}
+{"kind":"shape","id":"sh/onelgz2x","slide":5,"bbox":[785,244,200,49]}
+{"kind":"textbox","id":"sh/ponmpkji","slide":5,"text":"Local Intelligence","textPreview":"Local Intelligence","textChars":18,"textLines":1,"bbox":[795,259,180,22]}
+{"kind":"shape","id":"sh/ips32lkn","slide":5,"bbox":[785,302,200,218]}
+{"kind":"textbox","id":"sh/3q1kbql8","slide":5,"text":"Use consented reports to improve detection of Ghana-specific fraud patterns.","textPreview":"Use consented reports to improve detection of Ghana-specific fraud patterns.","textChars":76,"textLines":1,"bbox":[801,352,168,122]}
+{"kind":"shape","id":"sh/nidsn2xo","slide":5,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/mh4ruxw3","slide":5,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/8j69w7e9","slide":5,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/zud8jixc","slide":5,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/yt4rqdwr","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/uxcrmtw7","slide":5,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/5c8g8y","slide":5,"text":"Layout follows Hydrogo slide 5. These are intended impact pathways, not measured outcomes. Guard does not yet claim a quantified reduction in fraud losses."}
+{"kind":"slide","id":"sl/3ton7q","slide":6,"title":"COMPETITOR ANALYSIS","textShapes":5}
+{"kind":"shape","id":"sh/g3udg3yt","slide":6,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/v2lwnyh8","slide":6,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/u1svetgn","slide":6,"text":"COMPETITOR ANALYSIS","textPreview":"COMPETITOR ANALYSIS","textChars":19,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"textbox","id":"sh/8zadcjyx","slide":6,"text":"Category-level comparison. Named competitor validation remains part of customer and market research.","textPreview":"Category-level comparison. Named competitor validation remains part of customer and market research.","textChars":100,"textLines":1,"bbox":[92,558,850,24]}
+{"kind":"shape","id":"sh/7y1wjehc","slide":6,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/mxsva90r","slide":6,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/svexony1","slide":6,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/2lknit47","slide":6,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/3mtoryls","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"table","id":"tb/sb21wrip","slide":6,"name":"","rows":5,"cols":6,"preview":"Category | Cross-channel | Proactive warning | Local context | Explains risk | User cost","bbox":[92,255,938,270]}
+{"kind":"image","id":"im/cfeto3eh","slide":6,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/3ton7q","slide":6,"text":"Layout follows Hydrogo slide 6. This is a category-level positioning comparison, not an audited claim about every product. 'Planned' distinguishes Guard's intended proactive native experience from the current manual web checker."}
+{"kind":"slide","id":"sl/wnn85z","slide":7,"title":"MARKET SIZE","textShapes":16}
+{"kind":"shape","id":"sh/q9sj6947","slide":7,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/dwj2honi","slide":7,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/cva18jmx","slide":7,"text":"MARKET SIZE","textPreview":"MARKET SIZE","textChars":11,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"textbox","id":"sh/36hkbe5g","slide":7,"text":"TAM  Ghana connected market","textPreview":"TAM  Ghana connected market","textChars":27,"textLines":1,"bbox":[108,323,330,24]}
+{"kind":"textbox","id":"sh/258j294v","slide":7,"text":"30.5 million mobile data subscriptions","textPreview":"30.5 million mobile data subscriptions","textChars":38,"textLines":1,"bbox":[108,354,350,24]}
+{"kind":"textbox","id":"sh/p8j2donm","slide":7,"text":"SAM  Reachable Android users","textPreview":"SAM  Reachable Android users","textChars":28,"textLines":1,"bbox":[108,413,330,24]}
+{"kind":"textbox","id":"sh/o7q14jm1","slide":7,"text":"To size from device share and permission eligibility","textPreview":"To size from device share and permission eligibility","textChars":52,"textLines":1,"bbox":[108,444,370,43]}
+{"kind":"textbox","id":"sh/f2hk7u54","slide":7,"text":"SOM  Initial pilot and partner reach","textPreview":"SOM  Initial pilot and partner reach","textChars":36,"textLines":1,"bbox":[108,520,350,24]}
+{"kind":"textbox","id":"sh/u18jyp4z","slide":7,"text":"To validate through pilots and conversion","textPreview":"To validate through pilots and conversion","textChars":41,"textLines":1,"bbox":[108,551,345,24]}
+{"kind":"shape","id":"sh/43ux4bal","slide":7,"bbox":[505,270,180,416]}
+{"kind":"textbox","id":"sh/543ydwb6","slide":7,"text":"30.5M","textPreview":"30.5M","textChars":5,"textLines":1,"bbox":[515,214,160,48]}
+{"kind":"textbox","id":"sh/i1cf21sf","slide":7,"text":"Total Addressable\nMarket","textPreview":"Total Addressable | Market","textChars":24,"textLines":2,"bbox":[525,337,140,48]}
+{"kind":"shape","id":"sh/j2lgb6t0","slide":7,"bbox":[705,402,180,284]}
+{"kind":"textbox","id":"sh/wzax0rap","slide":7,"text":"TO SIZE","textPreview":"TO SIZE","textChars":7,"textLines":1,"bbox":[715,344,160,44]}
+{"kind":"textbox","id":"sh/h03y9wba","slide":7,"text":"Serviceable\nAddressable Market","textPreview":"Serviceable | Addressable Market","textChars":30,"textLines":2,"bbox":[725,468,140,50]}
+{"kind":"shape","id":"sh/uxsfyhsj","slide":7,"bbox":[905,516,164,170]}
+{"kind":"textbox","id":"sh/vy1g7mt4","slide":7,"text":"TO VALIDATE","textPreview":"TO VALIDATE","textChars":11,"textLines":1,"bbox":[910,462,154,40]}
+{"kind":"textbox","id":"sh/gvehcvat","slide":7,"text":"Serviceable\nObtainable Market","textPreview":"Serviceable | Obtainable Market","textChars":29,"textLines":2,"bbox":[920,563,134,52]}
+{"kind":"shape","id":"sh/1wnyl0re","slide":7,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/pcjy5gji","slide":7,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/na1g3q1c","slide":7,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/2psfulkr","slide":7,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/1ojy1gjm","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/vex87ex4","slide":7,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/wnn85z","slide":7,"text":"Layout follows Hydrogo slide 7. Source for TAM proxy: National Communications Authority, 30,515,711 mobile data subscriptions and 89.53% penetration in June 2026, https://nca.org.gh/. Subscriptions are not unique users and do not represent revenue. SAM and SOM remain intentionally unsized until Android share, reach, eligibility, conversion and pricing are validated."}
+{"kind":"slide","id":"sl/pjph97","slide":8,"title":"REVENUE MODEL","textShapes":17}
+{"kind":"shape","id":"sh/4re1cbq5","slide":8,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/3q5kj6p0","slide":8,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/ipwjal8f","slide":8,"text":"REVENUE MODEL","textPreview":"REVENUE MODEL","textChars":13,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"textbox","id":"sh/dw72p072","slide":8,"text":"Direct sale  B2C and B2B","textPreview":"Direct sale  B2C and B2B","textChars":24,"textLines":1,"bbox":[124,265,470,28]}
+{"kind":"textbox","id":"sh/svylgvqh","slide":8,"text":"Free","textPreview":"Free","textChars":4,"textLines":1,"bbox":[124,316,120,24]}
+{"kind":"textbox","id":"sh/rupknqpw","slide":8,"text":"Essential checks and supported warnings","textPreview":"Essential checks and supported warnings","textChars":39,"textLines":1,"bbox":[225,316,360,24]}
+{"kind":"textbox","id":"sh/qtgjel8b","slide":8,"text":"Premium","textPreview":"Premium","textChars":7,"textLines":1,"bbox":[124,358,120,24]}
+{"kind":"textbox","id":"sh/t032dw7i","slide":8,"text":"Personal and family protection","textPreview":"Personal and family protection","textChars":30,"textLines":1,"bbox":[225,358,360,24]}
+{"kind":"textbox","id":"sh/8zu14rqd","slide":8,"text":"Business","textPreview":"Business","textChars":8,"textLines":1,"bbox":[124,400,120,24]}
+{"kind":"textbox","id":"sh/utcnmxg7","slide":8,"text":"Seats, API usage and licensed integrations","textPreview":"Seats, API usage and licensed integrations","textChars":42,"textLines":1,"bbox":[225,400,390,24]}
+{"kind":"shape","id":"sh/vulof2xs","slide":8,"bbox":[124,458,470,0]}
+{"kind":"textbox","id":"sh/wvupo7yd","slide":8,"text":"Price","textPreview":"Price","textChars":5,"textLines":1,"bbox":[124,487,110,24]}
+{"kind":"textbox","id":"sh/hw36hcfy","slide":8,"text":"Validate in consumer and partner pilots","textPreview":"Validate in consumer and partner pilots","textChars":39,"textLines":1,"bbox":[225,487,350,24]}
+{"kind":"textbox","id":"sh/ixc7qhgj","slide":8,"text":"Unit cost","textPreview":"Unit cost","textChars":9,"textLines":1,"bbox":[124,529,110,24]}
+{"kind":"textbox","id":"sh/jylojmx4","slide":8,"text":"Measure cost per assessment and support","textPreview":"Measure cost per assessment and support","textChars":39,"textLines":1,"bbox":[225,529,365,24]}
+{"kind":"textbox","id":"sh/4zepsry9","slide":8,"text":"Margin","textPreview":"Margin","textChars":6,"textLines":1,"bbox":[124,571,110,24]}
+{"kind":"textbox","id":"sh/50n6lcfu","slide":8,"text":"Set after usage and infrastructure tests","textPreview":"Set after usage and infrastructure tests","textChars":40,"textLines":1,"bbox":[225,571,360,24]}
+{"kind":"shape","id":"sh/r25onmx0","slide":8,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/3qpobmd8","slide":8,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/ps76dwvy","slide":8,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/ory5krut","slide":8,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/f2547mdw","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/lor65ofa","slide":8,"name":"","alt":"Small business customer for Guard","bbox":[735,190,260,410]}
+{"kind":"image","id":"im/d8v61on6","slide":8,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/pjph97","slide":8,"text":"Layout follows Hydrogo slide 8. The revenue model is proposed. The supplied materials do not document validated prices, cost per assessment, gross margin, signed customers or revenue."}
+{"kind":"slide","id":"sl/9fkuzb","slide":9,"title":"TRACTION","textShapes":28}
+{"kind":"textbox","id":"sh/vi98nilo","slide":9,"text":"TRACTION","textPreview":"TRACTION","textChars":8,"textLines":1,"bbox":[123,68,500,54]}
+{"kind":"shape","id":"sh/wjipgn29","slide":9,"bbox":[80,154,216,112]}
+{"kind":"textbox","id":"sh/xkbqps3u","slide":9,"text":"80%","textPreview":"80%","textChars":3,"textLines":1,"bbox":[92,178,192,54]}
+{"kind":"textbox","id":"sh/md07adk7","slide":9,"text":"User Research","textPreview":"User Research","textChars":13,"textLines":1,"bbox":[80,280,216,25]}
+{"kind":"textbox","id":"sh/ne98jils","slide":9,"text":"Internal progress estimate","textPreview":"Internal progress estimate","textChars":26,"textLines":1,"bbox":[86,310,204,60]}
+{"kind":"shape","id":"sh/8fipcn2x","slide":9,"bbox":[340,154,216,112]}
+{"kind":"textbox","id":"sh/9grqls3i","slide":9,"text":"60%","textPreview":"60%","textChars":3,"textLines":1,"bbox":[352,178,192,54]}
+{"kind":"textbox","id":"sh/69krmhkb","slide":9,"text":"Frontend and Screens","textPreview":"Frontend and Screens","textChars":20,"textLines":1,"bbox":[340,280,216,25]}
+{"kind":"textbox","id":"sh/rat8v2lw","slide":9,"text":"Core product flows built","textPreview":"Core product flows built","textChars":24,"textLines":1,"bbox":[346,310,204,60]}
+{"kind":"shape","id":"sh/vmpc32p4","slide":9,"bbox":[600,154,216,112]}
+{"kind":"textbox","id":"sh/ulgvux8j","slide":9,"text":"50%","textPreview":"50%","textChars":3,"textLines":1,"bbox":[612,178,192,54]}
+{"kind":"textbox","id":"sh/ho7u5c7a","slide":9,"text":"Data and Backend","textPreview":"Data and Backend","textChars":16,"textLines":1,"bbox":[600,280,216,25]}
+{"kind":"textbox","id":"sh/gnydw7qp","slide":9,"text":"FastAPI and PostgreSQL foundation","textPreview":"FastAPI and PostgreSQL foundation","textChars":33,"textLines":1,"bbox":[606,310,204,60]}
+{"kind":"shape","id":"sh/3qpc72pg","slide":9,"bbox":[860,154,216,112]}
+{"kind":"textbox","id":"sh/ipgvyx8v","slide":9,"text":"80%","textPreview":"80%","textChars":3,"textLines":1,"bbox":[872,178,192,54]}
+{"kind":"textbox","id":"sh/5sru9c7m","slide":9,"text":"Stakeholder Engagement","textPreview":"Stakeholder Engagement","textChars":22,"textLines":1,"bbox":[860,280,216,25]}
+{"kind":"textbox","id":"sh/4ryd07q1","slide":9,"text":"Internal progress estimate","textPreview":"Internal progress estimate","textChars":26,"textLines":1,"bbox":[866,310,204,60]}
+{"kind":"shape","id":"sh/ru9wbmpc","slide":9,"bbox":[80,398,216,112]}
+{"kind":"textbox","id":"sh/qt0v2h8r","slide":9,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[92,422,192,54]}
+{"kind":"textbox","id":"sh/ml47q5wb","slide":9,"text":"Check Types","textPreview":"Check Types","textChars":11,"textLines":1,"bbox":[80,524,216,25]}
+{"kind":"textbox","id":"sh/nmdojadw","slide":9,"text":"Messages, screenshots, links, numbers, payments and calls","textPreview":"Messages, screenshots, links, numbers, payments and calls","textChars":57,"textLines":1,"bbox":[86,554,204,60]}
+{"kind":"shape","id":"sh/8nmpsfeh","slide":9,"bbox":[340,398,216,112]}
+{"kind":"textbox","id":"sh/9ov6lkv2","slide":9,"text":"22","textPreview":"22","textChars":2,"textLines":1,"bbox":[352,422,192,54]}
+{"kind":"textbox","id":"sh/yx47m5wf","slide":9,"text":"Database Tables","textPreview":"Database Tables","textChars":15,"textLines":1,"bbox":[340,524,216,25]}
+{"kind":"textbox","id":"sh/zydofad0","slide":9,"text":"Reported in the October 2026 update","textPreview":"Reported in the October 2026 update","textChars":35,"textLines":1,"bbox":[346,554,204,60]}
+{"kind":"shape","id":"sh/0zmpofe5","slide":9,"bbox":[600,398,216,112]}
+{"kind":"textbox","id":"sh/l0v6hkvq","slide":9,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[612,422,192,54]}
+{"kind":"textbox","id":"sh/ito7ypwj","slide":9,"text":"User Workflows","textPreview":"User Workflows","textChars":14,"textLines":1,"bbox":[600,524,216,25]}
+{"kind":"textbox","id":"sh/jux8rud4","slide":9,"text":"User and administrator experiences","textPreview":"User and administrator experiences","textChars":34,"textLines":1,"bbox":[606,554,204,60]}
+{"kind":"shape","id":"sh/tojah8f6","slide":9,"bbox":[860,398,216,112]}
+{"kind":"textbox","id":"sh/snq9o3yl","slide":9,"text":"API","textPreview":"API","textChars":3,"textLines":1,"bbox":[872,422,192,54]}
+{"kind":"textbox","id":"sh/7mhsfyx0","slide":9,"text":"Local Verification","textPreview":"Local Verification","textChars":18,"textLines":1,"bbox":[860,524,216,25]}
+{"kind":"textbox","id":"sh/6l8rmtgv","slide":9,"text":"Registration, login and profile route tested","textPreview":"Registration, login and profile route tested","textChars":44,"textLines":1,"bbox":[866,554,204,60]}
+{"kind":"shape","id":"sh/5kzadofa","slide":9,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/kjq9kjyp","slide":9,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/ih8ri9gj","slide":9,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/pg3apsfe","slide":9,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/4futwnyt","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/kn2p4zy9","slide":9,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/9fkuzb","slide":9,"text":"Layout follows Hydrogo slide 9. Progress percentages, database-table count and local API verification come from the October 2026 internal project update represented in the supplied Guard deck. They are not independently audited. Current workspace evidence supports the six check types, user/admin workflows and shared backend foundation."}
+{"kind":"slide","id":"sl/s94gbk","slide":10,"title":"Key Milestones","textShapes":20}
+{"kind":"shape","id":"sh/8b2hc761","slide":10,"bbox":[54,112,110,8]}
+{"kind":"shape","id":"sh/natgjm5g","slide":10,"bbox":[164,112,154,8]}
+{"kind":"textbox","id":"sh/m90zahov","slide":10,"text":"Key Milestones","textPreview":"Key Milestones","textChars":14,"textLines":1,"bbox":[128,150,800,54]}
+{"kind":"shape","id":"sh/h0bypwni","slide":10,"bbox":[177,247,64,64]}
+{"kind":"textbox","id":"sh/wz2hgr6d","slide":10,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[177,268,64,20]}
+{"kind":"textbox","id":"sh/vytgnm5s","slide":10,"text":"Q4: 2026","textPreview":"Q4: 2026","textChars":8,"textLines":1,"bbox":[113,327,192,30]}
+{"kind":"textbox","id":"sh/axkzeho7","slide":10,"text":"MVP Integration and Quality","textPreview":"MVP Integration and Quality","textChars":27,"textLines":1,"bbox":[95,370,230,52]}
+{"kind":"textbox","id":"sh/d4rydsne","slide":10,"text":"• Connect the web flows to the shared API\n• Establish accuracy and false-alert baselines\n• Define production privacy controls","textPreview":"• Connect the web flows to the shared API | • Establish accuracy and false-alert baselines | • Define production privacy controls","textChars":125,"textLines":3,"bbox":[105,435,210,150]}
+{"kind":"shape","id":"sh/c3ix4n6t","slide":10,"bbox":[435,247,64,64]}
+{"kind":"textbox","id":"sh/ixc3i107","slide":10,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[435,268,64,20]}
+{"kind":"textbox","id":"sh/jylkb6hs","slide":10,"text":"Q1: 2027","textPreview":"Q1: 2027","textChars":8,"textLines":1,"bbox":[371,327,192,30]}
+{"kind":"textbox","id":"sh/kzulkbyx","slide":10,"text":"Android Pilot","textPreview":"Android Pilot","textChars":13,"textLines":1,"bbox":[353,370,230,52]}
+{"kind":"textbox","id":"sh/5032dgzi","slide":10,"text":"• Implement call-screening and notification access\n• Test permission comprehension\n• Pilot with selected everyday users","textPreview":"• Implement call-screening and notification access | • Test permission comprehension | • Pilot with selected everyday users","textChars":119,"textLines":3,"bbox":[363,435,210,150]}
+{"kind":"shape","id":"sh/61c3mlg3","slide":10,"bbox":[693,247,64,64]}
+{"kind":"textbox","id":"sh/725kfqho","slide":10,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[693,268,64,20]}
+{"kind":"textbox","id":"sh/s3elovy9","slide":10,"text":"Q2: 2027","textPreview":"Q2: 2027","textChars":8,"textLines":1,"bbox":[629,327,192,30]}
+{"kind":"textbox","id":"sh/t4n2hgzu","slide":10,"text":"Email and iOS","textPreview":"Email and iOS","textChars":13,"textLines":1,"bbox":[611,370,230,52]}
+{"kind":"textbox","id":"sh/u5w3qlgf","slide":10,"text":"• Add authorized Gmail connection\n• Build supported Apple extensions\n• Measure cross-channel value","textPreview":"• Add authorized Gmail connection | • Build supported Apple extensions | • Measure cross-channel value","textChars":98,"textLines":3,"bbox":[621,435,210,150]}
+{"kind":"shape","id":"sh/fq54jqhk","slide":10,"bbox":[951,247,64,64]}
+{"kind":"textbox","id":"sh/rupk7qxs","slide":10,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[951,268,64,20]}
+{"kind":"textbox","id":"sh/qtgjelw7","slide":10,"text":"H2: 2027","textPreview":"H2: 2027","textChars":8,"textLines":1,"bbox":[887,327,192,30]}
+{"kind":"textbox","id":"sh/dw7290fy","slide":10,"text":"Partner Pilots","textPreview":"Partner Pilots","textChars":14,"textLines":1,"bbox":[869,370,230,52]}
+{"kind":"textbox","id":"sh/cvy1gved","slide":10,"text":"• Run SME and institutional pilots\n• Improve moderated local intelligence\n• Prepare regional-language expansion","textPreview":"• Run SME and institutional pilots | • Improve moderated local intelligence | • Prepare regional-language expansion","textChars":111,"textLines":3,"bbox":[879,435,210,150]}
+{"kind":"shape","id":"sh/365k3qxw","slide":10,"bbox":[54,686,1015,70]}
+{"kind":"shape","id":"sh/25wjalwb","slide":10,"bbox":[963,686,106,70]}
+{"kind":"textbox","id":"sh/47e1cveh","slide":10,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[149.54,704.56,93.6,19.5]}
+{"kind":"textbox","id":"sh/f25kz6xk","slide":10,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[150.32,722.5,93.6,10.14]}
+{"kind":"textbox","id":"sh/u1wj61wz","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[983,704,66,35]}
+{"kind":"image","id":"im/21kve18f","slide":10,"name":"","alt":"Guard logo","bbox":[116,703,26.52,26.52]}
+{"kind":"notes","id":"nt/s94gbk","slide":10,"text":"Layout follows Hydrogo slide 10. These are proposed milestones, subject to resources, user research, platform policy and technical validation. Android and Apple capabilities differ; third-party messaging coverage depends on supported integration points."}
+{"kind":"slide","id":"sl/brfc1n","slide":11,"title":"OUR TEAM","textShapes":24}
+{"kind":"shape","id":"sh/mhkjyhkv","slide":11,"bbox":[54,112,1015,584]}
+{"kind":"shape","id":"sh/9kvitwj6","slide":11,"bbox":[54,112,112,8]}
+{"kind":"shape","id":"sh/8jm10r2l","slide":11,"bbox":[166,112,152,8]}
+{"kind":"textbox","id":"sh/zet0nm14","slide":11,"text":"OUR TEAM","textPreview":"OUR TEAM","textChars":8,"textLines":1,"bbox":[130,202,360,55]}
+{"kind":"textbox","id":"sh/lgbipcja","slide":11,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[860.15,157.1,126,26.25]}
+{"kind":"textbox","id":"sh/kf2hw72p","slide":11,"text":"DIGITAL SAFETY","textPreview":"DIGITAL SAFETY","textChars":14,"textLines":1,"bbox":[861.2,181.25,126,13.65]}
+{"kind":"shape","id":"sh/3ad0z618","slide":11,"bbox":[114,306,132,132]}
+{"kind":"textbox","id":"sh/ip4j6103","slide":11,"text":"FSA","textPreview":"FSA","textChars":3,"textLines":1,"bbox":[114,351,132,35]}
+{"kind":"shape","id":"sh/8vqlcby1","slide":11,"bbox":[103,293,42,42]}
+{"kind":"textbox","id":"sh/9wzm5gzm","slide":11,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[103,306,42,18]}
+{"kind":"textbox","id":"sh/mto3algv","slide":11,"text":"Fuseini Saida\nAyisha","textPreview":"Fuseini Saida | Ayisha","textChars":20,"textLines":2,"bbox":[86,461,188,52]}
+{"kind":"textbox","id":"sh/nuh4j6hg","slide":11,"text":"Role and relevant\nexperience to confirm","textPreview":"Role and relevant | experience to confirm","textChars":39,"textLines":2,"bbox":[90,525,180,47]}
+{"kind":"shape","id":"sh/0r6l8by5","slide":11,"bbox":[310,306,132,132]}
+{"kind":"textbox","id":"sh/lsfmhgza","slide":11,"text":"YBI","textPreview":"YBI","textChars":3,"textLines":1,"bbox":[310,351,132,35]}
+{"kind":"shape","id":"sh/ypo361gz","slide":11,"bbox":[299,293,42,42]}
+{"kind":"textbox","id":"sh/zqx4f6hk","slide":11,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[299,306,42,18]}
+{"kind":"textbox","id":"sh/c36l4ryt","slide":11,"text":"Yusif Babamu\nIssah","textPreview":"Yusif Babamu | Issah","textChars":18,"textLines":2,"bbox":[282,461,188,52]}
+{"kind":"textbox","id":"sh/dof2dwze","slide":11,"text":"Role and relevant\nexperience to confirm","textPreview":"Role and relevant | experience to confirm","textChars":39,"textLines":2,"bbox":[286,525,180,47]}
+{"kind":"shape","id":"sh/t8nalon6","slide":11,"bbox":[506,306,132,132]}
+{"kind":"textbox","id":"sh/s7ets3ml","slide":11,"text":"JB","textPreview":"JB","textChars":2,"textLines":1,"bbox":[506,351,132,35]}
+{"kind":"shape","id":"sh/r65sjy50","slide":11,"bbox":[495,293,42,42]}
+{"kind":"textbox","id":"sh/65wrqt4f","slide":11,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[495,306,42,18]}
+{"kind":"textbox","id":"sh/5k3ahonu","slide":11,"text":"Josephus\nBawah","textPreview":"Josephus | Bawah","textChars":14,"textLines":2,"bbox":[478,461,188,52]}
+{"kind":"textbox","id":"sh/4ju9ojm9","slide":11,"text":"Role and relevant\nexperience to confirm","textPreview":"Role and relevant | experience to confirm","textChars":39,"textLines":2,"bbox":[482,525,180,47]}
+{"kind":"shape","id":"sh/jilsfe5o","slide":11,"bbox":[702,306,132,132]}
+{"kind":"textbox","id":"sh/ihcrm94j","slide":11,"text":"KA","textPreview":"KA","textChars":2,"textLines":1,"bbox":[702,351,132,35]}
+{"kind":"shape","id":"sh/pg7at8ne","slide":11,"bbox":[691,293,42,42]}
+{"kind":"textbox","id":"sh/ofyt0nmt","slide":11,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[691,306,42,18]}
+{"kind":"textbox","id":"sh/ml87e5kb","slide":11,"text":"Kelvin\nAhorbo","textPreview":"Kelvin | Ahorbo","textChars":13,"textLines":2,"bbox":[674,461,188,52]}
+{"kind":"textbox","id":"sh/nm18nalg","slide":11,"text":"Role and relevant\nexperience to confirm","textPreview":"Role and relevant | experience to confirm","textChars":39,"textLines":2,"bbox":[678,525,180,47]}
+{"kind":"shape","id":"sh/8napgf21","slide":11,"bbox":[898,306,132,132]}
+{"kind":"textbox","id":"sh/9ojqpk3m","slide":11,"text":"DOA","textPreview":"DOA","textChars":3,"textLines":1,"bbox":[898,351,132,35]}
+{"kind":"shape","id":"sh/yh87a5kz","slide":11,"bbox":[887,293,42,42]}
+{"kind":"textbox","id":"sh/zihojalk","slide":11,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[887,306,42,18]}
+{"kind":"textbox","id":"sh/0jqpcf25","slide":11,"text":"Dennis Owusu\nAdarkwarh","textPreview":"Dennis Owusu | Adarkwarh","textChars":22,"textLines":2,"bbox":[870,461,188,52]}
+{"kind":"textbox","id":"sh/lkzql03q","slide":11,"text":"Role and relevant\nexperience to confirm","textPreview":"Role and relevant | experience to confirm","textChars":39,"textLines":2,"bbox":[874,525,180,47]}
+{"kind":"textbox","id":"sh/idc7mpk3","slide":11,"text":"Seeking pilot partners, representative fraud data, technical mentorship and strategic support","textPreview":"Seeking pilot partners, representative fraud data, technical mentorship and strategic support","textChars":93,"textLines":1,"bbox":[130,625,862,30]}
+{"kind":"image","id":"im/r2lojuh8","slide":11,"name":"","alt":"Guard logo","bbox":[815,155,35.7,35.7]}
+{"kind":"notes","id":"nt/brfc1n","slide":11,"text":"Layout follows Hydrogo slide 11. Team names come from the supplied Guard investor deck. Roles, biographies, contact details and individual proof points were not provided and remain explicit completion items. The closing support request reflects the supplied Guard deck."}

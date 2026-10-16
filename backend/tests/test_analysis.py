@@ -1,4 +1,6 @@
 import unittest
+import json
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
@@ -178,11 +180,31 @@ class AnalysisEngineTests(unittest.TestCase):
         self.assertEqual([signal.key for signal in signals], ["known_risky_domain"])
         self.assertEqual(signals[0].source, "database")
 
-    def test_non_mvp_mode_does_not_claim_low_risk(self):
+    def test_screenshot_without_extracted_text_is_inconclusive(self):
         result = self.engine().analyse("screenshot", "image.png")
         self.assertEqual(result.level, "Unable to Determine")
         self.assertEqual(result.confidence, 0.0)
-        self.assertIn("not part of", result.explanation)
+        self.assertIn("Not enough readable", result.explanation)
+
+    def test_all_text_modes_use_the_shared_risk_engine(self):
+        content = "Urgent: the bank agent asked me to send my OTP immediately."
+        for kind in ("message", "screenshot", "payment", "call"):
+            with self.subTest(kind=kind):
+                result = self.engine().analyse(kind, content)
+                self.assertEqual(result.level, "High Risk")
+
+    def test_unknown_number_does_not_claim_low_risk(self):
+        result = self.engine().analyse("number", "+233240000000")
+        self.assertEqual(result.level, "Unable to Determine")
+        self.assertIn("does not prove", result.explanation)
+
+    def test_ghana_mvp_evaluation_cases_match_expected_bands(self):
+        path = Path(__file__).resolve().parents[1] / "evaluation" / "ghana_mvp_cases.json"
+        cases = json.loads(path.read_text())
+        for case in cases:
+            with self.subTest(case=case["id"]):
+                result = self.engine().analyse(case["kind"], case["content"])
+                self.assertEqual(result.level, case["expected"])
 
 
 if __name__ == "__main__":

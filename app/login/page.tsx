@@ -19,18 +19,17 @@ export default function Login() {
   const [password,setPassword] = useState('');
   const [error,setError] = useState('');
   const [loading,setLoading] = useState(false);
+  const demoEnabled = process.env.NEXT_PUBLIC_ENABLE_DEMO_AUTH === 'true';
 
   const signIn = (role:DemoRole) => {
-    sessionStorage.removeItem('guard-api-token');
     sessionStorage.setItem('guard-demo-auth',role);
-    sessionStorage.setItem('guard-demo-role',role);
     router.push(accounts[role].destination);
   };
 
   const submit = async (event:React.FormEvent) => {
     event.preventDefault();
     const cleanEmail = email.trim().toLowerCase();
-    const role = (Object.keys(accounts) as DemoRole[]).find(key=>accounts[key].email===cleanEmail&&accounts[key].password===password);
+    const role = demoEnabled ? (Object.keys(accounts) as DemoRole[]).find(key=>accounts[key].email===cleanEmail&&accounts[key].password===password) : undefined;
     if (role) { signIn(role); return; }
     setLoading(true); setError('');
     try {
@@ -38,9 +37,8 @@ export default function Login() {
       const response = await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:form});
       const body = await response.json();
       if(!response.ok) throw new Error(body.detail||'Sign in failed.');
-      sessionStorage.setItem('guard-api-token',body.access_token);
-      sessionStorage.setItem('guard-demo-role',body.user.role);
-      router.push(['super_admin','fraud_analyst','support_admin'].includes(body.user.role)?'/admin':'/dashboard');
+      sessionStorage.removeItem('guard-demo-auth');
+      router.push(['super_admin','fraud_analyst'].includes(body.user.role)?'/admin':'/dashboard');
     } catch(reason) { setError(reason instanceof Error?reason.message:'Sign in failed.'); }
     finally { setLoading(false); }
   };
@@ -68,14 +66,14 @@ export default function Login() {
           {error&&<p role="alert" style={{color:'#b14d46',fontSize:13,lineHeight:1.5,marginTop:14}}>{error}</p>}
           <button type="submit" className="btn btn-primary" disabled={loading} style={{marginTop:22,width:'100%'}}>{loading?'Signing in…':'Sign in'} <ShieldCheck size={16}/></button>
 
-          <div style={{marginTop:24,paddingTop:20,borderTop:'1px solid var(--line)'}}>
+          {demoEnabled&&<div style={{marginTop:24,paddingTop:20,borderTop:'1px solid var(--line)'}}>
             <strong style={{display:'block',fontSize:13,color:'var(--navy)',marginBottom:10}}>Demo accounts</strong>
             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
               <button type="button" className="btn btn-outline" style={{borderRadius:10,padding:'13px 12px'}} onClick={()=>chooseAccount('user')}><UserRound size={16}/>User account</button>
               <button type="button" className="btn btn-outline" style={{borderRadius:10,padding:'13px 12px'}} onClick={()=>chooseAccount('admin')}><LayoutDashboard size={16}/>Admin account</button>
             </div>
             <p className="helper" style={{marginTop:12}}>Both demo accounts use the password <strong>guard123</strong>. Select an account, then choose Sign in.</p>
-          </div>
+          </div>}
           <p className="helper" style={{textAlign:'center',marginTop:20}}>New to Guard? <Link href="/register" className="small-link">Create an account</Link></p>
         </form>
       </div>

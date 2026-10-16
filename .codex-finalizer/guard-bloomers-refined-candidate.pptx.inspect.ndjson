@@ -1,0 +1,405 @@
+{"kind":"deck","id":"pr/h0eyhz","name":"Deck"}
+{"kind":"layout","layoutId":"dc1d2382-5e87-4eb6-b17b-96d0e485124c","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"cc2e6692-98d0-4d93-9193-fcec7130cc20","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/zsxii0","slide":1,"title":"Guard","textShapes":8}
+{"kind":"shape","id":"sh/ad0rupoz","slide":1,"bbox":[630,0,165,720]}
+{"kind":"textbox","id":"sh/k32t0z61","slide":1,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/54bat47m","slide":1,"bbox":[58,132,190,32]}
+{"kind":"textbox","id":"sh/ih0rypob","slide":1,"text":"INVESTOR PITCH • 2026","textPreview":"INVESTOR PITCH • 2026","textChars":21,"textLines":1,"bbox":[58,140,190,16]}
+{"kind":"textbox","id":"sh/j29srupw","slide":1,"text":"Fraud moves fast.\nGuard gets there first.","textPreview":"Fraud moves fast. | Guard gets there first.","textChars":41,"textLines":2,"bbox":[56,210,650,145]}
+{"kind":"textbox","id":"sh/07y9ofqx","slide":1,"text":"Permission-based protection across calls, SMS, email, links and supported app notifications—before a user clicks, pays or shares a code.","textPreview":"Permission-based protection across calls, SMS, email, links and supported app notifications—before a user clicks, pays or shares a code.","textChars":136,"textLines":1,"bbox":[58,394,545,105]}
+{"kind":"shape","id":"sh/187ahk7i","slide":1,"bbox":[58,548,440,0]}
+{"kind":"textbox","id":"sh/to7qhcby","slide":1,"text":"Ghana-first • Explainable • Built for everyday digital life","textPreview":"Ghana-first • Explainable • Built for everyday digital life","textChars":59,"textLines":1,"bbox":[58,572,545,34]}
+{"kind":"textbox","id":"sh/83y9o7ud","slide":1,"text":"Think before you trust.","textPreview":"Think before you trust.","textChars":23,"textLines":1,"bbox":[58,624,350,25]}
+{"kind":"shape","id":"sh/72p8f2t8","slide":1,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/61grmxcn","slide":1,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/hsrqlcba","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/8vut43yh","slide":1,"name":"","alt":"Everyday user receiving a suspicious digital message","bbox":[690,0,590,720]}
+{"kind":"image","id":"im/mtcb2tgb","slide":1,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/zsxii0","slide":1,"text":"Guard product vision supplied by the founder. Cover image is an existing Guard brand asset."}
+{"kind":"slide","id":"sl/18g838","slide":2,"title":"Guard","textShapes":15}
+{"kind":"textbox","id":"sh/y5g3e14v","slide":2,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/z6p4n65g","slide":2,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/8vilkbmd","slide":2,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/9wrmtgni","slide":2,"text":"THE STAKES","textPreview":"THE STAKES","textChars":10,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/m903il47","slide":2,"text":"Digital fraud is becoming part of everyday life","textPreview":"Digital fraud is becoming part of everyday life","textChars":47,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"textbox","id":"sh/7a94rq5s","slide":2,"text":"The attack surface is growing at the same time as Ghana's connected economy.","textPreview":"The attack surface is growing at the same time as Ghana's connected economy.","textChars":76,"textLines":1,"bbox":[56,217,910,35]}
+{"kind":"shape","id":"sh/wz25ovm9","slide":2,"bbox":[56,292,266,215]}
+{"kind":"shape","id":"sh/h0bmx0nu","slide":2,"bbox":[56,292,266,7]}
+{"kind":"textbox","id":"sh/pcny50bm","slide":2,"text":"24,778","textPreview":"24,778","textChars":6,"textLines":1,"bbox":[76,331,226,62]}
+{"kind":"textbox","id":"sh/obexcvu1","slide":2,"text":"reported financial-sector fraud cases in 2025","textPreview":"reported financial-sector fraud cases in 2025","textChars":45,"textLines":1,"bbox":[76,411,224,62]}
+{"kind":"shape","id":"sh/3a5g3qtg","slide":2,"bbox":[350,292,266,215]}
+{"kind":"shape","id":"sh/29wfalcb","slide":2,"bbox":[350,292,266,7]}
+{"kind":"textbox","id":"sh/d07y9kby","slide":2,"text":"+48%","textPreview":"+48%","textChars":4,"textLines":1,"bbox":[370,331,226,62]}
+{"kind":"textbox","id":"sh/czyxgfud","slide":2,"text":"year-on-year increase in reported cases","textPreview":"year-on-year increase in reported cases","textChars":39,"textLines":1,"bbox":[370,411,224,62]}
+{"kind":"shape","id":"sh/bypg7ats","slide":2,"bbox":[644,292,266,215]}
+{"kind":"shape","id":"sh/qdwfe5c7","slide":2,"bbox":[644,292,266,7]}
+{"kind":"textbox","id":"sh/t43exgbe","slide":2,"text":"47%","textPreview":"47%","textChars":3,"textLines":1,"bbox":[664,331,226,62]}
+{"kind":"textbox","id":"sh/s3ux4but","slide":2,"text":"of CSA incidents were online fraud, Jan–Jul 2026","textPreview":"of CSA incidents were online fraud, Jan–Jul 2026","textChars":48,"textLines":1,"bbox":[664,411,224,62]}
+{"kind":"shape","id":"sh/knyxkb2p","slide":2,"bbox":[938,292,266,215]}
+{"kind":"shape","id":"sh/5o7ydgja","slide":2,"bbox":[938,292,266,7]}
+{"kind":"textbox","id":"sh/ilgfilkz","slide":2,"text":"30.5m","textPreview":"30.5m","textChars":5,"textLines":1,"bbox":[958,331,226,62]}
+{"kind":"textbox","id":"sh/jmpgbq14","slide":2,"text":"mobile data subscriptions in June 2026","textPreview":"mobile data subscriptions in June 2026","textChars":38,"textLines":1,"bbox":[958,411,224,62]}
+{"kind":"shape","id":"sh/sryxov21","slide":2,"bbox":[56,541,1148,78]}
+{"kind":"textbox","id":"sh/tsryh0jm","slide":2,"text":"The loss starts before money moves—when a convincing message creates urgency, trust and a bad decision.","textPreview":"The loss starts before money moves—when a convincing message creates urgency, trust and a bad decision.","textChars":103,"textLines":1,"bbox":[84,563,1092,35]}
+{"kind":"shape","id":"sh/6pgfmlkv","slide":2,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/7qpgfq1g","slide":2,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/gfixsv2x","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/s7ylc7mp","slide":2,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/18g838","slide":2,"text":"Sources: Bank of Ghana Fraud Report 2025: https://www.bog.gov.gh/wp-content/uploads/2026/07/FRAUD-REPORT-2025.pdf. CSA 2026 awareness-month release: https://csa.gov.gh/2026-national-cyber-security-awareness-month-launched-to-build-digital-trust.php. NCA June 2026 statistics: https://nca.org.gh/. Subscriptions are not unique users."}
+{"kind":"slide","id":"sl/6qfzq5","slide":3,"title":"Guard","textShapes":21}
+{"kind":"textbox","id":"sh/o3algfm5","slide":3,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/94jm9kna","slide":3,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/ed83a54n","slide":3,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/ze143a58","slide":3,"text":"THE PROBLEM","textPreview":"THE PROBLEM","textChars":11,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/0falcfmt","slide":3,"text":"One scam can move across five familiar surfaces","textPreview":"One scam can move across five familiar surfaces","textChars":47,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"shape","id":"sh/1gjm5kne","slide":3,"bbox":[125,336,1010,0]}
+{"kind":"shape","id":"sh/q983654r","slide":3,"bbox":[119,309,54,54]}
+{"kind":"textbox","id":"sh/rah4zq5c","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[119,326,54,17]}
+{"kind":"textbox","id":"sh/nux4jy54","slide":3,"text":"SMS","textPreview":"SMS","textChars":3,"textLines":1,"bbox":[72,389,150,25]}
+{"kind":"textbox","id":"sh/mtonqt4j","slide":3,"text":"A fake alert creates urgency","textPreview":"A fake alert creates urgency","textChars":28,"textLines":1,"bbox":[50,430,194,76]}
+{"kind":"shape","id":"sh/9wfmlonu","slide":3,"bbox":[357,309,54,54]}
+{"kind":"textbox","id":"sh/8v65sjmp","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[357,326,54,17]}
+{"kind":"textbox","id":"sh/vyx4ny50","slide":3,"text":"CALL","textPreview":"CALL","textChars":4,"textLines":1,"bbox":[310,389,150,25]}
+{"kind":"textbox","id":"sh/axonut4f","slide":3,"text":"An impersonator reinforces the story","textPreview":"An impersonator reinforces the story","textChars":36,"textLines":1,"bbox":[288,430,194,76]}
+{"kind":"shape","id":"sh/x0zmp8n6","slide":3,"bbox":[595,309,54,54]}
+{"kind":"textbox","id":"sh/wz65w3ml","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[595,326,54,17]}
+{"kind":"textbox","id":"sh/b2d4be5w","slide":3,"text":"LINK","textPreview":"LINK","textChars":4,"textLines":1,"bbox":[548,389,150,25]}
+{"kind":"textbox","id":"sh/q143i94b","slide":3,"text":"A lookalike page captures credentials","textPreview":"A lookalike page captures credentials","textChars":37,"textLines":1,"bbox":[526,430,194,76]}
+{"kind":"shape","id":"sh/exs7qhoz","slide":3,"bbox":[833,309,54,54]}
+{"kind":"textbox","id":"sh/fi18j2pk","slide":3,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[833,326,54,17]}
+{"kind":"textbox","id":"sh/gjups76p","slide":3,"text":"CHAT","textPreview":"CHAT","textChars":4,"textLines":1,"bbox":[786,389,150,25]}
+{"kind":"textbox","id":"sh/1k3qlc7a","slide":3,"text":"A payment request feels personal","textPreview":"A payment request feels personal","textChars":32,"textLines":1,"bbox":[764,430,194,76]}
+{"kind":"shape","id":"sh/6ts7mxon","slide":3,"bbox":[1071,309,54,54]}
+{"kind":"textbox","id":"sh/7u1of2p8","slide":3,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1071,326,54,17]}
+{"kind":"textbox","id":"sh/svapo76t","slide":3,"text":"EMAIL","textPreview":"EMAIL","textChars":5,"textLines":1,"bbox":[1024,389,150,25]}
+{"kind":"textbox","id":"sh/twjqhc7e","slide":3,"text":"A follow-up makes the fraud look official","textPreview":"A follow-up makes the fraud look official","textChars":41,"textLines":1,"bbox":[1002,430,194,76]}
+{"kind":"shape","id":"sh/ip87ixor","slide":3,"bbox":[184,554,912,62]}
+{"kind":"textbox","id":"sh/jqhobipc","slide":3,"text":"Today's defenses are channel-specific. The user experiences one coordinated attack.","textPreview":"Today's defenses are channel-specific. The user experiences one coordinated attack.","textChars":83,"textLines":1,"bbox":[210,573,860,26]}
+{"kind":"shape","id":"sh/lwr2dkvq","slide":3,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/kvy14ful","slide":3,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/zup0bad0","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/2lc3214n","slide":3,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/6qfzq5","slide":3,"text":"Illustrative composite scenario based on common impersonation, phishing and payment-request patterns. It is not presented as a specific customer incident."}
+{"kind":"slide","id":"sl/03ck41","slide":4,"title":"Guard","textShapes":21}
+{"kind":"textbox","id":"sh/5c3adk7y","slide":4,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/4but4zqd","slide":4,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/relsfup4","slide":4,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/qdcb6p8j","slide":4,"text":"THE SOLUTION","textPreview":"THE SOLUTION","textChars":12,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/d0nuh47a","slide":4,"text":"A digital safety layer that appears before the mistake","textPreview":"A digital safety layer that appears before the mistake","textChars":54,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"textbox","id":"sh/sfet8zqp","slide":4,"text":"Guard listens only where the user grants access, combines risk signals, and explains what to do next.","textPreview":"Guard listens only where the user grants access, combines risk signals, and explains what to do next.","textChars":101,"textLines":1,"bbox":[56,217,1030,35]}
+{"kind":"shape","id":"sh/f25cjep0","slide":4,"bbox":[58,282,96,32]}
+{"kind":"textbox","id":"sh/e1wba98v","slide":4,"text":"CALLS","textPreview":"CALLS","textChars":5,"textLines":1,"bbox":[58,290,96,16]}
+{"kind":"textbox","id":"sh/szm5ofa1","slide":4,"text":"Screen or identify","textPreview":"Screen or identify","textChars":18,"textLines":1,"bbox":[177,287,300,24]}
+{"kind":"shape","id":"sh/d0vmxkbm","slide":4,"bbox":[472,297,86,0]}
+{"kind":"shape","id":"sh/qxknmpsv","slide":4,"bbox":[58,341,96,32]}
+{"kind":"textbox","id":"sh/ryt4vatg","slide":4,"text":"SMS","textPreview":"SMS","textChars":3,"textLines":1,"bbox":[58,349,96,16]}
+{"kind":"textbox","id":"sh/03m5szax","slide":4,"text":"Flag in the inbox","textPreview":"Flag in the inbox","textChars":17,"textLines":1,"bbox":[177,346,300,24]}
+{"kind":"shape","id":"sh/1ovm14bi","slide":4,"bbox":[472,356,86,0]}
+{"kind":"shape","id":"sh/e14nqps7","slide":4,"bbox":[58,400,96,32]}
+{"kind":"textbox","id":"sh/f2d4zuts","slide":4,"text":"EMAIL","textPreview":"EMAIL","textChars":5,"textLines":1,"bbox":[58,408,96,16]}
+{"kind":"textbox","id":"sh/or65wza9","slide":4,"text":"Warn before reply or click","textPreview":"Warn before reply or click","textChars":26,"textLines":1,"bbox":[177,405,300,24]}
+{"kind":"shape","id":"sh/psfm54bu","slide":4,"bbox":[472,415,86,0]}
+{"kind":"shape","id":"sh/xobm943y","slide":4,"bbox":[58,459,96,32]}
+{"kind":"textbox","id":"sh/wn25gz2d","slide":4,"text":"LINKS","textPreview":"LINKS","textChars":5,"textLines":1,"bbox":[58,467,96,16]}
+{"kind":"textbox","id":"sh/bmt47uls","slide":4,"text":"Assess destination risk","textPreview":"Assess destination risk","textChars":23,"textLines":1,"bbox":[177,464,300,24]}
+{"kind":"shape","id":"sh/al03epk7","slide":4,"bbox":[472,474,86,0]}
+{"kind":"shape","id":"sh/lcbmdoju","slide":4,"bbox":[58,518,96,32]}
+{"kind":"textbox","id":"sh/kb25kj29","slide":4,"text":"APPS","textPreview":"APPS","textChars":4,"textLines":1,"bbox":[58,526,96,16]}
+{"kind":"textbox","id":"sh/jat4be14","slide":4,"text":"Use supported notifications","textPreview":"Use supported notifications","textChars":27,"textLines":1,"bbox":[177,523,300,24]}
+{"kind":"shape","id":"sh/y9kni9kj","slide":4,"bbox":[472,533,86,0]}
+{"kind":"shape","id":"sh/1grm1k3q","slide":4,"bbox":[558,263,302,322]}
+{"kind":"textbox","id":"sh/qlwjil03","slide":4,"text":"GUARD","textPreview":"GUARD","textChars":5,"textLines":1,"bbox":[598,413,222,31]}
+{"kind":"textbox","id":"sh/rm5kbq1o","slide":4,"text":"Identity + content + link + reputation signals","textPreview":"Identity + content + link + reputation signals","textChars":46,"textLines":1,"bbox":[609,463,200,74]}
+{"kind":"shape","id":"sh/cny1kvi9","slide":4,"bbox":[860,424,86,0]}
+{"kind":"shape","id":"sh/do72d0je","slide":4,"bbox":[946,300,276,247]}
+{"kind":"textbox","id":"sh/epgjml0z","slide":4,"text":"HIGH RISK","textPreview":"HIGH RISK","textChars":9,"textLines":1,"bbox":[974,332,220,27]}
+{"kind":"textbox","id":"sh/zqpkfq1k","slide":4,"text":"Don't share the code.","textPreview":"Don't share the code.","textChars":21,"textLines":1,"bbox":[974,383,220,65]}
+{"kind":"textbox","id":"sh/0ry1ovi5","slide":4,"text":"This request uses impersonation and false urgency. Verify through the official channel.","textPreview":"This request uses impersonation and false urgency. Verify through the official channel.","textChars":87,"textLines":1,"bbox":[976,472,216,58]}
+{"kind":"shape","id":"sh/1s72h0zq","slide":4,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/utcja10v","slide":4,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/ful0361g","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/zad4fmds","slide":4,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"image","id":"im/3qpkza14","slide":4,"name":"","alt":"Guard protection layer","bbox":[660,295,96,96]}
+{"kind":"notes","id":"nt/03ck41","slide":4,"text":"Future product vision. Platform access is permission-based and varies by operating system. Android supports user-selected call screening and permissioned notification access; iOS uses Call Directory / Live Caller ID and Message Filter extensions; Gmail requires account authorization. Sources: https://developer.android.com/reference/android/telecom/CallScreeningService, https://developer.android.com/reference/android/service/notification/NotificationListenerService, https://developer.apple.com/documentation/IdentityLookup, https://developers.google.com/workspace/gmail/api/guides/push"}
+{"kind":"slide","id":"sl/a0nn17","slide":5,"title":"Guard","textShapes":19}
+{"kind":"textbox","id":"sh/21o3e107","slide":5,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/32x47mhs","slide":5,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/crq5kbi9","slide":5,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/dszmdgzu","slide":5,"text":"THE EXPERIENCE","textPreview":"THE EXPERIENCE","textChars":14,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/q5oni10j","slide":5,"text":"The warning lives where the user needs it","textPreview":"The warning lives where the user needs it","textChars":41,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"shape","id":"sh/b6x4b6ho","slide":5,"bbox":[70,238,335,383]}
+{"kind":"shape","id":"sh/sbml87i5","slide":5,"bbox":[89,260,297,339]}
+{"kind":"shape","id":"sh/twvm1cjq","slide":5,"bbox":[111,284,60,32]}
+{"kind":"textbox","id":"sh/58bed8je","slide":5,"text":"SMS","textPreview":"SMS","textChars":3,"textLines":1,"bbox":[111,292,60,16]}
+{"kind":"textbox","id":"sh/kn2xkn2t","slide":5,"text":"MoMo Support","textPreview":"MoMo Support","textChars":12,"textLines":1,"bbox":[111,335,210,25]}
+{"kind":"textbox","id":"sh/jm9wbi18","slide":5,"text":"Your account is blocked. Send the OTP now to restore access.","textPreview":"Your account is blocked. Send the OTP now to restore access.","textChars":60,"textLines":1,"bbox":[111,377,235,72]}
+{"kind":"shape","id":"sh/il0fidkn","slide":5,"bbox":[104,480,267,89]}
+{"kind":"textbox","id":"sh/tcbehsja","slide":5,"text":"GUARD WARNING","textPreview":"GUARD WARNING","textChars":13,"textLines":1,"bbox":[122,497,224,18]}
+{"kind":"textbox","id":"sh/sb2xon25","slide":5,"text":"Likely impersonation. Do not share the OTP.","textPreview":"Likely impersonation. Do not share the OTP.","textChars":43,"textLines":1,"bbox":[122,524,224,34]}
+{"kind":"shape","id":"sh/7atwfi1k","slide":5,"bbox":[476,256,322,144]}
+{"kind":"textbox","id":"sh/69kfmdkz","slide":5,"text":"Contextual","textPreview":"Contextual","textChars":10,"textLines":1,"bbox":[496,277,282,28]}
+{"kind":"textbox","id":"sh/1gvelsjm","slide":5,"text":"A flag appears inside or beside the supported interaction.","textPreview":"A flag appears inside or beside the supported interaction.","textChars":58,"textLines":1,"bbox":[496,320,282,60]}
+{"kind":"shape","id":"sh/gfmxs721","slide":5,"bbox":[830,256,322,144]}
+{"kind":"textbox","id":"sh/0vup4ve9","slide":5,"text":"Explainable","textPreview":"Explainable","textChars":11,"textLines":1,"bbox":[850,277,282,28]}
+{"kind":"textbox","id":"sh/lwnqd0vu","slide":5,"text":"The user sees the signals—not an unexplained red badge.","textPreview":"The user sees the signals—not an unexplained red badge.","textChars":55,"textLines":1,"bbox":[850,320,282,60]}
+{"kind":"shape","id":"sh/ytc725wj","slide":5,"bbox":[476,428,322,144]}
+{"kind":"textbox","id":"sh/zul8bqd4","slide":5,"text":"Actionable","textPreview":"Actionable","textChars":10,"textLines":1,"bbox":[496,449,282,28]}
+{"kind":"textbox","id":"sh/8ze98fel","slide":5,"text":"Guard recommends the safest next step: pause, block or verify.","textPreview":"Guard recommends the safest next step: pause, block or verify.","textChars":62,"textLines":1,"bbox":[496,492,282,60]}
+{"kind":"shape","id":"sh/90nqhkv6","slide":5,"bbox":[830,428,322,144]}
+{"kind":"textbox","id":"sh/mxw765wf","slide":5,"text":"Permissioned","textPreview":"Permissioned","textChars":12,"textLines":1,"bbox":[850,449,282,28]}
+{"kind":"textbox","id":"sh/ny58fad0","slide":5,"text":"Each data source is explicit, revocable and platform-limited.","textPreview":"Each data source is explicit, revocable and platform-limited.","textChars":61,"textLines":1,"bbox":[850,492,282,60]}
+{"kind":"textbox","id":"sh/o3apwbeh","slide":5,"text":"Illustrative mobile experience—not a claim that every platform exposes the same controls.","textPreview":"Illustrative mobile experience—not a claim that every platform exposes the same controls.","textChars":89,"textLines":1,"bbox":[476,595,676,22]}
+{"kind":"shape","id":"sh/p43q5gvm","slide":5,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/7i9sbexk","slide":5,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/6h0b2tgz","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/gne18vqt","slide":5,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/a0nn17","slide":5,"text":"Conceptual experience. Exact UI placement depends on operating-system and app integration points and on user-granted permissions."}
+{"kind":"slide","id":"sl/7e5o4g","slide":6,"title":"Guard","textShapes":25}
+{"kind":"textbox","id":"sh/6hkza1sz","slide":6,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/7itgj6t4","slide":6,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/kv2x8rat","slide":6,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/lwbyhwbe","slide":6,"text":"HOW IT WORKS","textPreview":"HOW IT WORKS","textChars":12,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/yt0f61sn","slide":6,"text":"Fast detection without becoming another privacy risk","textPreview":"Fast detection without becoming another privacy risk","textChars":52,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"shape","id":"sh/jutgf6t8","slide":6,"bbox":[56,257,265,215]}
+{"kind":"shape","id":"sh/4rmhkvax","slide":6,"bbox":[76,279,38,38]}
+{"kind":"textbox","id":"sh/5svyt0bi","slide":6,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[76,291,38,16]}
+{"kind":"textbox","id":"sh/tcf6dsvi","slide":6,"text":"USER PERMISSION","textPreview":"USER PERMISSION","textChars":15,"textLines":1,"bbox":[76,339,222,24]}
+{"kind":"textbox","id":"sh/sb654nud","slide":6,"text":"Choose the channels Guard may access","textPreview":"Choose the channels Guard may access","textChars":36,"textLines":1,"bbox":[76,383,222,66]}
+{"kind":"shape","id":"sh/7axobids","slide":6,"bbox":[350,257,265,215]}
+{"kind":"shape","id":"sh/69on2dc7","slide":6,"bbox":[370,279,38,38]}
+{"kind":"textbox","id":"sh/58f698vm","slide":6,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[370,291,38,16]}
+{"kind":"textbox","id":"sh/k76503u1","slide":6,"text":"SIGNAL ANALYSIS","textPreview":"SIGNAL ANALYSIS","textChars":15,"textLines":1,"bbox":[370,339,222,24]}
+{"kind":"textbox","id":"sh/j6xo7idg","slide":6,"text":"Inspect content, sender, link and behavior signals","textPreview":"Inspect content, sender, link and behavior signals","textChars":50,"textLines":1,"bbox":[370,383,222,66]}
+{"kind":"shape","id":"sh/i54nydwv","slide":6,"bbox":[644,257,265,215]}
+{"kind":"shape","id":"sh/p4z6lcvq","slide":6,"bbox":[664,279,38,38]}
+{"kind":"textbox","id":"sh/43qpc7u5","slide":6,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[664,291,38,16]}
+{"kind":"textbox","id":"sh/o7yp8b2h","slide":6,"text":"RISK DECISION","textPreview":"RISK DECISION","textChars":13,"textLines":1,"bbox":[664,339,222,24]}
+{"kind":"textbox","id":"sh/p87qhg32","slide":6,"text":"Score concern and identify the evidence","textPreview":"Score concern and identify the evidence","textChars":39,"textLines":1,"bbox":[664,383,222,66]}
+{"kind":"shape","id":"sh/2lg761kb","slide":6,"bbox":[938,257,265,215]}
+{"kind":"shape","id":"sh/n6p8f6lw","slide":6,"bbox":[958,279,38,38]}
+{"kind":"textbox","id":"sh/0jyp4b2l","slide":6,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[958,291,38,16]}
+{"kind":"textbox","id":"sh/1k7qdg36","slide":6,"text":"SAFE ACTION","textPreview":"SAFE ACTION","textChars":11,"textLines":1,"bbox":[958,339,222,24]}
+{"kind":"textbox","id":"sh/ehg721kf","slide":6,"text":"Warn, explain and route to official verification","textPreview":"Warn, explain and route to official verification","textChars":48,"textLines":1,"bbox":[958,383,222,66]}
+{"kind":"textbox","id":"sh/fip8b6l0","slide":6,"text":"MINIMISE","textPreview":"MINIMISE","textChars":8,"textLines":1,"bbox":[56,524,264,18]}
+{"kind":"textbox","id":"sh/sfep0r29","slide":6,"text":"Collect only what the feature needs","textPreview":"Collect only what the feature needs","textChars":35,"textLines":1,"bbox":[56,552,264,50]}
+{"kind":"textbox","id":"sh/dgnq9w3u","slide":6,"text":"EXPLAIN","textPreview":"EXPLAIN","textChars":7,"textLines":1,"bbox":[350,524,264,18]}
+{"kind":"textbox","id":"sh/va58jm5w","slide":6,"text":"Show why a warning appeared","textPreview":"Show why a warning appeared","textChars":27,"textLines":1,"bbox":[350,552,264,50]}
+{"kind":"textbox","id":"sh/u9crahob","slide":6,"text":"CONTROL","textPreview":"CONTROL","textChars":7,"textLines":1,"bbox":[644,524,264,18]}
+{"kind":"textbox","id":"sh/hcnqlwnm","slide":6,"text":"Let users revoke access","textPreview":"Let users revoke access","textChars":23,"textLines":1,"bbox":[644,552,264,50]}
+{"kind":"textbox","id":"sh/gbe9cr61","slide":6,"text":"SEPARATE","textPreview":"SEPARATE","textChars":8,"textLines":1,"bbox":[938,524,264,18]}
+{"kind":"textbox","id":"sh/3e58n65s","slide":6,"text":"Keep private checks distinct from consented intelligence","textPreview":"Keep private checks distinct from consented intelligence","textChars":56,"textLines":1,"bbox":[938,552,264,50]}
+{"kind":"shape","id":"sh/idwre147","slide":6,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/5gnapwny","slide":6,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/4fe9gbmd","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/ofqtg3yp","slide":6,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/7e5o4g","slide":6,"text":"Architecture is the intended product approach. The current project separates private user checks from explicitly consented fraud-intelligence contributions. Security and privacy controls require formal validation before production launch."}
+{"kind":"slide","id":"sl/md8kds","slide":7,"title":"Guard","textShapes":16}
+{"kind":"textbox","id":"sh/2pof6po3","slide":7,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/3qxwfapo","slide":7,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/cvqxcz65","slide":7,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/dgzel47q","slide":7,"text":"PROOF OF EXECUTION","textPreview":"PROOF OF EXECUTION","textChars":18,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/qt8fapoz","slide":7,"text":"The analysis engine already works on the web","textPreview":"The analysis engine already works on the web","textChars":44,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"shape","id":"sh/sz6d0v61","slide":7,"bbox":[586,248,180,116]}
+{"kind":"textbox","id":"sh/tkfe907m","slide":7,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[604,267,144,45]}
+{"kind":"textbox","id":"sh/5k3ipg76","slide":7,"text":"input types","textPreview":"input types","textChars":11,"textLines":1,"bbox":[604,321,144,28]}
+{"kind":"shape","id":"sh/kjuhgbql","slide":7,"bbox":[791,248,180,116]}
+{"kind":"textbox","id":"sh/jil0n6p0","slide":7,"text":"22","textPreview":"22","textChars":2,"textLines":1,"bbox":[809,267,144,45]}
+{"kind":"textbox","id":"sh/ihsze18f","slide":7,"text":"reported database tables","textPreview":"reported database tables","textChars":24,"textLines":1,"bbox":[809,321,144,28]}
+{"kind":"shape","id":"sh/to3itg72","slide":7,"bbox":[996,248,180,116]}
+{"kind":"textbox","id":"sh/snuhkbqh","slide":7,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1014,267,144,45]}
+{"kind":"textbox","id":"sh/7ml0rqpw","slide":7,"text":"user + admin workflows","textPreview":"user + admin workflows","textChars":22,"textLines":1,"bbox":[1014,321,144,28]}
+{"kind":"shape","id":"sh/6lczil8b","slide":7,"bbox":[590,410,18,18]}
+{"kind":"textbox","id":"sh/hcnih07y","slide":7,"text":"Messages, screenshots, URLs, phone and WhatsApp numbers, payment requests and calls","textPreview":"Messages, screenshots, URLs, phone and WhatsApp numbers, payment requests and calls","textChars":83,"textLines":1,"bbox":[625,405,565,46]}
+{"kind":"shape","id":"sh/gbe1ov6t","slide":7,"bbox":[590,467,18,18]}
+{"kind":"textbox","id":"sh/0vm1kzep","slide":7,"text":"Explainable risk assessment, warning indicators and recommended actions","textPreview":"Explainable risk assessment, warning indicators and recommended actions","textChars":71,"textLines":1,"bbox":[625,462,565,46]}
+{"kind":"shape","id":"sh/1wv2t4fa","slide":7,"bbox":[590,524,18,18]}
+{"kind":"textbox","id":"sh/et4jipwz","slide":7,"text":"Shared FastAPI backend, authenticated user flows and moderated intelligence workflows","textPreview":"Shared FastAPI backend, authenticated user flows and moderated intelligence workflows","textChars":85,"textLines":1,"bbox":[625,519,565,46]}
+{"kind":"shape","id":"sh/zudkrux4","slide":7,"bbox":[586,588,70,32]}
+{"kind":"textbox","id":"sh/ojmloje1","slide":7,"text":"NOW","textPreview":"NOW","textChars":3,"textLines":1,"bbox":[586,596,70,16]}
+{"kind":"textbox","id":"sh/9kf2xofm","slide":7,"text":"Manual web verification proves the workflow. Native, background protection is the next product leap.","textPreview":"Manual web verification proves the workflow. Native, background protection is the next product leap.","textChars":100,"textLines":1,"bbox":[675,593,520,34]}
+{"kind":"shape","id":"sh/mx43m9wv","slide":7,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/nidkvexg","slide":7,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/4n21cfeh","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/szmhkfax","slide":7,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"image","id":"im/i9kfe5sv","slide":7,"name":"","geometry":"roundRect","alt":"Guard web product","bbox":[58,243,470,330]}
+{"kind":"notes","id":"nt/md8kds","slide":7,"text":"Sources: current Guard workspace, including README.md, components/Checker.tsx, backend/app/intelligence.py and backend/app/intelligence_routes.py; plus the October 2026 internal project update used in the supplied deck. Database-table count is an internal report and should be verified during due diligence. No accuracy, user or revenue traction is inferred."}
+{"kind":"slide","id":"sl/y2phjm","slide":8,"title":"Guard","textShapes":19}
+{"kind":"textbox","id":"sh/za1k3i50","slide":8,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/y9s3adof","slide":8,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/d8j218nu","slide":8,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/c7al8369","slide":8,"text":"MARKET ENTRY","textPreview":"MARKET ENTRY","textChars":12,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/b61kzi5o","slide":8,"text":"Start narrow, learn quickly, distribute through trust","textPreview":"Start narrow, learn quickly, distribute through trust","textChars":53,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"textbox","id":"sh/q5s36do3","slide":8,"text":"Guard's first market is not “everyone online.” It is reachable users with a repeated fraud problem and a reason to install protection.","textPreview":"Guard's first market is not “everyone online.” It is reachable users with a repeated fraud problem and a reason to install protection.","textChars":134,"textLines":1,"bbox":[56,217,1110,44]}
+{"kind":"shape","id":"sh/p4z2x8ni","slide":8,"bbox":[56,308,264,235]}
+{"kind":"textbox","id":"sh/o3ql436x","slide":8,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[76,330,65,30]}
+{"kind":"textbox","id":"sh/y1w3u9wb","slide":8,"text":"ANDROID USERS","textPreview":"ANDROID USERS","textChars":13,"textLines":1,"bbox":[76,382,224,47]}
+{"kind":"shape","id":"sh/j2pknedw","slide":8,"bbox":[76,444,58,0]}
+{"kind":"textbox","id":"sh/k3ylwze1","slide":8,"text":"Early adopters exposed to calls, messages and risky links","textPreview":"Early adopters exposed to calls, messages and risky links","textChars":57,"textLines":1,"bbox":[76,468,224,58]}
+{"kind":"shape","id":"sh/l472p4vm","slide":8,"bbox":[350,308,264,235]}
+{"kind":"textbox","id":"sh/axw3qpwz","slide":8,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[370,330,65,30]}
+{"kind":"textbox","id":"sh/by5kjuxk","slide":8,"text":"FAMILIES + SMES","textPreview":"FAMILIES + SMES","textChars":15,"textLines":1,"bbox":[370,382,224,47]}
+{"kind":"shape","id":"sh/wzelsze5","slide":8,"bbox":[370,444,58,0]}
+{"kind":"textbox","id":"sh/x0n2l4vq","slide":8,"text":"People protecting relatives, staff and business communication","textPreview":"People protecting relatives, staff and business communication","textChars":61,"textLines":1,"bbox":[370,468,224,58]}
+{"kind":"shape","id":"sh/m9cjmpw3","slide":8,"bbox":[644,308,264,235]}
+{"kind":"textbox","id":"sh/nulkfuxo","slide":8,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[664,330,65,30]}
+{"kind":"textbox","id":"sh/re10nqdg","slide":8,"text":"DISTRIBUTION PARTNERS","textPreview":"DISTRIBUTION PARTNERS","textChars":21,"textLines":1,"bbox":[664,382,224,47]}
+{"kind":"shape","id":"sh/qdszulcv","slide":8,"bbox":[664,444,58,0]}
+{"kind":"textbox","id":"sh/d0jipgv6","slide":8,"text":"Telecoms, financial institutions and digital platforms","textPreview":"Telecoms, financial institutions and digital platforms","textChars":54,"textLines":1,"bbox":[664,468,224,58]}
+{"kind":"shape","id":"sh/cfahwvu1","slide":8,"bbox":[938,308,264,235]}
+{"kind":"textbox","id":"sh/z210rqtc","slide":8,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[958,330,65,30]}
+{"kind":"textbox","id":"sh/e1szylcr","slide":8,"text":"REGIONAL EXPANSION","textPreview":"REGIONAL EXPANSION","textChars":18,"textLines":1,"bbox":[958,382,224,47]}
+{"kind":"shape","id":"sh/143it0bi","slide":8,"bbox":[958,444,58,0]}
+{"kind":"textbox","id":"sh/03uh0vux","slide":8,"text":"Local-language and market-specific fraud intelligence","textPreview":"Local-language and market-specific fraud intelligence","textChars":53,"textLines":1,"bbox":[958,468,224,58]}
+{"kind":"shape","id":"sh/v6hgf6d8","slide":8,"bbox":[56,575,1146,51]}
+{"kind":"textbox","id":"sh/u58zm1cn","slide":8,"text":"Market sizing will be built bottom-up from reachable users, pilot conversion and validated pricing—not headline internet counts.","textPreview":"Market sizing will be built bottom-up from reachable users, pilot conversion and validated pricing—not headline internet counts.","textChars":128,"textLines":1,"bbox":[80,591,1098,23]}
+{"kind":"shape","id":"sh/kbmxg7al","slide":8,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/lcfepsbq","slide":8,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/yp4fexsf","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/1kba58ri","slide":8,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/y2phjm","slide":8,"text":"Ghana launch-market evidence: 30,515,711 mobile-data subscriptions and 89.53% penetration in June 2026, NCA: https://nca.org.gh/. These are subscriptions, not unique users. No TAM/SAM/SOM value is asserted until conversion and pricing assumptions are validated."}
+{"kind":"slide","id":"sl/hcofyb","slide":9,"title":"Guard","textShapes":6}
+{"kind":"textbox","id":"sh/8jmt8jad","slide":9,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/94vuhoby","slide":9,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/u54batsj","slide":9,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/v6dcjyt4","slide":9,"text":"WHY GUARD","textPreview":"WHY GUARD","textChars":9,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/w7mtc3ap","slide":9,"text":"Most tools protect a channel. Guard protects the decision.","textPreview":"Most tools protect a channel. Guard protects the decision.","textChars":58,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"textbox","id":"sh/i94bedsv","slide":9,"text":"Guard's defensibility grows with validated local fraud patterns, distribution partnerships and user trust—not with a generic AI label.","textPreview":"Guard's defensibility grows with validated local fraud patterns, distribution partnerships and user trust—not with a generic AI label.","textChars":134,"textLines":1,"bbox":[56,588,1110,34]}
+{"kind":"shape","id":"sh/3axcnit0","slide":9,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/zm9sji1g","slide":9,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/yl0rqdkv","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"table","id":"tb/wja10fip","slide":9,"name":"","rows":6,"cols":6,"preview":"Category | Call / number | Email / link | Cross-channel | Local context | Explains action","bbox":[56,254,1148,304]}
+{"kind":"image","id":"im/y94zip8r","slide":9,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/hcofyb","slide":9,"text":"Category-level positioning hypothesis. It is not an audited comparison with every competitor. Named competitor research and customer interviews should be added before investor circulation."}
+{"kind":"slide","id":"sl/oiqp5j","slide":10,"title":"Guard","textShapes":18}
+{"kind":"textbox","id":"sh/ra9gfy5k","slide":10,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/q9gzmdof","slide":10,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/1grilsn2","slide":10,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/0fihsn6h","slide":10,"text":"BUSINESS MODEL","textPreview":"BUSINESS MODEL","textChars":14,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/fe90ji5w","slide":10,"text":"Consumer reach creates partner value","textPreview":"Consumer reach creates partner value","textChars":36,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"shape","id":"sh/ed0zqdob","slide":10,"bbox":[56,267,264,280]}
+{"kind":"shape","id":"sh/pkbipsny","slide":10,"bbox":[56,267,264,7]}
+{"kind":"textbox","id":"sh/oj2hwnmd","slide":10,"text":"FREE","textPreview":"FREE","textChars":4,"textLines":1,"bbox":[76,299,224,23]}
+{"kind":"textbox","id":"sh/a9ori5oz","slide":10,"text":"Everyday protection","textPreview":"Everyday protection","textChars":19,"textLines":1,"bbox":[76,348,224,58]}
+{"kind":"textbox","id":"sh/baxsbapk","slide":10,"text":"Essential checks and supported warnings","textPreview":"Essential checks and supported warnings","textChars":39,"textLines":1,"bbox":[76,438,224,70]}
+{"kind":"shape","id":"sh/cb69kf6p","slide":10,"bbox":[350,267,264,280]}
+{"kind":"shape","id":"sh/xcfad07a","slide":10,"bbox":[350,267,264,7]}
+{"kind":"textbox","id":"sh/ydorm5ov","slide":10,"text":"PREMIUM","textPreview":"PREMIUM","textChars":7,"textLines":1,"bbox":[370,299,224,23]}
+{"kind":"textbox","id":"sh/zexsfapg","slide":10,"text":"Personal + family","textPreview":"Personal + family","textChars":17,"textLines":1,"bbox":[370,348,224,58]}
+{"kind":"textbox","id":"sh/kf69of61","slide":10,"text":"Expanded monitoring, history and shared protection","textPreview":"Expanded monitoring, history and shared protection","textChars":50,"textLines":1,"bbox":[370,438,224,70]}
+{"kind":"shape","id":"sh/lgzahk7m","slide":10,"bbox":[644,267,264,280]}
+{"kind":"shape","id":"sh/eh4ralor","slide":10,"bbox":[644,267,264,7]}
+{"kind":"textbox","id":"sh/fid83qpc","slide":10,"text":"BUSINESS","textPreview":"BUSINESS","textChars":8,"textLines":1,"bbox":[664,299,224,23]}
+{"kind":"textbox","id":"sh/jm9obm54","slide":10,"text":"Seats + usage","textPreview":"Seats + usage","textChars":13,"textLines":1,"bbox":[664,348,224,58]}
+{"kind":"textbox","id":"sh/il07ih4j","slide":10,"text":"Employee protection, support workflows and API access","textPreview":"Employee protection, support workflows and API access","textChars":53,"textLines":1,"bbox":[664,438,224,70]}
+{"kind":"shape","id":"sh/5or6dcnu","slide":10,"bbox":[938,267,264,280]}
+{"kind":"shape","id":"sh/4nipkrmp","slide":10,"bbox":[938,267,264,7]}
+{"kind":"textbox","id":"sh/vy9o725s","slide":10,"text":"PARTNERS","textPreview":"PARTNERS","textChars":8,"textLines":1,"bbox":[958,299,224,23]}
+{"kind":"textbox","id":"sh/uxgnex47","slide":10,"text":"License + distribution","textPreview":"License + distribution","textChars":22,"textLines":1,"bbox":[958,348,224,58]}
+{"kind":"textbox","id":"sh/hkr69cny","slide":10,"text":"Embedded protection and local intelligence","textPreview":"Embedded protection and local intelligence","textChars":42,"textLines":1,"bbox":[958,438,224,70]}
+{"kind":"textbox","id":"sh/wzipg7md","slide":10,"text":"Validate first: willingness to pay • cost per assessment • retention • enterprise procurement cycle","textPreview":"Validate first: willingness to pay • cost per assessment • retention • enterprise procurement cycle","textChars":99,"textLines":1,"bbox":[56,588,1146,25]}
+{"kind":"shape","id":"sh/futoj65c","slide":10,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/etk7q14r","slide":10,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/czelk329","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/lcv6xkbe","slide":10,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/oiqp5j","slide":10,"text":"Proposed business model only. The supplied materials do not document revenue, signed customers or validated pricing. Fixed prices and forecasts should be added only after pilot evidence."}
+{"kind":"slide","id":"sl/1g7o1u","slide":11,"title":"Guard","textShapes":22}
+{"kind":"textbox","id":"sh/5ormdsfu","slide":11,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/4ni5kne9","slide":11,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/vyp47ixc","slide":11,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/uxg3edw7","slide":11,"text":"ROADMAP","textPreview":"ROADMAP","textChars":7,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/h07m9sfi","slide":11,"text":"Move from a working checker to trusted daily protection","textPreview":"Move from a working checker to trusted daily protection","textChars":55,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"shape","id":"sh/gzy5gnex","slide":11,"bbox":[121,333,1034,0]}
+{"kind":"shape","id":"sh/7u543yxg","slide":11,"bbox":[111,307,48,48]}
+{"kind":"textbox","id":"sh/6tw3adwv","slide":11,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[111,322,48,17]}
+{"kind":"textbox","id":"sh/c3m5w7mx","slide":11,"text":"0–3 MONTHS","textPreview":"0–3 MONTHS","textChars":10,"textLines":1,"bbox":[56,390,264,20]}
+{"kind":"textbox","id":"sh/x4fmpc3i","slide":11,"text":"INTEGRATE","textPreview":"INTEGRATE","textChars":9,"textLines":1,"bbox":[56,429,264,28]}
+{"kind":"textbox","id":"sh/a14nux47","slide":11,"text":"Productionize the web MVP, instrument quality and define the permission model","textPreview":"Productionize the web MVP, instrument quality and define the permission model","textChars":77,"textLines":1,"bbox":[56,477,264,78]}
+{"kind":"shape","id":"sh/b2d4n2lc","slide":11,"bbox":[405,307,48,48]}
+{"kind":"textbox","id":"sh/ofm5s7m1","slide":11,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[405,322,48,17]}
+{"kind":"textbox","id":"sh/p0vmlc3m","slide":11,"text":"3–6 MONTHS","textPreview":"3–6 MONTHS","textChars":10,"textLines":1,"bbox":[350,390,264,20]}
+{"kind":"textbox","id":"sh/2d4nqx4v","slide":11,"text":"ANDROID PILOT","textPreview":"ANDROID PILOT","textChars":13,"textLines":1,"bbox":[350,429,264,28]}
+{"kind":"textbox","id":"sh/ned4j2lg","slide":11,"text":"Call screening, notifications and link checks with measured user consent","textPreview":"Call screening, notifications and link checks with measured user consent","textChars":72,"textLines":1,"bbox":[350,477,264,78]}
+{"kind":"shape","id":"sh/8b654rm5","slide":11,"bbox":[699,307,48,48]}
+{"kind":"textbox","id":"sh/9wz6xw3q","slide":11,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[699,322,48,17]}
+{"kind":"textbox","id":"sh/hsvmhwvu","slide":11,"text":"6–9 MONTHS","textPreview":"6–9 MONTHS","textChars":10,"textLines":1,"bbox":[644,390,264,20]}
+{"kind":"textbox","id":"sh/grm58re9","slide":11,"text":"EMAIL + iOS","textPreview":"EMAIL + iOS","textChars":11,"textLines":1,"bbox":[644,429,264,28]}
+{"kind":"textbox","id":"sh/vqt4fmdo","slide":11,"text":"Authorized Gmail connection and supported Apple extensions","textPreview":"Authorized Gmail connection and supported Apple extensions","textChars":58,"textLines":1,"bbox":[644,477,264,78]}
+{"kind":"shape","id":"sh/upkn6hwj","slide":11,"bbox":[993,307,48,48]}
+{"kind":"textbox","id":"sh/tobmdcvy","slide":11,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[993,322,48,17]}
+{"kind":"textbox","id":"sh/8n254red","slide":11,"text":"9–12 MONTHS","textPreview":"9–12 MONTHS","textChars":11,"textLines":1,"bbox":[938,390,264,20]}
+{"kind":"textbox","id":"sh/7mt4bmds","slide":11,"text":"PARTNER PILOTS","textPreview":"PARTNER PILOTS","textChars":14,"textLines":1,"bbox":[938,429,264,28]}
+{"kind":"textbox","id":"sh/6lkn2hw7","slide":11,"text":"Deploy with selected SMEs, financial and telecom partners","textPreview":"Deploy with selected SMEs, financial and telecom partners","textChars":57,"textLines":1,"bbox":[938,477,264,78]}
+{"kind":"shape","id":"sh/l0bm9cvm","slide":11,"bbox":[56,590,1146,49]}
+{"kind":"textbox","id":"sh/kz25g7e1","slide":11,"text":"Gates: detection quality • false-alert rate • task completion • permission trust • pilot retention","textPreview":"Gates: detection quality • false-alert rate • task completion • permission trust • pilot retention","textChars":98,"textLines":1,"bbox":[80,605,1098,22]}
+{"kind":"shape","id":"sh/a5gjadcz","slide":11,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/b6pkjitk","slide":11,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/wri1cnu5","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/r6t03a9g","slide":11,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/1g7o1u","slide":11,"text":"Proposed roadmap subject to technical validation, platform policy and available resources. Exact channel coverage cannot be assumed until tested on target operating-system versions and approved integrations."}
+{"kind":"slide","id":"sl/b3aehk","slide":12,"title":"Guard","textShapes":23}
+{"kind":"textbox","id":"sh/pgnihcvq","slide":12,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/4fuhoru5","slide":12,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/fql0b2do","slide":12,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/upczixw3","slide":12,"text":"TEAM + ASK","textPreview":"TEAM + ASK","textChars":10,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/hs3idcvu","slide":12,"text":"Help us move from checking to protecting","textPreview":"Help us move from checking to protecting","textChars":40,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"textbox","id":"sh/gruhk7u9","slide":12,"text":"BLOOMERS TEAM","textPreview":"BLOOMERS TEAM","textChars":13,"textLines":1,"bbox":[58,236,240,22]}
+{"kind":"shape","id":"sh/zm50n6ds","slide":12,"bbox":[58,272,590,241]}
+{"kind":"textbox","id":"sh/ylwju1c7","slide":12,"text":"Fuseini Saida Ayisha","textPreview":"Fuseini Saida Ayisha","textChars":20,"textLines":1,"bbox":[84,303,248,28]}
+{"kind":"textbox","id":"sh/obeh8na9","slide":12,"text":"Yusif Babamu Issah","textPreview":"Yusif Babamu Issah","textChars":18,"textLines":1,"bbox":[354,303,248,28]}
+{"kind":"textbox","id":"sh/9cny1sru","slide":12,"text":"Josephus Bawah","textPreview":"Josephus Bawah","textChars":14,"textLines":1,"bbox":[84,357,248,28]}
+{"kind":"textbox","id":"sh/m9cz6dsj","slide":12,"text":"Kelvin Ahorbo","textPreview":"Kelvin Ahorbo","textChars":13,"textLines":1,"bbox":[354,357,248,28]}
+{"kind":"textbox","id":"sh/nalgzi94","slide":12,"text":"Dennis Owusu Adarkwarh","textPreview":"Dennis Owusu Adarkwarh","textChars":22,"textLines":1,"bbox":[84,411,248,28]}
+{"kind":"shape","id":"sh/07uh4nad","slide":12,"bbox":[84,457,100,32]}
+{"kind":"textbox","id":"sh/183yxsry","slide":12,"text":"TO COMPLETE","textPreview":"TO COMPLETE","textChars":11,"textLines":1,"bbox":[84,465,100,16]}
+{"kind":"textbox","id":"sh/elcz2ds7","slide":12,"text":"Add each member's role and one relevant proof point before external circulation.","textPreview":"Add each member's role and one relevant proof point before external circulation.","textChars":80,"textLines":1,"bbox":[199,458,420,44]}
+{"kind":"textbox","id":"sh/fmlgvi9s","slide":12,"text":"WHAT UNLOCKS THE NEXT STAGE","textPreview":"WHAT UNLOCKS THE NEXT STAGE","textChars":27,"textLines":1,"bbox":[710,236,410,22]}
+{"kind":"shape","id":"sh/sjah03ah","slide":12,"bbox":[712,283,28,28]}
+{"kind":"textbox","id":"sh/dk3yt8rm","slide":12,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[712,291,28,13]}
+{"kind":"textbox","id":"sh/t0vex4jq","slide":12,"text":"Representative fraud data and validation partners","textPreview":"Representative fraud data and validation partners","textChars":49,"textLines":1,"bbox":[758,282,425,39]}
+{"kind":"shape","id":"sh/sf2x4z25","slide":12,"bbox":[712,347,28,28]}
+{"kind":"textbox","id":"sh/7etwvu1k","slide":12,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[712,355,28,13]}
+{"kind":"textbox","id":"sh/6dkf2pkz","slide":12,"text":"Android consumer and SME pilot organisations","textPreview":"Android consumer and SME pilot organisations","textChars":44,"textLines":1,"bbox":[758,346,425,39]}
+{"kind":"shape","id":"sh/5cbetkje","slide":12,"bbox":[712,411,28,28]}
+{"kind":"textbox","id":"sh/kb2x0f2t","slide":12,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[712,419,28,13]}
+{"kind":"textbox","id":"sh/jatwru1o","slide":12,"text":"Technical, regulatory and distribution mentorship","textPreview":"Technical, regulatory and distribution mentorship","textChars":49,"textLines":1,"bbox":[758,410,425,39]}
+{"kind":"shape","id":"sh/i9kfypk3","slide":12,"bbox":[712,475,28,28]}
+{"kind":"textbox","id":"sh/p8fy5ojy","slide":12,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[712,483,28,13]}
+{"kind":"textbox","id":"sh/476xcj2d","slide":12,"text":"Pre-seed capital: insert target + use of funds","textPreview":"Pre-seed capital: insert target + use of funds","textChars":46,"textLines":1,"bbox":[758,474,425,39]}
+{"kind":"shape","id":"sh/mdgbql0v","slide":12,"bbox":[58,560,1128,69]}
+{"kind":"textbox","id":"sh/nepczqhg","slide":12,"text":"Guard can stop a fraudulent interaction before it becomes a financial loss.","textPreview":"Guard can stop a fraudulent interaction before it becomes a financial loss.","textChars":75,"textLines":1,"bbox":[82,581,1080,30]}
+{"kind":"shape","id":"sh/8fytsvil","slide":12,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/9g7u1gz6","slide":12,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/ypgbm10j","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/7yxsnuhw","slide":12,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/b3aehk","slide":12,"text":"Team names are taken from the supplied investor deck. Roles, biographies, contact details, fundraising target and use-of-funds budget were not provided and remain explicit completion items."}
+{"kind":"slide","id":"sl/2bs02l","slide":13,"title":"Guard","textShapes":18}
+{"kind":"textbox","id":"sh/mx43m5kj","slide":13,"text":"Guard","textPreview":"Guard","textChars":5,"textLines":1,"bbox":[100,37,150,30]}
+{"kind":"shape","id":"sh/7yd4fq14","slide":13,"bbox":[54,98,66,5]}
+{"kind":"shape","id":"sh/kvmlkv2d","slide":13,"bbox":[120,98,92,5]}
+{"kind":"textbox","id":"sh/lwv2d0jy","slide":13,"text":"APPENDIX","textPreview":"APPENDIX","textChars":8,"textLines":1,"bbox":[54,116,420,20]}
+{"kind":"textbox","id":"sh/yt43ilk7","slide":13,"text":"Evidence, limits and investor-ready completion list","textPreview":"Evidence, limits and investor-ready completion list","textChars":51,"textLines":1,"bbox":[54,145,1150,62]}
+{"kind":"textbox","id":"sh/zudkbq1s","slide":13,"text":"PUBLIC EVIDENCE","textPreview":"PUBLIC EVIDENCE","textChars":15,"textLines":1,"bbox":[58,248,290,20]}
+{"kind":"textbox","id":"sh/4rqlwf2h","slide":13,"text":"BoG 2025 Fraud Report; CSA 2026 incident update; NCA June 2026 telecom statistics.","textPreview":"BoG 2025 Fraud Report; CSA 2026 incident update; NCA June 2026 telecom statistics.","textChars":82,"textLines":1,"bbox":[58,278,500,55]}
+{"kind":"textbox","id":"sh/5szmpkj2","slide":13,"text":"PRODUCT EVIDENCE","textPreview":"PRODUCT EVIDENCE","textChars":16,"textLines":1,"bbox":[58,351,290,20]}
+{"kind":"textbox","id":"sh/1sv6hw7e","slide":13,"text":"Working web UI and API, explainable assessment flow, authenticated user and admin workflows.","textPreview":"Working web UI and API, explainable assessment flow, authenticated user and admin workflows.","textChars":92,"textLines":1,"bbox":[58,381,500,55]}
+{"kind":"textbox","id":"sh/0rm5orqt","slide":13,"text":"PLATFORM EVIDENCE","textPreview":"PLATFORM EVIDENCE","textChars":17,"textLines":1,"bbox":[58,454,290,20]}
+{"kind":"textbox","id":"sh/fqdofmp8","slide":13,"text":"Official Android, Apple and Gmail documentation supports permissioned integrations—with different limits.","textPreview":"Official Android, Apple and Gmail documentation supports permissioned integrations—with different limits.","textChars":105,"textLines":1,"bbox":[58,484,500,55]}
+{"kind":"shape","id":"sh/ep4nmh8n","slide":13,"bbox":[625,236,575,355]}
+{"kind":"textbox","id":"sh/dob6dc7i","slide":13,"text":"COMPLETE BEFORE EXTERNAL CIRCULATION","textPreview":"COMPLETE BEFORE EXTERNAL CIRCULATION","textChars":36,"textLines":1,"bbox":[654,264,510,24]}
+{"kind":"shape","id":"sh/sn25k7qx","slide":13,"bbox":[654,309,20,20]}
+{"kind":"textbox","id":"sh/r2tob2pc","slide":13,"text":"Founder roles, bios and contact details","textPreview":"Founder roles, bios and contact details","textChars":39,"textLines":1,"bbox":[694,307,470,28]}
+{"kind":"shape","id":"sh/q1knix8r","slide":13,"bbox":[654,358,20,20]}
+{"kind":"textbox","id":"sh/xkf6pg7m","slide":13,"text":"Fundraising amount, runway and use of funds","textPreview":"Fundraising amount, runway and use of funds","textChars":43,"textLines":1,"bbox":[694,356,470,28]}
+{"kind":"shape","id":"sh/cj6pwbq1","slide":13,"bbox":[654,407,20,20]}
+{"kind":"textbox","id":"sh/wfyh8zi9","slide":13,"text":"Pilot metrics: users, accuracy, false alerts and retention","textPreview":"Pilot metrics: users, accuracy, false alerts and retention","textChars":58,"textLines":1,"bbox":[694,405,470,28]}
+{"kind":"shape","id":"sh/hg7ih4ju","slide":13,"bbox":[654,456,20,20]}
+{"kind":"textbox","id":"sh/udwz690j","slide":13,"text":"Named competitor validation","textPreview":"Named competitor validation","textChars":27,"textLines":1,"bbox":[694,454,470,28]}
+{"kind":"shape","id":"sh/vep0fe14","slide":13,"bbox":[654,505,20,20]}
+{"kind":"textbox","id":"sh/8beh4zid","slide":13,"text":"Bottom-up TAM / SAM / SOM and pricing evidence","textPreview":"Bottom-up TAM / SAM / SOM and pricing evidence","textChars":46,"textLines":1,"bbox":[694,503,470,28]}
+{"kind":"textbox","id":"sh/9cnid4jy","slide":13,"text":"This appendix is intended for diligence and can be hidden during a live pitch.","textPreview":"This appendix is intended for diligence and can be hidden during a live pitch.","textChars":78,"textLines":1,"bbox":[58,620,850,22]}
+{"kind":"shape","id":"sh/m9wz2pk7","slide":13,"bbox":[54,680,1172,0]}
+{"kind":"textbox","id":"sh/7a5gbu1s","slide":13,"text":"GUARD / BLOOMERS","textPreview":"GUARD / BLOOMERS","textChars":16,"textLines":1,"bbox":[54,688,260,15]}
+{"kind":"textbox","id":"sh/k7eh0f2h","slide":13,"text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1178,686,48,17]}
+{"kind":"image","id":"im/wnidc3et","slide":13,"name":"","alt":"Guard shield logo","bbox":[54,34,38,38]}
+{"kind":"notes","id":"nt/2bs02l","slide":13,"text":"Primary sources: Bank of Ghana Fraud Report 2025 https://www.bog.gov.gh/wp-content/uploads/2026/07/FRAUD-REPORT-2025.pdf; Cyber Security Authority 2026 incident snapshot https://csa.gov.gh/2026-national-cyber-security-awareness-month-launched-to-build-digital-trust.php; National Communications Authority June 2026 telecom statistics https://nca.org.gh/; Android CallScreeningService https://developer.android.com/reference/android/telecom/CallScreeningService; Android NotificationListenerService https://developer.android.com/reference/android/service/notification/NotificationListenerService; Apple IdentityLookup https://developer.apple.com/documentation/IdentityLookup; Gmail push notifications https://developers.google.com/workspace/gmail/api/guides/push. Internal evidence: current Guard workspace and the October 2026 project update represented in the supplied deck."}

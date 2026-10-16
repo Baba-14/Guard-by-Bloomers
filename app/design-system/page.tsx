@@ -11,14 +11,14 @@ import {
 } from 'lucide-react';
 
 const swatches = [
-  ['Void Plum', '#180A2E', 'Primary canvas'],
-  ['Signal Violet', '#6D22B7', 'Brand / active'],
-  ['Ultraviolet', 'rgba(152, 40, 229, 1)', 'Accent / glow'],
-  ['Safety Orange', '#FF7A18', 'Warning / CTA'],
-  ['Warm Gold', '#FFB52E', 'Highlight / attention'],
-  ['Lilac Mist', '#F0E9FF', 'Soft surface'],
-  ['Paper', '#FFFDFC', 'Primary surface'],
-  ['Ink', '#241539', 'Primary text'],
+  ['Void Plum', '#0c191d', 'Primary canvas'],
+  ['Signal Violet', '#00a8db', 'Brand / active'],
+  ['Ultraviolet', 'rgba(7,198,255, 1)', 'Accent / glow'],
+  ['Action Violet', '#00a8db', 'Primary emphasis / CTA'],
+  ['Soft Lilac', '#7fe3ff', 'Highlight / attention'],
+  ['Lilac Mist', '#e6f7fb', 'Soft surface'],
+  ['Paper', '#f8fafc', 'Primary surface'],
+  ['Ink', '#10242b', 'Primary text'],
 ];
 
 const typeScale = [

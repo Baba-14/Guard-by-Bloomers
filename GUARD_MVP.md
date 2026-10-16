@@ -2,13 +2,14 @@
 
 ## Outcome
 
-Guard helps a person pause before acting on a suspicious message or link. The
-MVP accepts the submission, evaluates independent warning signals, returns an
+Guard helps a person pause before acting on suspicious digital or payment
+activity. The MVP accepts seven evidence types, evaluates independent warning signals, returns an
 explainable risk assessment, and records the result for authorized review.
 
 ## Included now
 
-- Message and URL submission through the existing detection experience.
+- Message, screenshot text, URL, number, WhatsApp, payment and call submission.
+- Browser-side screenshot OCR; the original screenshot is not uploaded by checks.
 - Word-boundary-aware deterministic message rules.
 - Local URL-shape checks for shortened, insecure, encoded, IP-based, and
   misleading hosted links.
@@ -19,6 +20,7 @@ explainable risk assessment, and records the result for authorized review.
 - Authenticated user history for owned checks.
 - Anonymous or authenticated fraud-report intake and analyst status review.
 - Moderated domain-reputation evidence from the Guard database.
+- Verified URL, phone and WhatsApp reputation evidence from the Guard database.
 - An analyst-only API for reviewing recent checks.
 - Regression tests for core scoring and false-positive behavior.
 
@@ -29,7 +31,7 @@ explainable risk assessment, and records the result for authorized review.
 3. A single external AI provider cannot independently produce `High Risk`.
 4. Every displayed warning maps to stored evidence and a source.
 5. Lower-risk wording never claims that a submission is safe.
-6. Message and URL examples in the test dataset pass their expected bands.
+6. Examples for every enabled mode pass their expected bands.
 
 ## Next
 
@@ -37,10 +39,9 @@ explainable risk assessment, and records the result for authorized review.
 - Connect the admin UI to `GET /v1/admin/checks`.
 - Connect the report and history screens to the implemented APIs.
 - Add richer known-pattern matching after the evaluation schema is approved.
-- Add screenshot analysis after the message/link MVP has been evaluated.
+- Evaluate screenshot OCR quality before including it in a public demo.
 
 ## Later
 
-Phone and WhatsApp reputation, payment and call workflows, browser extensions,
-automatic monitoring, and third-party messaging integrations remain outside the
-MVP until message and link performance is measured.
+Browser extensions, automatic monitoring, evidence storage, and third-party
+messaging integrations remain outside the MVP until detection performance is measured.

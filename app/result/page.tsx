@@ -3,6 +3,7 @@ import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, CalendarDays, ExternalLink, Link2, ShieldAlert, TriangleAlert } from 'lucide-react';
 import { Header, Footer } from '@/components/Header';
+import { authenticatedHeaders, responseJson } from '@/lib/client-api';
 
 type Assessment = { level: string; reason: string; signals: string[]; action: string; pattern?: string };
 
@@ -10,10 +11,15 @@ function ResultContent() {
   const [assessment, setAssessment] = useState<Assessment | null>(null);
   const [input, setInput] = useState('');
   const [kind, setKind] = useState('link');
+  const [error, setError] = useState('');
   useEffect(() => {
     const params = new URLSearchParams(window.location.search); const query = params.get('input') || ''; const queryKind = params.get('kind') || 'link'; setInput(query); setKind(queryKind);
-    fetch('/api/analyse', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ kind: queryKind, input: query }) }).then(r => r.json()).then(setAssessment);
+    if(!query){setError('No content was provided for this check.');return}
+    fetch('/api/analyse', { method: 'POST', headers:authenticatedHeaders(), body: JSON.stringify({ kind: queryKind, input: query }) })
+      .then(response=>responseJson<Assessment>(response)).then(setAssessment)
+      .catch(reason=>setError(reason instanceof Error?reason.message:'Guard could not complete the check.'));
   }, []);
+  if (error) return <main className="result-page result-loading"><div><div className="eyebrow">Check unavailable</div><h1>Guard could not complete this check.</h1><p>{error}</p><Link href="/detect" className="btn btn-primary">Try another check</Link></div></main>;
   if (!assessment) return <main className="result-page result-loading"><div><div className="eyebrow">Guard is checking</div><h1>Reviewing the signals…</h1><p>We’re checking the submitted information and preparing an explanation.</p></div></main>;
   const high = assessment.level === 'High Risk'; const caution = assessment.level === 'Caution';
   const reportHref=`/report?kind=${encodeURIComponent(kind)}&input=${encodeURIComponent(input)}`;

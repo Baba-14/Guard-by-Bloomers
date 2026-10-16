@@ -10,9 +10,12 @@ cp .env.example .env.local
 npm run dev
 ```
 
+`npm run dev` starts both the Next.js website and the FastAPI analysis service.
+The website runs on port 3000 and the API runs on port 8000.
+
 Development uses `.next`; production builds use `.next-build`, so running a build will not invalidate an active development server. Do not run two `next dev` processes against the same port.
 
-The core check flow works without Supabase credentials using the explainable MVP analysis route at `POST /api/analyse`. The Supabase migration in `supabase/migrations/001_guard_schema.sql` remains available for a Supabase deployment. Local development uses the FastAPI-owned authentication and PostgreSQL migration described below.
+The core check flow works without database credentials using the explainable MVP analysis route at `POST /api/analyse`. Production uses a managed Supabase PostgreSQL database with the FastAPI-owned authentication schema in `backend/migrations`; local development may use any local PostgreSQL instance.
 
 The analysis route also works without Jev or PostgreSQL. In that mode it returns
 an explainable local-rules result and clearly records that Jev was not used.
@@ -29,8 +32,8 @@ Set the Vercel project's framework to **Services**, configure the backend's
 `DATABASE_URL`, `JWT_SECRET`, and other secrets in the project environment, and
 deploy normally. Do not create `BACKEND_URL` yourself; Vercel injects it from
 the service binding. Run all services locally with `vercel dev`. When using
-`npm run dev` instead, `POST /api/analyse` falls back to a FastAPI server at
-`http://127.0.0.1:8000`.
+`npm run dev`, the same command starts the FastAPI server at
+`http://127.0.0.1:8000` for `POST /api/analyse`.
 
 ## Local FastAPI and PostgreSQL backend
 
@@ -42,11 +45,35 @@ createdb guard                         # skip when the database already exists
 psql -d guard -f backend/migrations/001_guard_postgres.sql
 psql -d guard -f backend/migrations/002_analysis_signals.sql
 psql -d guard -f backend/migrations/002_guard_intelligence.sql
+psql -d guard -f backend/migrations/003_extended_detection_signals.sql
 python3 -m venv backend/.venv
 backend/.venv/bin/pip install -r backend/requirements.txt
 cp backend/.env.example backend/.env  # keep the real file private
 backend/.venv/bin/uvicorn backend.app.main:app --reload
 ```
+
+You can also apply every outstanding migration with:
+
+```bash
+backend/.venv/bin/python backend/scripts/migrate.py
+```
+
+## Production database: managed Supabase Postgres
+
+Use a Supabase project as the hosted PostgreSQL database for the deployed MVP.
+Supabase is PostgreSQL, so the FastAPI application can keep its existing
+SQLAlchemy models and Guard-owned authentication. Set the backend service's
+`DATABASE_URL` to the Supabase **session pooler** connection string, set a unique
+production `JWT_SECRET`, and run `backend/scripts/migrate.py` against that URL
+once before the first deployment.
+
+Git and GitHub contain the schema migrations, not the database or its records.
+Pushing this repository therefore never uploads a local database. Local and
+production databases are separate environments; migrations reproduce the
+schema, while production records stay inside the Supabase project. Do not use
+both the `supabase/migrations` schema and the `backend/migrations` schema for the
+same database: this deployment uses `backend/migrations` because FastAPI owns
+authentication.
 
 To enable the optional Jev decision signal and database persistence, add these
 settings to `backend/.env`:
@@ -74,14 +101,22 @@ routes are `POST /v1/auth/register`, `POST /v1/auth/login`, and the protected
 `GET /v1/auth/me`. Login uses OAuth2 form fields: the email is sent as `username`
 and the password as `password`.
 
-The completed MVP API also exposes:
+The MVP API also exposes:
 
-- `POST /v1/analyse` for public message and URL analysis, with optional bearer
+- `POST /v1/analyse` for all seven public analysis modes, with optional bearer
   authentication to attach a stored check to a user.
 - `GET /v1/history` for a signed-in user's checks.
 - `POST /v1/reports` for anonymous or signed-in report intake.
 - `GET /v1/admin/checks` and `GET/PATCH /v1/admin/reports` for analyst review.
 - `GET /health/live` for liveness and `GET /health` for database readiness.
+
+All seven public check modes use the same result contract. Message, payment,
+call, and OCR-extracted screenshot text use the explainable text engine; links
+also receive URL-shape and moderated reputation checks; phone and WhatsApp
+numbers use verified reputation records and remain inconclusive when unknown.
+Screenshot OCR runs in the browser, so the original image is not uploaded by
+the check flow. The public endpoints include a per-instance rate-limit baseline;
+use a shared edge or Redis limiter before scaling to multiple regions.
 
 See `docs/backend-architecture.md` for the complete architecture, authentication
 flow, database design, frontend integration examples, and production checklist.

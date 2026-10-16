@@ -4,7 +4,7 @@
 
 Each evaluation example should have:
 
-- `submission_type`: `message` or `link`
+- `submission_type`: `message`, `screenshot`, `link`, `number`, `whatsapp`, `payment`, or `call`
 - `language`: for example English, Twi, Ga, Ewe, or code-switched
 - `expected_level`: lower risk, caution, or high risk
 - `fraud_category`: credential theft, advance fee, impersonation, investment,

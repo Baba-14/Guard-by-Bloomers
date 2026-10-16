@@ -22,9 +22,11 @@ from .config import get_settings
 from .database import get_db
 from .intelligence_routes import router as intelligence_router
 from .models import AuditLog, Check, FraudReport, Profile, ReportStatus, User, UserRole
+from .rate_limit import PublicRateLimitMiddleware
 
 app = FastAPI(title="Guard Analysis API", version="0.2.0")
 logger = logging.getLogger(__name__)
+app.add_middleware(PublicRateLimitMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(get_settings().cors_origins),

@@ -9,17 +9,17 @@ to the FastAPI backend.
 ```text
 Browser
   |
-  | HTTP/JSON and Bearer access tokens
+  | HTTP/JSON and HTTP-only session cookie
   v
 Next.js frontend (localhost:3000)
   |
   | HTTP API requests
   v
-FastAPI backend (localhost:8000)
+FastAPI backend (local or deployed service)
   |
   | SQLAlchemy + Psycopg
   v
-Local PostgreSQL: guard
+PostgreSQL (local development or managed Supabase in production)
 ```
 
 The browser-facing application is Next.js. FastAPI owns backend validation,
@@ -32,14 +32,14 @@ Infrastructure and database design do not decide whether something is risky.
 Guard's analysis pipeline makes that boundary explicit:
 
 ```text
-Message or URL
+Message, screenshot text, link, number, WhatsApp, payment, or call
       |
       v
 Validation and normalization
       |
       +------------------+------------------+------------------+
       v                  v                  v                  v
-Message rules       URL-shape checks   Guard reputation   Jev typed questions
+Behavior rules      URL-shape checks   Guard reputation   Jev typed questions
       |                  |                  |                  |
       +------------------+------------------+------------------+
                          v
@@ -59,7 +59,7 @@ The modules live under `backend/app/analysis/`:
 
 - `rules.py`: deterministic, word-boundary-aware message signals.
 - `urls.py`: local URL structure and deception signals.
-- `knowledge.py`: moderated Guard domain-reputation evidence.
+- `knowledge.py`: verified Guard URL, domain, phone, and WhatsApp reputation evidence.
 - `jev.py`: timeout-bounded Jev adapter and typed questions.
 - `engine.py`: Guard-owned score fusion and output language.
 - `persistence.py`: optional check, result, and evidence storage.
@@ -93,7 +93,8 @@ PostgreSQL is the database. It was chosen instead of SQLite because Guard needs:
 - Enums for roles, risk levels, and report statuses.
 - Reliable reporting and aggregation as fraud data grows.
 
-The local database is named `guard`.
+The default local database is named `guard`; production uses a managed
+Supabase PostgreSQL project through its session pooler.
 
 ### SQLAlchemy
 
@@ -159,18 +160,18 @@ FastAPI verifies the signature and expiry, extracts the user ID, and loads the
 current user from PostgreSQL. Disabled or deleted users are rejected even if an
 older token still exists.
 
-### Alembic status
+### Migration status
 
-Alembic was discussed as the long-term migration tool, but it has **not been
-configured yet**. The schema currently uses a plain SQL migration:
+Alembic has **not been configured yet**. The schema currently uses ordered SQL
+migrations under:
 
 ```text
-backend/migrations/001_guard_postgres.sql
+backend/migrations/*.sql
 ```
 
-That migration has already been applied to the local `guard` database. Alembic
-should be introduced before the project starts accumulating many incremental
-schema changes. Until then, the SQL file is the local schema source of truth.
+`backend/scripts/migrate.py` records applied filenames in
+`guard_schema_migrations` and can target local PostgreSQL or Supabase. Alembic
+should be introduced before migration branching becomes frequent.
 
 ### Uvicorn
 
@@ -182,9 +183,8 @@ backend/.venv/bin/uvicorn backend.app.main:app --reload
 
 ## 3. Database architecture
 
-The Supabase schema was preserved at
-`supabase/migrations/001_guard_schema.sql`. A local PostgreSQL version was
-created at `backend/migrations/001_guard_postgres.sql`.
+The production schema source of truth is `backend/migrations`. It works against
+both local PostgreSQL and a managed Supabase PostgreSQL database.
 
 The important translation is:
 
@@ -194,8 +194,8 @@ Supabase auth.uid() / RLS  -> FastAPI authentication and authorization
 uuid_generate_v4()         -> gen_random_uuid()
 ```
 
-The original Supabase migration was not overwritten, so a future Supabase
-deployment remains possible.
+The older `supabase/migrations` tree represents a Supabase-Auth/RLS alternative
+and must not be applied to the same database as `backend/migrations`.
 
 The additive Guard Intelligence schema is in `backend/migrations/002_guard_intelligence.sql`
 and `supabase/migrations/002_guard_intelligence.sql`. It adds provenance-aware
@@ -207,7 +207,7 @@ existing `fraud_reports`, `checks`, `fraud_categories`, `phone_entities`, and
 Private analysis and data contribution are intentionally separate:
 
 ```text
-POST /v1/analyse -> fused risk result, never persisted
+POST /v1/analyse -> fused risk result -> optional hash/result persistence
 POST /v1/contributions -> consented report -> de-identification -> pending review
 pending review -> analyst decision -> verified dataset
 verified dataset -> explicit dataset version/split -> offline evaluation/training
@@ -317,7 +317,8 @@ FastAPI
 ### Protected requests
 
 ```text
-Frontend sends Authorization: Bearer <token>
+Browser sends the HTTP-only Guard session cookie to the Next.js API route
+  -> Next.js forwards Authorization: Bearer <token> to FastAPI
   -> FastAPI verifies JWT signature and expiry
   -> FastAPI loads the current user from PostgreSQL
   -> inactive or missing users receive 401
@@ -402,36 +403,29 @@ export async function getCurrentUser(accessToken: string) {
 }
 ```
 
-### Step 3: replace demo login
+### Step 3: production login
 
-The current login page compares credentials against hard-coded demo accounts.
-Replace that comparison with `login(email, password)`.
-
-For the first frontend integration, the returned token can be placed in
-`sessionStorage`:
+The login page calls the same-origin Next.js authentication route. That route
+exchanges credentials with FastAPI and stores the JWT in an HTTP-only, secure,
+same-site cookie. Browser JavaScript never receives the token:
 
 ```ts
-const result = await login(email, password);
-sessionStorage.setItem('guard-access-token', result.access_token);
-sessionStorage.setItem('guard-user', JSON.stringify(result.user));
+const result = await login(email, password); // cookie is set by the server route
 router.push(result.user.role === 'user' ? '/dashboard' : '/admin');
 ```
 
-This matches the current bearer-token backend and is acceptable for local MVP
-development. For production, an HTTP-only, secure, same-site cookie managed by
-a server route is preferable because browser JavaScript cannot read it, which
-reduces token theft through cross-site scripting.
+Demo accounts are available only when `NEXT_PUBLIC_ENABLE_DEMO_AUTH=true`; keep
+that variable false or unset in production.
 
 ### Step 4: connect registration
 
-Convert the registration page to a client component with controlled name,
-email, and password inputs. Call `register(...)`, display validation/API errors,
-then either send the user to login or log them in immediately.
+The registration page uses controlled inputs, displays validation/API errors,
+logs the new user in, and redirects to the dashboard.
 
 ### Step 5: protect dashboard requests
 
-When the dashboard loads, read the token and call `/api/auth/me`. If the token is
-missing, expired, or invalid, clear the session and redirect to `/login`.
+When the dashboard loads, call `/api/auth/me`. If the cookie is missing, expired,
+or invalid, redirect to `/login`.
 
 Frontend redirects improve the experience, but they are not security controls.
 Every sensitive FastAPI endpoint must still validate the JWT and enforce roles.
