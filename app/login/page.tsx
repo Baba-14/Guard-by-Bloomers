@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { LayoutDashboard, ShieldCheck, UserRound } from 'lucide-react';
 import { Header, Footer } from '@/components/Header';
+import { demoAuthEnabled } from '@/lib/demo-auth';
 
 type DemoRole = 'admin' | 'user';
 
@@ -19,8 +20,6 @@ export default function Login() {
   const [password,setPassword] = useState('');
   const [error,setError] = useState('');
   const [loading,setLoading] = useState(false);
-  const demoEnabled = process.env.NEXT_PUBLIC_ENABLE_DEMO_AUTH === 'true';
-
   const signIn = (role:DemoRole) => {
     sessionStorage.setItem('guard-demo-auth',role);
     router.push(accounts[role].destination);
@@ -29,7 +28,7 @@ export default function Login() {
   const submit = async (event:React.FormEvent) => {
     event.preventDefault();
     const cleanEmail = email.trim().toLowerCase();
-    const role = demoEnabled ? (Object.keys(accounts) as DemoRole[]).find(key=>accounts[key].email===cleanEmail&&accounts[key].password===password) : undefined;
+    const role = demoAuthEnabled ? (Object.keys(accounts) as DemoRole[]).find(key=>accounts[key].email===cleanEmail&&accounts[key].password===password) : undefined;
     if (role) { signIn(role); return; }
     setLoading(true); setError('');
     try {
@@ -66,7 +65,7 @@ export default function Login() {
           {error&&<p role="alert" style={{color:'#b14d46',fontSize:13,lineHeight:1.5,marginTop:14}}>{error}</p>}
           <button type="submit" className="btn btn-primary" disabled={loading} style={{marginTop:22,width:'100%'}}>{loading?'Signing in…':'Sign in'} <ShieldCheck size={16}/></button>
 
-          {demoEnabled&&<div style={{marginTop:24,paddingTop:20,borderTop:'1px solid var(--line)'}}>
+          {demoAuthEnabled&&<div style={{marginTop:24,paddingTop:20,borderTop:'1px solid var(--line)'}}>
             <strong style={{display:'block',fontSize:13,color:'var(--navy)',marginBottom:10}}>Demo accounts</strong>
             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
               <button type="button" className="btn btn-outline" style={{borderRadius:10,padding:'13px 12px'}} onClick={()=>chooseAccount('user')}><UserRound size={16}/>User account</button>

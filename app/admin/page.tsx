@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './admin.css';
 import IntelligenceWorkspace from '@/components/admin/IntelligenceWorkspace';
+import { demoAuthEnabled } from '@/lib/demo-auth';
 import {
   Activity, BarChart3, Bell, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight,
   CircleAlert, ClipboardList, Database, FileWarning, Globe2, LayoutDashboard, Link2,
@@ -158,7 +159,7 @@ function SettingsView() { const [saved,setSaved]=useState(false); const [values,
 
 export default function AdminPage(){
   const router=useRouter(); const [accessChecked,setAccessChecked]=useState(false); const [active,setActive]=useState<NavLabel>('Overview'); const [collapsed,setCollapsed]=useState(false); const [mobile,setMobile]=useState(false); const [query,setQuery]=useState(''); const [period,setPeriod]=useState('Last 24 hours'); const [filters,setFilters]=useState(false); const [modal,setModal]=useState(false);
-  useEffect(()=>{const demo=process.env.NEXT_PUBLIC_ENABLE_DEMO_AUTH==='true'&&sessionStorage.getItem('guard-demo-auth')==='admin';if(demo){setAccessChecked(true);return}fetch('/api/auth/me').then(async response=>{if(!response.ok)throw new Error();const user=await response.json();if(!['super_admin','fraud_analyst'].includes(user.role))throw new Error();setAccessChecked(true)}).catch(()=>router.replace('/login'))},[router]);
+  useEffect(()=>{const demo=demoAuthEnabled&&sessionStorage.getItem('guard-demo-auth')==='admin';if(demo){setAccessChecked(true);return}fetch('/api/auth/me').then(async response=>{if(!response.ok)throw new Error();const user=await response.json();if(!['super_admin','fraud_analyst'].includes(user.role))throw new Error();setAccessChecked(true)}).catch(()=>router.replace('/login'))},[router]);
   if(!accessChecked)return <main className="page-shell"><div className="container"><p>Checking administrator access…</p></div></main>;
   const current=active==='Overview'?{eyebrow:'Live intelligence',description:'Monitor fraud signals, emerging patterns and review activity across Guard.',action:'Create alert'}:active==='Settings'?{eyebrow:'Workspace administration',description:'Configure organisation preferences, security and connected services.',action:'Save changes'}:tabs[active];
   const select=(label:NavLabel)=>{setActive(label);setMobile(false);setQuery('')};

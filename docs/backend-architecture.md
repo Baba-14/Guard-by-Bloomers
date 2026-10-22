@@ -414,8 +414,8 @@ const result = await login(email, password); // cookie is set by the server rout
 router.push(result.user.role === 'user' ? '/dashboard' : '/admin');
 ```
 
-Demo accounts are available only when `NEXT_PUBLIC_ENABLE_DEMO_AUTH=true`; keep
-that variable false or unset in production.
+Demo accounts default to enabled in development and can be controlled with
+`NEXT_PUBLIC_ENABLE_DEMO_AUTH`. Keep that variable false or unset in production.
 
 ### Step 4: connect registration
 

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import { demoAuthEnabled } from '@/lib/demo-auth';
 
 export function Header({ overlay = false }: { overlay?: boolean }) {
   const [hidden, setHidden] = useState(false);
@@ -11,7 +12,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const [role, setRole] = useState<'admin' | 'user' | null>(null);
   const previousY = useRef(0);
   useEffect(() => {
-    const demoRole = process.env.NEXT_PUBLIC_ENABLE_DEMO_AUTH === 'true' ? sessionStorage.getItem('guard-demo-auth') : null;
+    const demoRole = demoAuthEnabled ? sessionStorage.getItem('guard-demo-auth') : null;
     if (demoRole === 'admin' || demoRole === 'user') setRole(demoRole);
     else fetch('/api/auth/me').then(async response=>{
       if(!response.ok)return;

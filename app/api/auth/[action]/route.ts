@@ -20,29 +20,49 @@ async function proxy(request: Request, action: string) {
   if (contentType) headers.set('content-type', contentType);
   if (authorization) headers.set('authorization', authorization);
 
-  const response = await fetch(backendEndpoint(`v1/auth/${action}`), {
-    method: request.method,
-    headers,
-    body: request.method === 'GET' ? undefined : await request.arrayBuffer(),
-    cache: 'no-store',
-  });
+  let response: Response;
+  try {
+    response = await fetch(backendEndpoint(`v1/auth/${action}`), {
+      method: request.method,
+      headers,
+      body: request.method === 'GET' ? undefined : await request.arrayBuffer(),
+      cache: 'no-store',
+      signal: AbortSignal.timeout(10000),
+    });
+  } catch {
+    return NextResponse.json(
+      { detail: 'The authentication service is temporarily unavailable. Please try again.' },
+      { status: 503 },
+    );
+  }
+
+  const responseText = await response.text();
+  let body: Record<string, unknown>;
+  try {
+    body = responseText ? JSON.parse(responseText) : {};
+  } catch {
+    body = {};
+  }
+
+  if (!responseText || Object.keys(body).length === 0) {
+    return NextResponse.json(
+      { detail: 'The authentication service returned an unexpected response. Please try again.' },
+      { status: response.ok ? 502 : response.status >= 500 ? 502 : response.status },
+    );
+  }
 
   if (action === 'login') {
-    const body = await response.json();
     const { access_token: accessToken, ...safeBody } = body;
     const result = NextResponse.json(safeBody, { status:response.status });
-    if (response.ok && accessToken) {
+    if (response.ok && typeof accessToken === 'string') {
       result.cookies.set(SESSION_COOKIE, accessToken, {
         httpOnly:true, sameSite:'lax', secure:process.env.NODE_ENV==='production',
-        path:'/', maxAge:body.expires_in,
+        path:'/', maxAge:typeof body.expires_in === 'number' ? body.expires_in : undefined,
       });
     }
     return result;
   }
-  return new NextResponse(response.body, {
-    status: response.status,
-    headers: { 'content-type': response.headers.get('content-type') ?? 'application/json' },
-  });
+  return NextResponse.json(body, { status:response.status });
 }
 
 type Context = { params: Promise<{ action: string }> };

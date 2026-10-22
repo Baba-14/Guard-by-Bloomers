@@ -1,0 +1,140 @@
+{"kind":"deck","id":"pr/hflpy2","name":"Deck"}
+{"kind":"layout","layoutId":"2654d8b5-1256-4b7f-805b-b1d1a5fe71d6","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"b3c3e08e-e6db-49b2-bfd4-de75e76718aa","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/kaes2b","slide":1,"title":"How Guard works","textShapes":20}
+{"kind":"textbox","id":"sh/idkj2l87","slide":1,"text":"How Guard works","textPreview":"How Guard works","textChars":15,"textLines":1,"bbox":[64,44,900,56]}
+{"kind":"textbox","id":"sh/5gv2d07y","slide":1,"text":"A private check produces an explainable result. Only intentional reports enter the learning pipeline.","textPreview":"A private check produces an explainable result. Only intentional reports enter the learning pipeline.","textChars":101,"textLines":1,"bbox":[66,100,930,46]}
+{"kind":"textbox","id":"sh/4fm14vqd","slide":1,"text":"GUARD  01","textPreview":"GUARD  01","textChars":9,"textLines":1,"bbox":[1055,50,160,24]}
+{"kind":"shape","id":"sh/ridkfap4","slide":1,"bbox":[86,178,0,394]}
+{"kind":"textbox","id":"sh/6h4j658j","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[65,158,42,42]}
+{"kind":"textbox","id":"sh/tkv2h07u","slide":1,"text":"Submit","textPreview":"Submit","textChars":6,"textLines":1,"bbox":[128,160,155,28]}
+{"kind":"textbox","id":"sh/sjm18vqp","slide":1,"text":"Message, link, number, screenshot, call or payment request","textPreview":"Message, link, number, screenshot, call or payment request","textChars":58,"textLines":1,"bbox":[285,157,405,55]}
+{"kind":"textbox","id":"sh/f6xkjap0","slide":1,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[65,249,42,42]}
+{"kind":"textbox","id":"sh/e54ja58f","slide":1,"text":"Extract","textPreview":"Extract","textChars":7,"textLines":1,"bbox":[128,251,155,28]}
+{"kind":"textbox","id":"sh/k3ulsrax","slide":1,"text":"Guard detects credential requests, urgency, impersonation and suspicious URLs","textPreview":"Guard detects credential requests, urgency, impersonation and suspicious URLs","textChars":77,"textLines":1,"bbox":[285,248,405,55]}
+{"kind":"textbox","id":"sh/l43m1wbi","slide":1,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[65,340,42,42]}
+{"kind":"textbox","id":"sh/y1s3q1sr","slide":1,"text":"Corroborate","textPreview":"Corroborate","textChars":11,"textLines":1,"bbox":[128,342,155,28]}
+{"kind":"textbox","id":"sh/z214z6tc","slide":1,"text":"Rules and moderated Ghana intelligence strengthen or challenge the signal","textPreview":"Rules and moderated Ghana intelligence strengthen or challenge the signal","textChars":73,"textLines":1,"bbox":[285,339,405,55]}
+{"kind":"textbox","id":"sh/8ru5wbat","slide":1,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[65,431,42,42]}
+{"kind":"textbox","id":"sh/9s3m5gre","slide":1,"text":"Explain","textPreview":"Explain","textChars":7,"textLines":1,"bbox":[128,433,155,28]}
+{"kind":"textbox","id":"sh/m5c3u1sn","slide":1,"text":"The user receives a risk score, likely pattern and safer next action","textPreview":"The user receives a risk score, likely pattern and safer next action","textChars":68,"textLines":1,"bbox":[285,430,405,55]}
+{"kind":"textbox","id":"sh/76l43698","slide":1,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[65,522,42,42]}
+{"kind":"textbox","id":"sh/wve50ba5","slide":1,"text":"Improve","textPreview":"Improve","textChars":7,"textLines":1,"bbox":[128,524,155,28]}
+{"kind":"textbox","id":"sh/hwnm9gra","slide":1,"text":"Opt-in reports enter analyst review before they can influence verified intelligence","textPreview":"Opt-in reports enter analyst review before they can influence verified intelligence","textChars":83,"textLines":1,"bbox":[285,521,405,55]}
+{"kind":"textbox","id":"sh/4balkb29","slide":1,"text":"PRIVATE BY DEFAULT","textPreview":"PRIVATE BY DEFAULT","textChars":18,"textLines":1,"bbox":[760,600,210,26]}
+{"kind":"textbox","id":"sh/3q14r61o","slide":1,"text":"Checks do not become training data unless the user reports them and consents.","textPreview":"Checks do not become training data unless the user reports them and consents.","textChars":77,"textLines":1,"bbox":[760,628,430,40]}
+{"kind":"image","id":"im/ep4japcf","slide":1,"name":"","geometry":"roundRect","alt":"Guard identifying a suspicious mobile payment message","bbox":[738,142,490,492]}
+{"kind":"notes","id":"nt/kaes2b","slide":1,"text":"Product flow based on the current Guard MVP. Private checks remain separate from contributions. Reports require consent and analyst review before promotion into verified intelligence."}
+{"kind":"slide","id":"sl/976xj9","slide":2,"title":"Business model","textShapes":20}
+{"kind":"textbox","id":"sh/bad07qps","slide":2,"text":"Business model","textPreview":"Business model","textChars":14,"textLines":1,"bbox":[64,44,900,56]}
+{"kind":"textbox","id":"sh/cvm10vqd","slide":2,"text":"Free access builds reach. Team subscriptions and enterprise integrations fund the intelligence layer.","textPreview":"Free access builds reach. Team subscriptions and enterprise integrations fund the intelligence layer.","textChars":101,"textLines":1,"bbox":[66,100,930,46]}
+{"kind":"textbox","id":"sh/dwvi907y","slide":2,"text":"GUARD  02","textPreview":"GUARD  02","textChars":9,"textLines":1,"bbox":[1055,50,160,24]}
+{"kind":"shape","id":"sh/25kzul8b","slide":2,"bbox":[66,176,500,108]}
+{"kind":"textbox","id":"sh/36t03qpw","slide":2,"text":"EVERYDAY USERS","textPreview":"EVERYDAY USERS","textChars":14,"textLines":1,"bbox":[90,194,260,20]}
+{"kind":"textbox","id":"sh/o721wvqh","slide":2,"text":"Free","textPreview":"Free","textChars":4,"textLines":1,"bbox":[90,219,250,34]}
+{"kind":"textbox","id":"sh/p8bi507m","slide":2,"text":"Five checks per day across messages, links and numbers. Guard Plus adds unlimited checks and saved history.","textPreview":"Five checks per day across messages, links and numbers. Guard Plus adds unlimited checks and saved history.","textChars":107,"textLines":1,"bbox":[346,196,120,76]}
+{"kind":"shape","id":"sh/m1oj6p8f","slide":2,"bbox":[66,300,620,128]}
+{"kind":"textbox","id":"sh/n2x0fap0","slide":2,"text":"SMEs AND SUPPORT TEAMS","textPreview":"SMEs AND SUPPORT TEAMS","textChars":22,"textLines":1,"bbox":[90,318,260,20]}
+{"kind":"textbox","id":"sh/fitgbe5g","slide":2,"text":"GHS 1,500 / month","textPreview":"GHS 1,500 / month","textChars":17,"textLines":1,"bbox":[90,343,250,34]}
+{"kind":"textbox","id":"sh/ehkfi9ov","slide":2,"text":"Protect includes 2,500 monthly checks, 15 team members, review queues and priority intelligence.","textPreview":"Protect includes 2,500 monthly checks, 15 team members, review queues and priority intelligence.","textChars":96,"textLines":1,"bbox":[346,320,240,96]}
+{"kind":"shape","id":"sh/1kbydon6","slide":2,"bbox":[66,444,740,148]}
+{"kind":"textbox","id":"sh/gj2xkj6l","slide":2,"text":"ENTERPRISE AND PARTNERS","textPreview":"ENTERPRISE AND PARTNERS","textChars":23,"textLines":1,"bbox":[90,462,260,20]}
+{"kind":"textbox","id":"sh/nmtgfe5c","slide":2,"text":"Custom contracts","textPreview":"Custom contracts","textChars":16,"textLines":1,"bbox":[90,487,250,34]}
+{"kind":"textbox","id":"sh/2lkfmtor","slide":2,"text":"API access, configurable rules, data integrations and dedicated intelligence support.","textPreview":"API access, configurable rules, data integrations and dedicated intelligence support.","textChars":85,"textLines":1,"bbox":[346,464,360,116]}
+{"kind":"textbox","id":"sh/povyhoni","slide":2,"text":"LAND","textPreview":"LAND","textChars":4,"textLines":1,"bbox":[850,205,100,22]}
+{"kind":"textbox","id":"sh/onmxoj6x","slide":2,"text":"Free consumer and team pilots","textPreview":"Free consumer and team pilots","textChars":29,"textLines":1,"bbox":[850,232,290,40]}
+{"kind":"shape","id":"sh/bqdgjy58","slide":2,"bbox":[850,287,320,0]}
+{"kind":"textbox","id":"sh/ap4fqto3","slide":2,"text":"EXPAND","textPreview":"EXPAND","textChars":6,"textLines":1,"bbox":[850,320,100,22]}
+{"kind":"textbox","id":"sh/m5ojix8b","slide":2,"text":"More checks, seats and shared workflows","textPreview":"More checks, seats and shared workflows","textChars":39,"textLines":1,"bbox":[850,347,300,50]}
+{"kind":"shape","id":"sh/76x0r2pg","slide":2,"bbox":[850,416,320,0]}
+{"kind":"textbox","id":"sh/87q1k7q1","slide":2,"text":"INTEGRATE","textPreview":"INTEGRATE","textChars":9,"textLines":1,"bbox":[850,448,120,22]}
+{"kind":"textbox","id":"sh/98zitc7m","slide":2,"text":"API, custom rules and partner data","textPreview":"API, custom rules and partner data","textChars":34,"textLines":1,"bbox":[850,475,300,50]}
+{"kind":"shape","id":"sh/yhojed8z","slide":2,"bbox":[850,554,310,48]}
+{"kind":"textbox","id":"sh/zix0nipk","slide":2,"text":"Recurring subscriptions + enterprise contracts","textPreview":"Recurring subscriptions + enterprise contracts","textChars":46,"textLines":1,"bbox":[866,568,278,22]}
+{"kind":"textbox","id":"sh/kj61gnq5","slide":2,"text":"Current product pricing. Enterprise pricing varies by volume and integration scope.","textPreview":"Current product pricing. Enterprise pricing varies by volume and integration scope.","textChars":83,"textLines":1,"bbox":[68,650,800,24]}
+{"kind":"notes","id":"nt/976xj9","slide":2,"text":"Pricing source: Guard product pages in app/pricing/page.tsx and app/business/page.tsx, reviewed 17 October 2026. Enterprise pricing remains custom and should be tested through pilots."}
+{"kind":"slide","id":"sl/tio9s1","slide":3,"title":"Traction","textShapes":18}
+{"kind":"textbox","id":"sh/zu94v654","slide":3,"text":"Traction","textPreview":"Traction","textChars":8,"textLines":1,"bbox":[64,44,900,56]}
+{"kind":"textbox","id":"sh/0vi5ob6p","slide":3,"text":"The MVP now connects research, user experience, risk logic and a governed data pipeline.","textPreview":"The MVP now connects research, user experience, risk logic and a governed data pipeline.","textChars":88,"textLines":1,"bbox":[66,100,930,46]}
+{"kind":"textbox","id":"sh/lwr6xwna","slide":3,"text":"GUARD  03","textPreview":"GUARD  03","textChars":9,"textLines":1,"bbox":[1055,50,160,24]}
+{"kind":"textbox","id":"sh/q5gnihon","slide":3,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[68,164,220,74]}
+{"kind":"textbox","id":"sh/b6p4rmps","slide":3,"text":"input types","textPreview":"input types","textChars":11,"textLines":1,"bbox":[68,232,220,26]}
+{"kind":"textbox","id":"sh/cry5kr6d","slide":3,"text":"Messages, links, numbers, WhatsApp, screenshots, calls and payments","textPreview":"Messages, links, numbers, WhatsApp, screenshots, calls and payments","textChars":67,"textLines":1,"bbox":[68,267,310,52]}
+{"kind":"textbox","id":"sh/ds7mtwny","slide":3,"text":"1,400","textPreview":"1,400","textChars":5,"textLines":1,"bbox":[458,164,220,74]}
+{"kind":"textbox","id":"sh/a1knulor","slide":3,"text":"records loaded","textPreview":"records loaded","textChars":14,"textLines":1,"bbox":[458,232,220,26]}
+{"kind":"textbox","id":"sh/v2to3q5c","slide":3,"text":"Fraud, legitimate and URL examples in the intelligence dataset","textPreview":"Fraud, legitimate and URL examples in the intelligence dataset","textChars":62,"textLines":1,"bbox":[458,267,310,52]}
+{"kind":"textbox","id":"sh/7qpovedc","slide":3,"text":"26","textPreview":"26","textChars":2,"textLines":1,"bbox":[848,164,220,74]}
+{"kind":"textbox","id":"sh/6pw7m9wr","slide":3,"text":"analysis tests","textPreview":"analysis tests","textChars":14,"textLines":1,"bbox":[848,232,220,26]}
+{"kind":"textbox","id":"sh/ts76xov2","slide":3,"text":"Core pattern, URL, database and safety checks passing","textPreview":"Core pattern, URL, database and safety checks passing","textChars":53,"textLines":1,"bbox":[848,267,310,52]}
+{"kind":"shape","id":"sh/srypojeh","slide":3,"bbox":[68,337,1144,0]}
+{"kind":"textbox","id":"sh/fupozyd8","slide":3,"text":"DISCOVERY AND DESIGN","textPreview":"DISCOVERY AND DESIGN","textChars":20,"textLines":1,"bbox":[68,374,330,22]}
+{"kind":"textbox","id":"sh/utg7qtwn","slide":3,"text":"User research and problem definition\nGhana fraud-pattern mapping\nPublic product flows and admin workspace\nResponsive screens and brand system","textPreview":"User research and problem definition | Ghana fraud-pattern mapping | Public product flows and admin workspace | Responsive screens and br...","textChars":141,"textLines":4,"bbox":[68,410,480,168]}
+{"kind":"textbox","id":"sh/hw7618ve","slide":3,"text":"WORKING SYSTEM","textPreview":"WORKING SYSTEM","textChars":14,"textLines":1,"bbox":[650,374,300,22]}
+{"kind":"textbox","id":"sh/gvyps3ut","slide":3,"text":"Explainable risk engine and URL analysis\nFastAPI backend with Supabase PostgreSQL\nAuthentication and role-based administration\nReporting, import and analyst review pipeline","textPreview":"Explainable risk engine and URL analysis | FastAPI backend with Supabase PostgreSQL | Authentication and role-based administration | Repo...","textChars":172,"textLines":4,"bbox":[650,410,500,168]}
+{"kind":"shape","id":"sh/3y9o3ydk","slide":3,"bbox":[68,615,1082,3]}
+{"kind":"textbox","id":"sh/2x07utcz","slide":3,"text":"Current stage","textPreview":"Current stage","textChars":13,"textLines":1,"bbox":[68,636,130,22]}
+{"kind":"textbox","id":"sh/ytkr2xw7","slide":3,"text":"Working MVP ready for controlled pilots and verified Ghana data partnerships","textPreview":"Working MVP ready for controlled pilots and verified Ghana data partnerships","textChars":76,"textLines":1,"bbox":[205,633,900,30]}
+{"kind":"notes","id":"nt/tio9s1","slide":3,"text":"Internal product status as of 17 October 2026. Metrics describe product implementation, test coverage and dataset records. They do not represent active users, revenue or validated commercial traction."}
+{"kind":"slide","id":"sl/ldcrbe","slide":4,"title":"Key milestones","textShapes":30}
+{"kind":"textbox","id":"sh/utcfu5wz","slide":4,"text":"Key milestones","textPreview":"Key milestones","textChars":14,"textLines":1,"bbox":[64,44,900,56]}
+{"kind":"textbox","id":"sh/hw3epkvq","slide":4,"text":"A proposed quarterly path from working MVP to repeatable deployment by the end of 2027.","textPreview":"A proposed quarterly path from working MVP to repeatable deployment by the end of 2027.","textChars":87,"textLines":1,"bbox":[66,100,930,46]}
+{"kind":"textbox","id":"sh/gvuxwfe5","slide":4,"text":"GUARD  04","textPreview":"GUARD  04","textChars":9,"textLines":1,"bbox":[1055,50,160,24]}
+{"kind":"shape","id":"sh/7q1wjqxo","slide":4,"bbox":[104,252,1050,0]}
+{"kind":"textbox","id":"sh/65svq5w3","slide":4,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[152,230,44,44]}
+{"kind":"textbox","id":"sh/ts3el0fe","slide":4,"text":"Q4 2026","textPreview":"Q4 2026","textChars":7,"textLines":1,"bbox":[84,175,180,26]}
+{"kind":"textbox","id":"sh/sraxsvet","slide":4,"text":"Foundation","textPreview":"Foundation","textChars":10,"textLines":1,"bbox":[84,298,190,50]}
+{"kind":"textbox","id":"sh/j21wfqxc","slide":4,"text":"User research complete\nWeb MVP, backend and database working","textPreview":"User research complete | Web MVP, backend and database working","textChars":60,"textLines":2,"bbox":[84,365,190,145]}
+{"kind":"shape","id":"sh/i1svmlwr","slide":4,"bbox":[84,533,92,28]}
+{"kind":"textbox","id":"sh/svy9wb2h","slide":4,"text":"COMPLETED","textPreview":"COMPLETED","textChars":9,"textLines":1,"bbox":[92,541,76,14]}
+{"kind":"textbox","id":"sh/tw7qpgj2","slide":4,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[382,230,44,44]}
+{"kind":"textbox","id":"sh/69wru1kb","slide":4,"text":"Q1 2027","textPreview":"Q1 2027","textChars":7,"textLines":1,"bbox":[314,175,180,26]}
+{"kind":"textbox","id":"sh/ra58n61w","slide":4,"text":"Pilot readiness","textPreview":"Pilot readiness","textChars":15,"textLines":1,"bbox":[314,298,190,50]}
+{"kind":"textbox","id":"sh/47e9sr25","slide":4,"text":"Review and benchmark the dataset\nOnboard controlled SME and support-team pilots","textPreview":"Review and benchmark the dataset | Onboard controlled SME and support-team pilots","textChars":79,"textLines":2,"bbox":[314,365,190,145]}
+{"kind":"shape","id":"sh/58nqlwjq","slide":4,"bbox":[314,533,84,28]}
+{"kind":"textbox","id":"sh/i5wrq1kf","slide":4,"text":"PROPOSED","textPreview":"PROPOSED","textChars":8,"textLines":1,"bbox":[322,541,68,14]}
+{"kind":"textbox","id":"sh/j658j61k","slide":4,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[612,230,44,44]}
+{"kind":"textbox","id":"sh/o3i94v2p","slide":4,"text":"Q2 2027","textPreview":"Q2 2027","textChars":7,"textLines":1,"bbox":[544,175,180,26]}
+{"kind":"textbox","id":"sh/p4rax0ju","slide":4,"text":"Multi-channel beta","textPreview":"Multi-channel beta","textChars":18,"textLines":1,"bbox":[544,298,190,50]}
+{"kind":"textbox","id":"sh/d83i1w72","slide":4,"text":"Release the mobile app beta\nTest browser extension and partner plugin","textPreview":"Release the mobile app beta | Test browser extension and partner plugin","textChars":69,"textLines":2,"bbox":[544,365,190,145]}
+{"kind":"shape","id":"sh/c7uhsr6h","slide":4,"bbox":[544,533,84,28]}
+{"kind":"textbox","id":"sh/b6l0zmpw","slide":4,"text":"PROPOSED","textPreview":"PROPOSED","textChars":8,"textLines":1,"bbox":[552,541,68,14]}
+{"kind":"textbox","id":"sh/q5czqhob","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[842,230,44,44]}
+{"kind":"textbox","id":"sh/pk3ixw7q","slide":4,"text":"Q3 2027","textPreview":"Q3 2027","textChars":7,"textLines":1,"bbox":[774,175,180,26]}
+{"kind":"textbox","id":"sh/ojahorq5","slide":4,"text":"Partnerships and data","textPreview":"Partnerships and data","textChars":21,"textLines":1,"bbox":[774,298,190,50]}
+{"kind":"textbox","id":"sh/3i10vmp0","slide":4,"text":"Secure cybersecurity and sector partners\nExpand verified Ghana fraud intelligence","textPreview":"Secure cybersecurity and sector partners | Expand verified Ghana fraud intelligence","textChars":81,"textLines":2,"bbox":[774,365,190,145]}
+{"kind":"shape","id":"sh/2hszmh8f","slide":4,"bbox":[774,533,84,28]}
+{"kind":"textbox","id":"sh/1gjytc7u","slide":4,"text":"PROPOSED","textPreview":"PROPOSED","textChars":8,"textLines":1,"bbox":[782,541,68,14]}
+{"kind":"textbox","id":"sh/gfahk7q9","slide":4,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1072,230,44,44]}
+{"kind":"textbox","id":"sh/6l8fud47","slide":4,"text":"Q4 2027","textPreview":"Q4 2027","textChars":7,"textLines":1,"bbox":[1004,175,180,26]}
+{"kind":"textbox","id":"sh/rmhw3i5s","slide":4,"text":"Scale readiness","textPreview":"Scale readiness","textChars":15,"textLines":1,"bbox":[1004,298,190,50]}
+{"kind":"textbox","id":"sh/snqxwnmx","slide":4,"text":"Run paid enterprise pilots\nHarden API, security and model monitoring","textPreview":"Run paid enterprise pilots | Harden API, security and model monitoring","textChars":68,"textLines":2,"bbox":[1004,365,190,145]}
+{"kind":"shape","id":"sh/tozepsni","slide":4,"bbox":[1004,533,84,28]}
+{"kind":"textbox","id":"sh/ihofqdov","slide":4,"text":"PROPOSED","textPreview":"PROPOSED","textChars":8,"textLines":1,"bbox":[1012,541,68,14]}
+{"kind":"shape","id":"sh/jixwzy5g","slide":4,"bbox":[68,611,1144,54]}
+{"kind":"textbox","id":"sh/4j6xs361","slide":4,"text":"2027 outcome","textPreview":"2027 outcome","textChars":12,"textLines":1,"bbox":[92,628,140,20]}
+{"kind":"textbox","id":"sh/5kfe18nm","slide":4,"text":"Verified local intelligence, multi-channel access and enterprise pilots ready for scale","textPreview":"Verified local intelligence, multi-channel access and enterprise pilots ready for scale","textChars":87,"textLines":1,"bbox":[245,624,900,28]}
+{"kind":"notes","id":"nt/ldcrbe","slide":4,"text":"Q4 2026 reflects completed internal work. All 2027 milestones are proposed planning assumptions and should be revised after pilot partner commitments, data-access agreements and resourcing decisions."}
+{"kind":"slide","id":"sl/mjoywt","slide":5,"title":"The ask","textShapes":16}
+{"kind":"shape","id":"sh/lw7qtg3m","slide":5,"bbox":[0,0,760,720]}
+{"kind":"textbox","id":"sh/kvypkb21","slide":5,"text":"The ask","textPreview":"The ask","textChars":7,"textLines":1,"bbox":[64,50,500,55]}
+{"kind":"textbox","id":"sh/7yp8v6lc","slide":5,"text":"Partners can help Guard move from a working MVP to controlled Ghana pilots.","textPreview":"Partners can help Guard move from a working MVP to controlled Ghana pilots.","textChars":75,"textLines":1,"bbox":[66,112,560,58]}
+{"kind":"textbox","id":"sh/6xgrmlkr","slide":5,"text":"GUARD  05","textPreview":"GUARD  05","textChars":9,"textLines":1,"bbox":[1070,50,145,24]}
+{"kind":"textbox","id":"sh/t0rqxg3i","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[68,198,40,24]}
+{"kind":"textbox","id":"sh/8zi9ob2x","slide":5,"text":"Cybersecurity partnerships","textPreview":"Cybersecurity partnerships","textChars":26,"textLines":1,"bbox":[120,196,410,30]}
+{"kind":"textbox","id":"sh/v298zqlo","slide":5,"text":"Fraud expertise, threat intelligence and independent evaluation from trusted security organisations.","textPreview":"Fraud expertise, threat intelligence and independent evaluation from trusted security organisations.","textChars":100,"textLines":1,"bbox":[120,230,500,58]}
+{"kind":"shape","id":"sh/u10rqlk3","slide":5,"bbox":[120,290,490,0]}
+{"kind":"textbox","id":"sh/wrm94bah","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[68,303,40,24]}
+{"kind":"textbox","id":"sh/xsvadgr2","slide":5,"text":"Privacy-safe Ghanaian data","textPreview":"Privacy-safe Ghanaian data","textChars":26,"textLines":1,"bbox":[120,301,410,30]}
+{"kind":"textbox","id":"sh/a54r2lsb","slide":5,"text":"De-identified messages, URLs, sender patterns and confirmed cases from telcos, banks, fintechs and agencies.","textPreview":"De-identified messages, URLs, sender patterns and confirmed cases from telcos, banks, fintechs and agencies.","textChars":108,"textLines":1,"bbox":[120,335,500,58]}
+{"kind":"shape","id":"sh/bqdsbqtw","slide":5,"bbox":[120,395,490,0]}
+{"kind":"textbox","id":"sh/kv698vad","slide":5,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[68,408,40,24]}
+{"kind":"textbox","id":"sh/lwfah0ry","slide":5,"text":"Cloud and model credits","textPreview":"Cloud and model credits","textChars":23,"textLines":1,"bbox":[120,406,410,30]}
+{"kind":"textbox","id":"sh/yt4r6ls7","slide":5,"text":"Compute, secure storage, model inference, monitoring and evaluation support for the pilot period.","textPreview":"Compute, secure storage, model inference, monitoring and evaluation support for the pilot period.","textChars":97,"textLines":1,"bbox":[120,440,500,58]}
+{"kind":"shape","id":"sh/judsfq9s","slide":5,"bbox":[120,500,490,0]}
+{"kind":"textbox","id":"sh/8z6tcvap","slide":5,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[68,513,40,24]}
+{"kind":"textbox","id":"sh/t0fal0ru","slide":5,"text":"Pilot distribution","textPreview":"Pilot distribution","textChars":18,"textLines":1,"bbox":[120,511,410,30]}
+{"kind":"textbox","id":"sh/1gbap0je","slide":5,"text":"Access to SMEs, merchants, support teams and public-sector services where Guard can test real workflows.","textPreview":"Access to SMEs, merchants, support teams and public-sector services where Guard can test real workflows.","textChars":104,"textLines":1,"bbox":[120,545,500,58]}
+{"kind":"shape","id":"sh/gf29wv2t","slide":5,"bbox":[66,628,558,48]}
+{"kind":"textbox","id":"sh/fetsnq18","slide":5,"text":"Priority: launch trusted pilots with verified Ghana fraud intelligence","textPreview":"Priority: launch trusted pilots with verified Ghana fraud intelligence","textChars":70,"textLines":1,"bbox":[82,642,526,21]}
+{"kind":"image","id":"im/vmtgrixw","slide":5,"name":"","alt":"Ghanaian cybersecurity team reviewing fraud intelligence","bbox":[665,0,615,720]}
+{"kind":"notes","id":"nt/mjoywt","slide":5,"text":"Partnership asks reflect the priorities supplied by the founder: cybersecurity partnerships, cloud or model credits, pilot distribution and access to privacy-safe Ghanaian fraud data. No funding amount is stated because the capital requirement has not yet been defined."}

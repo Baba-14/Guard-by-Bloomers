@@ -11,6 +11,7 @@ import {
 import { Header, Footer } from '@/components/Header';
 import styles from './dashboard.module.css';
 import { authenticatedHeaders, responseJson } from '@/lib/client-api';
+import { demoAuthEnabled } from '@/lib/demo-auth';
 
 type Risk = 'High risk' | 'Caution' | 'Low risk' | 'Unable to determine';
 type Filter = 'All' | 'High risk' | 'Caution' | 'Low risk';
@@ -51,7 +52,7 @@ export default function Dashboard() {
   const [historyError,setHistoryError] = useState('');
   const filteredChecks = useMemo(()=>filter==='All'?checks:checks.filter(check=>check.result===filter),[filter,checks]);
   useEffect(()=>{
-    const demoRole=sessionStorage.getItem('guard-demo-auth');
+    const demoRole=demoAuthEnabled?sessionStorage.getItem('guard-demo-auth'):null;
     if(demoRole){setDemo(true);setChecks(sampleChecks);setIsAdmin(demoRole==='admin');return}
     fetch('/api/auth/me')
       .then(response=>responseJson<{role:string}>(response))

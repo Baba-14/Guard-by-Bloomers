@@ -13,6 +13,10 @@ npm run dev
 `npm run dev` starts both the Next.js website and the FastAPI analysis service.
 The website runs on port 3000 and the API runs on port 8000.
 
+Demo login is enabled by default in development. Use `user@guard.test` or
+`admin@guard.test` with password `guard123`. Production builds keep these demo
+accounts disabled unless `NEXT_PUBLIC_ENABLE_DEMO_AUTH=true` is explicitly set.
+
 Development uses `.next`; production builds use `.next-build`, so running a build will not invalidate an active development server. Do not run two `next dev` processes against the same port.
 
 The core check flow works without database credentials using the explainable MVP analysis route at `POST /api/analyse`. Production uses a managed Supabase PostgreSQL database with the FastAPI-owned authentication schema in `backend/migrations`; local development may use any local PostgreSQL instance.
