@@ -10,12 +10,12 @@ from typing import Annotated, Literal
 from uuid import UUID, uuid4
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, Request, UploadFile, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, EmailStr, Field
 from sqlalchemy import func, insert, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, selectinload
 
-from .auth import get_optional_user, require_analyst
+from .auth import get_optional_user, hash_password, require_analyst
 from .config import get_settings
 from .database import get_db
 from .analysis.rules import analyse_text
@@ -23,7 +23,7 @@ from .intelligence import PHONE_PATTERN, URL_PATTERN, deidentify, normalize_phon
 from .models import (
     AuditLog, Brand, DatasetItem, DatasetLabel, DatasetSource, DatasetSourceType, DatasetVersion,
     DatasetVersionItem, Feedback, FraudCategory, FraudReport, PhoneIntelligence, ReportStatus,
-    ReviewQueueItem, ReviewStatus, UrlIntelligence, User, UserRole,
+    Profile, ReviewQueueItem, ReviewStatus, UrlIntelligence, User, UserRole,
 )
 
 router = APIRouter(prefix="/v1", tags=["Guard Intelligence"])
@@ -71,6 +71,13 @@ class FeedbackRequest(BaseModel):
 class AdminUserUpdateRequest(BaseModel):
     role: UserRole | None = None
     is_active: bool | None = None
+
+
+class AdminUserCreateRequest(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=8, max_length=128)
+    full_name: str = Field(min_length=2, max_length=120)
+    role: UserRole = UserRole.user
 
 
 class TrainingDatasetRequest(BaseModel):
@@ -278,6 +285,33 @@ def list_users(db: Db, _: Analyst) -> list[dict]:
         select(User).options(selectinload(User.profile)).order_by(User.created_at.desc())
     ).all()
     return [serialize_user(user) for user in users]
+
+
+@router.post("/intelligence/users", status_code=status.HTTP_201_CREATED)
+def create_user(payload: AdminUserCreateRequest, db: Db, analyst: Analyst) -> dict:
+    if analyst.profile.role != UserRole.super_admin:
+        raise HTTPException(status_code=403, detail="Only a super administrator can create users")
+    email = payload.email.lower().strip()
+    if db.scalar(select(User.id).where(User.email == email)) is not None:
+        raise HTTPException(status_code=409, detail="Email is already registered")
+    user = User(email=email, password_hash=hash_password(payload.password))
+    user.profile = Profile(full_name=payload.full_name.strip(), role=payload.role)
+    db.add(user)
+    try:
+        db.flush()
+        db.add(AuditLog(
+            actor_id=analyst.id,
+            action="user.created",
+            target_type="user",
+            target_id=user.id,
+            metadata_={"email": email, "role": payload.role.value},
+        ))
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Email is already registered")
+    db.refresh(user)
+    return serialize_user(user)
 
 
 @router.patch("/intelligence/users/{user_id}")
