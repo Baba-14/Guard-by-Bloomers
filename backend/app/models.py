@@ -148,6 +148,74 @@ class TelegramUpdateRecord(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
+class Organization(Base):
+    """A business that embeds Guard for its customers."""
+
+    __tablename__ = "organizations"
+
+    id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), primary_key=True, default=uuid4)
+    name: Mapped[str] = mapped_column(Text)
+    slug: Mapped[str] = mapped_column(String(80), unique=True, index=True)
+    status: Mapped[str] = mapped_column(Text, default="active")
+    plan: Mapped[str] = mapped_column(Text, default="pilot")
+    monthly_check_quota: Mapped[int] = mapped_column(Integer, default=1000)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class PartnerApiKey(Base):
+    """Hashed machine credential for a partner integration."""
+
+    __tablename__ = "partner_api_keys"
+
+    id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), primary_key=True, default=uuid4)
+    organization_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), index=True
+    )
+    name: Mapped[str] = mapped_column(Text)
+    prefix: Mapped[str] = mapped_column(String(48), unique=True, index=True)
+    secret_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    environment: Mapped[str] = mapped_column(Text, default="test")
+    scopes: Mapped[list] = mapped_column(JSONB, default=lambda: ["checks:write"])
+    last_used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_by: Mapped[UUID | None] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("profiles.id", ondelete="SET NULL"), nullable=True
+    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    organization: Mapped[Organization] = relationship()
+
+
+class PartnerApiUsage(Base):
+    """Content-free request ledger used for quotas, billing, and support."""
+
+    __tablename__ = "partner_api_usage"
+
+    id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), primary_key=True, default=uuid4)
+    organization_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), index=True
+    )
+    api_key_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("partner_api_keys.id", ondelete="CASCADE"), index=True
+    )
+    check_id: Mapped[UUID | None] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("checks.id", ondelete="SET NULL"), nullable=True
+    )
+    request_id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), default=uuid4, unique=True)
+    idempotency_key: Mapped[str | None] = mapped_column(String(160))
+    endpoint: Mapped[str] = mapped_column(Text, default="/v1/checks")
+    response_status: Mapped[int] = mapped_column(Integer)
+    response_payload: Mapped[dict] = mapped_column(JSONB, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("organization_id", "idempotency_key", name="partner_usage_org_idempotency_key"),
+    )
+
+
 class FraudSignal(Base):
     __tablename__ = "fraud_signals"
 

@@ -17,6 +17,7 @@ class Settings:
     jwt_secret = os.getenv("JWT_SECRET", "")
     jwt_algorithm = os.getenv("JWT_ALGORITHM", "HS256")
     access_token_expire_minutes = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
+    api_key_pepper = os.getenv("API_KEY_PEPPER", "").strip()
     cors_origins = tuple(
         origin.strip()
         for origin in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
@@ -54,6 +55,14 @@ class Settings:
                 "JWT_SECRET must be configured with at least 32 characters in backend/.env"
             )
         return self.jwt_secret
+
+    def require_api_key_pepper(self) -> str:
+        value = self.api_key_pepper or self.jwt_secret
+        if len(value) < 32:
+            raise RuntimeError(
+                "API_KEY_PEPPER (or JWT_SECRET fallback) must be configured with at least 32 characters"
+            )
+        return value
 
 
 @lru_cache

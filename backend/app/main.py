@@ -22,6 +22,7 @@ from .config import get_settings
 from .database import get_db
 from .intelligence_routes import router as intelligence_router
 from .models import AuditLog, Check, FraudReport, Profile, ReportStatus, User, UserRole
+from .partner_api import router as partner_api_router
 from .rate_limit import PublicRateLimitMiddleware
 from .telegram import router as telegram_router
 
@@ -37,6 +38,7 @@ app.add_middleware(
 )
 app.include_router(intelligence_router)
 app.include_router(telegram_router)
+app.include_router(partner_api_router)
 
 
 class RegisterRequest(BaseModel):

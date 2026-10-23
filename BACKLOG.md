@@ -16,6 +16,10 @@
   Priority: High. Status: Partial.
 - `GUARD-007` — Add Alembic before the next database schema change.
   Priority: Medium. Status: Backlog.
+- `GUARD-008` — Replace partner quota counting with an atomic Redis/edge limiter and add usage alerts.
+  Priority: High. Status: Backlog; database quota enforcement and usage metering are implemented.
+- `GUARD-009` — Add self-service partner onboarding, key management, and billing.
+  Priority: High. Status: Partial; analyst provisioning and public developer documentation are implemented.
 
 ## Later
 

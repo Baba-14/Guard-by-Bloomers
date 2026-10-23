@@ -105,6 +105,42 @@ routes are `POST /v1/auth/register`, `POST /v1/auth/login`, and the protected
 `GET /v1/auth/me`. Login uses OAuth2 form fields: the email is sent as `username`
 and the password as `password`.
 
+## Partner public API
+
+Guard now includes the first B2B2C API foundation for organizations that want
+to protect their customers inside an existing product or workflow. The public
+website exposes `POST /api/v1/checks`, which proxies to the FastAPI-owned
+`POST /v1/checks` contract. Partner requests require a server-side Guard API
+key; consumer JWTs and partner keys are deliberately separate credentials.
+
+The partner API currently provides:
+
+- Test and live API-key formats with one-time secret display and hashed storage.
+- Organization status, plan, and monthly check quota enforcement.
+- An optional `Idempotency-Key` header for safe network retries.
+- Per-request IDs and an organization/key usage ledger for support and billing.
+- The same explainable risk result used by Guard's web and Telegram channels.
+- No automatic training-data contribution and no raw-content storage by default.
+
+Apply `006_partner_public_api.sql`, configure a separate `API_KEY_PEPPER`, and
+provision organizations and keys through the analyst-protected endpoints:
+
+```text
+POST /v1/admin/partners
+GET  /v1/admin/partners
+POST /v1/admin/partners/{organization_id}/keys
+POST /v1/admin/partner-keys/{key_id}/revoke
+```
+
+In a Vercel deployment, the corresponding authenticated website proxies are
+`/api/admin/partners`, `/api/admin/partners/{organization_id}/keys`, and
+`/api/admin/partner-keys/{key_id}/revoke`.
+
+The plaintext key is returned only by the key-creation response. Keep API keys
+in a server-side secret manager; never embed them in browser or mobile code.
+The public quickstart and request/response reference are available at
+`/developers` on the website.
+
 The MVP API also exposes:
 
 - `POST /v1/analyse` for all seven public analysis modes, with optional bearer
@@ -187,6 +223,8 @@ backend/.venv/bin/python -m unittest discover -s backend/tests -v
 
 Generate a production JWT secret with `openssl rand -hex 32`; never reuse the
 development secret or commit `backend/.env`.
+Generate `API_KEY_PEPPER` separately with the same command. Rotating that value
+invalidates existing partner keys, so manage it as a durable production secret.
 
 ## Product areas
 
