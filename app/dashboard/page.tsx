@@ -58,7 +58,7 @@ export default function Dashboard() {
     if(demoRole){setDemo(true);setChecks(sampleChecks);setIsAdmin(demoRole==='admin');return}
     fetch('/api/auth/me')
       .then(response=>responseJson<{role:string}>(response))
-      .then(async user=>{if(user.role==='super_admin'){setIsAdmin(true);setWorkspaceHref('/super-admin');setWorkspaceLabel('Super admin dashboard')}else if(user.role==='fraud_analyst'){setIsAdmin(true)}else{const partner=await fetch('/api/partner/overview').catch(()=>null);if(partner?.ok){setIsAdmin(true);setWorkspaceHref('/partner');setWorkspaceLabel('Partner dashboard')}}return fetch('/api/history',{headers:authenticatedHeaders(false)})})
+      .then(async user=>{if(user.role==='super_admin'){setIsAdmin(true);setWorkspaceHref('/admin');setWorkspaceLabel('Admin dashboard')}else if(user.role==='fraud_analyst'){setIsAdmin(true)}else{const partner=await fetch('/api/partner/overview').catch(()=>null);if(partner?.ok){setIsAdmin(true);setWorkspaceHref('/partner');setWorkspaceLabel('Partner dashboard')}}return fetch('/api/history',{headers:authenticatedHeaders(false)})})
       .then(response=>responseJson<HistoryItem[]>(response))
       .then(rows=>setChecks(rows.map(row=>({
         type:row.check_type.replace(/^./,value=>value.toUpperCase()),

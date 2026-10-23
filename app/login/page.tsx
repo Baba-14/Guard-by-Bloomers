@@ -37,7 +37,7 @@ export default function Login() {
       const body = await response.json();
       if(!response.ok) throw new Error(body.detail||'Sign in failed.');
       sessionStorage.removeItem('guard-demo-auth');
-      if(body.user.role==='super_admin')router.push('/super-admin');
+      if(body.user.role==='super_admin')router.push('/admin');
       else if(body.user.role==='fraud_analyst')router.push('/admin');
       else {
         const partner=await fetch('/api/partner/overview').catch(()=>null);

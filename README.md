@@ -147,8 +147,9 @@ Guard now routes each signed-in role to a dedicated workspace:
 
 - `/dashboard` — personal user checks, reports, and safety activity.
 - `/admin` — fraud analysts and super administrators operating Guard intelligence.
-- `/super-admin` — Guard-wide partner provisioning, membership, API-key, quota,
-  and usage oversight. Only `super_admin` accounts can use its management APIs.
+  Super administrators also see a Partners tab in the same dashboard sidebar for
+  organization provisioning, membership, API-key, quota, and usage oversight.
+- `/super-admin` — compatibility route that redirects to the unified admin dashboard.
 - `/partner` — organization owners, admins, developers, and viewers monitoring
   their own API usage and risk outcomes. Owners and partner admins can issue and
   revoke their organization's credentials.
