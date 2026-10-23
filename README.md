@@ -141,6 +141,23 @@ in a server-side secret manager; never embed them in browser or mobile code.
 The public quickstart and request/response reference are available at
 `/developers` on the website.
 
+### Dashboard roles
+
+Guard now routes each signed-in role to a dedicated workspace:
+
+- `/dashboard` — personal user checks, reports, and safety activity.
+- `/admin` — fraud analysts and super administrators operating Guard intelligence.
+- `/super-admin` — Guard-wide partner provisioning, membership, API-key, quota,
+  and usage oversight. Only `super_admin` accounts can use its management APIs.
+- `/partner` — organization owners, admins, developers, and viewers monitoring
+  their own API usage and risk outcomes. Owners and partner admins can issue and
+  revoke their organization's credentials.
+
+Apply `007_partner_memberships.sql` after the public-API migration. A super
+administrator can then attach an existing Guard user to an organization through
+`POST /v1/admin/partners/{organization_id}/members`. Membership roles are
+`owner`, `admin`, `developer`, and `viewer`.
+
 The MVP API also exposes:
 
 - `POST /v1/analyse` for all seven public analysis modes, with optional bearer

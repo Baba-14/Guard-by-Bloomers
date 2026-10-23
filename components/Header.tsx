@@ -9,15 +9,21 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [checkMenuOpen, setCheckMenuOpen] = useState(false);
-  const [role, setRole] = useState<'admin' | 'user' | null>(null);
+  const [role, setRole] = useState<'super_admin' | 'admin' | 'partner' | 'user' | null>(null);
   const previousY = useRef(0);
   useEffect(() => {
     const demoRole = demoAuthEnabled ? sessionStorage.getItem('guard-demo-auth') : null;
-    if (demoRole === 'admin' || demoRole === 'user') setRole(demoRole);
+    if (demoRole === 'admin') setRole('admin');
+    else if (demoRole === 'user') setRole('user');
     else fetch('/api/auth/me').then(async response=>{
       if(!response.ok)return;
       const user=await response.json();
-      setRole(['super_admin','fraud_analyst'].includes(user.role)?'admin':'user');
+      if(user.role==='super_admin')setRole('super_admin');
+      else if(user.role==='fraud_analyst')setRole('admin');
+      else {
+        const partner=await fetch('/api/partner/overview').catch(()=>null);
+        setRole(partner?.ok?'partner':'user');
+      }
     }).catch(()=>{});
     const onScroll = () => {
       const currentY = window.scrollY;
@@ -36,7 +42,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   return <><header className={headerClass}><div className="container" style={{display:'flex',width:'100%',alignItems:'center',justifyContent:'space-between'}}>
     <Link href="/" className="brand"><span className="brand-mark brand-mark-image"><img src={overlay||scrolled?'/images/guard-white.png':'/images/guard-violet.png'} alt=""/></span><span>Guard</span></Link>
     <button type="button" className="mobile-nav-toggle" aria-label={menuOpen?'Close navigation':'Open navigation'} aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={()=>setMenuOpen(open=>!open)}>{menuOpen?<X size={21}/>:<Menu size={21}/>}</button>
-    <nav id="primary-navigation" className={'nav '+(!overlay?'nav-light':'')+(menuOpen?' nav-open':'')}><Link href="/" onClick={closeNavigation}>Home</Link><div className={'nav-dropdown'+(checkMenuOpen?' open':'')}><button type="button" className="nav-dropdown-trigger" aria-expanded={checkMenuOpen} aria-controls="check-fraud-menu" onClick={()=>setCheckMenuOpen(open=>!open)}>Check Fraud <ChevronDown size={15}/></button><div id="check-fraud-menu" className="nav-dropdown-menu"><Link href="/detect" onClick={closeNavigation}>Check</Link><Link href="/learn" onClick={closeNavigation}>Learn</Link><Link href="/contribute" onClick={closeNavigation}>Contribute</Link><Link href="/reports" onClick={closeNavigation}>Reports</Link></div></div><Link href="/community" onClick={closeNavigation}>Community</Link><Link href="/business" onClick={closeNavigation}>Business</Link><Link href="/developers" onClick={closeNavigation}>Developers</Link><Link href={role==='admin'?'/admin':role==='user'?'/dashboard':'/login'} className="btn btn-primary" onClick={closeNavigation}>{role==='admin'?'Admin':role==='user'?'Dashboard':'Login'}</Link>{role&&<button type="button" onClick={signOut} style={{border:0,background:'transparent',color:'inherit',cursor:'pointer'}}>Sign out</button>}</nav>
+    <nav id="primary-navigation" className={'nav '+(!overlay?'nav-light':'')+(menuOpen?' nav-open':'')}><Link href="/" onClick={closeNavigation}>Home</Link><div className={'nav-dropdown'+(checkMenuOpen?' open':'')}><button type="button" className="nav-dropdown-trigger" aria-expanded={checkMenuOpen} aria-controls="check-fraud-menu" onClick={()=>setCheckMenuOpen(open=>!open)}>Check Fraud <ChevronDown size={15}/></button><div id="check-fraud-menu" className="nav-dropdown-menu"><Link href="/detect" onClick={closeNavigation}>Check</Link><Link href="/learn" onClick={closeNavigation}>Learn</Link><Link href="/contribute" onClick={closeNavigation}>Contribute</Link><Link href="/reports" onClick={closeNavigation}>Reports</Link></div></div><Link href="/community" onClick={closeNavigation}>Community</Link><Link href="/business" onClick={closeNavigation}>Business</Link><Link href="/developers" onClick={closeNavigation}>Developers</Link><Link href={role==='super_admin'?'/super-admin':role==='admin'?'/admin':role==='partner'?'/partner':role==='user'?'/dashboard':'/login'} className="btn btn-primary" onClick={closeNavigation}>{role==='super_admin'?'Super Admin':role==='admin'?'Admin':role==='partner'?'Partner':role==='user'?'Dashboard':'Login'}</Link>{role&&<button type="button" onClick={signOut} style={{border:0,background:'transparent',color:'inherit',cursor:'pointer'}}>Sign out</button>}</nav>
   </div></header></>;
 }
 

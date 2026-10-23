@@ -37,7 +37,12 @@ export default function Login() {
       const body = await response.json();
       if(!response.ok) throw new Error(body.detail||'Sign in failed.');
       sessionStorage.removeItem('guard-demo-auth');
-      router.push(['super_admin','fraud_analyst'].includes(body.user.role)?'/admin':'/dashboard');
+      if(body.user.role==='super_admin')router.push('/super-admin');
+      else if(body.user.role==='fraud_analyst')router.push('/admin');
+      else {
+        const partner=await fetch('/api/partner/overview').catch(()=>null);
+        router.push(partner?.ok?'/partner':'/dashboard');
+      }
     } catch(reason) { setError(reason instanceof Error?reason.message:'Sign in failed.'); }
     finally { setLoading(false); }
   };

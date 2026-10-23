@@ -19,14 +19,19 @@ from sqlalchemy.orm import Session, selectinload
 from .analysis import AnalysisEngine
 from .analysis.knowledge import analyse_known_data
 from .analysis.persistence import persist_outcome
-from .auth import require_analyst
+from .auth import get_current_user, require_analyst
 from .config import Settings, get_settings
 from .database import get_db
-from .models import Organization, PartnerApiKey, PartnerApiUsage, User
+from .models import Organization, OrganizationMember, PartnerApiKey, PartnerApiUsage, User
 
 
 router = APIRouter(tags=["partner-api"])
 CHECK_SCOPE = "checks:write"
+
+
+def require_super_admin(user: User) -> None:
+    if user.profile.role.value != "super_admin":
+        raise HTTPException(status_code=403, detail="Super administrator access required")
 
 
 class PartnerCheckRequest(BaseModel):
@@ -89,6 +94,9 @@ class OrganizationResponse(BaseModel):
     plan: str
     monthly_check_quota: int
     created_at: datetime
+    checks_this_month: int = 0
+    active_keys: int = 0
+    member_count: int = 0
 
 
 class ApiKeyCreateRequest(BaseModel):
@@ -106,10 +114,63 @@ class ApiKeyCreateResponse(BaseModel):
     created_at: datetime
 
 
+class ApiKeyResponse(BaseModel):
+    id: UUID
+    name: str
+    environment: str
+    prefix: str
+    scopes: list[str]
+    last_used_at: datetime | None
+    revoked_at: datetime | None
+    created_at: datetime
+
+
+class OrganizationMemberRequest(BaseModel):
+    email: str = Field(min_length=3, max_length=320)
+    role: Literal["owner", "admin", "developer", "viewer"] = "viewer"
+
+
+class OrganizationMemberResponse(BaseModel):
+    id: UUID
+    user_id: UUID
+    email: str
+    full_name: str | None
+    role: str
+    created_at: datetime
+
+
+class PartnerUsageResponse(BaseModel):
+    request_id: UUID
+    level: str | None
+    score: int | None
+    response_status: int
+    created_at: datetime
+
+
+class PartnerOverviewResponse(BaseModel):
+    organization: OrganizationResponse
+    membership_role: str
+    total_checks: int
+    checks_this_month: int
+    remaining_this_month: int
+    high_risk_this_month: int
+    caution_this_month: int
+    low_risk_this_month: int
+    active_keys: int
+    recent_usage: list[PartnerUsageResponse]
+    keys: list[ApiKeyResponse]
+
+
 @dataclass(frozen=True)
 class PartnerPrincipal:
     organization: Organization
     api_key: PartnerApiKey
+
+
+@dataclass(frozen=True)
+class PartnerMemberPrincipal:
+    user: User
+    membership: OrganizationMember
 
 
 def api_key_hash(secret: str, settings: Settings) -> str:
@@ -173,6 +234,36 @@ def _monthly_usage(db: Session, organization_id: UUID) -> int:
             PartnerApiUsage.response_status == 200,
         )
     ) or 0)
+
+
+def get_partner_member(
+    current_user: Annotated[User, Depends(get_current_user)],
+    db: Annotated[Session, Depends(get_db)],
+) -> PartnerMemberPrincipal:
+    membership = db.scalar(
+        select(OrganizationMember)
+        .options(selectinload(OrganizationMember.organization))
+        .where(OrganizationMember.user_id == current_user.id)
+        .order_by(OrganizationMember.created_at.asc())
+    )
+    if membership is None:
+        raise HTTPException(status_code=403, detail="Partner workspace access is required")
+    if membership.organization.status != "active":
+        raise HTTPException(status_code=403, detail="Organization access is suspended")
+    return PartnerMemberPrincipal(current_user, membership)
+
+
+def _key_response(record: PartnerApiKey) -> ApiKeyResponse:
+    return ApiKeyResponse(
+        id=record.id,
+        name=record.name,
+        environment=record.environment,
+        prefix=record.prefix,
+        scopes=record.scopes,
+        last_used_at=record.last_used_at,
+        revoked_at=record.revoked_at,
+        created_at=record.created_at,
+    )
 
 
 @router.post("/v1/checks", response_model=PartnerCheckResponse)
@@ -280,7 +371,8 @@ def create_partner(
     request: OrganizationCreateRequest,
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_analyst)],
-) -> Organization:
+) -> OrganizationResponse:
+    require_super_admin(current_user)
     organization = Organization(
         name=request.name.strip(),
         slug=request.slug,
@@ -294,15 +386,100 @@ def create_partner(
     except IntegrityError as exc:
         db.rollback()
         raise HTTPException(status_code=409, detail="Organization slug is already in use") from exc
-    return organization
+    return OrganizationResponse(
+        id=organization.id, name=organization.name, slug=organization.slug,
+        status=organization.status, plan=organization.plan,
+        monthly_check_quota=organization.monthly_check_quota,
+        created_at=organization.created_at,
+    )
 
 
 @router.get("/v1/admin/partners", response_model=list[OrganizationResponse])
 def list_partners(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_analyst)],
-) -> list[Organization]:
-    return list(db.scalars(select(Organization).order_by(Organization.created_at.desc())).all())
+) -> list[OrganizationResponse]:
+    require_super_admin(current_user)
+    organizations = db.scalars(select(Organization).order_by(Organization.created_at.desc())).all()
+    return [
+        OrganizationResponse(
+            id=organization.id,
+            name=organization.name,
+            slug=organization.slug,
+            status=organization.status,
+            plan=organization.plan,
+            monthly_check_quota=organization.monthly_check_quota,
+            created_at=organization.created_at,
+            checks_this_month=_monthly_usage(db, organization.id),
+            active_keys=int(db.scalar(select(func.count(PartnerApiKey.id)).where(
+                PartnerApiKey.organization_id == organization.id,
+                PartnerApiKey.revoked_at.is_(None),
+            )) or 0),
+            member_count=int(db.scalar(select(func.count(OrganizationMember.id)).where(
+                OrganizationMember.organization_id == organization.id,
+            )) or 0),
+        )
+        for organization in organizations
+    ]
+
+
+@router.post(
+    "/v1/admin/partners/{organization_id}/members",
+    response_model=OrganizationMemberResponse,
+    status_code=201,
+)
+def add_partner_member(
+    organization_id: UUID,
+    request: OrganizationMemberRequest,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_analyst)],
+) -> OrganizationMemberResponse:
+    require_super_admin(current_user)
+    organization = db.get(Organization, organization_id)
+    if organization is None:
+        raise HTTPException(status_code=404, detail="Organization not found")
+    user = db.scalar(
+        select(User).options(selectinload(User.profile)).where(User.email == request.email.lower().strip())
+    )
+    if user is None:
+        raise HTTPException(status_code=404, detail="Create the Guard user before adding partner access")
+    membership = OrganizationMember(
+        organization_id=organization.id,
+        user_id=user.id,
+        role=request.role,
+    )
+    db.add(membership)
+    try:
+        db.commit()
+        db.refresh(membership)
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="This user already belongs to the organization") from exc
+    return OrganizationMemberResponse(
+        id=membership.id,
+        user_id=user.id,
+        email=user.email,
+        full_name=user.profile.full_name,
+        role=membership.role,
+        created_at=membership.created_at,
+    )
+
+
+@router.get("/v1/admin/partners/{organization_id}/keys", response_model=list[ApiKeyResponse])
+def list_partner_keys(
+    organization_id: UUID,
+    db: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[User, Depends(require_analyst)],
+) -> list[ApiKeyResponse]:
+    require_super_admin(current_user)
+    return [
+        _key_response(record)
+        for record in db.scalars(
+            select(PartnerApiKey)
+            .where(PartnerApiKey.organization_id == organization_id)
+            .order_by(PartnerApiKey.created_at.desc())
+        ).all()
+    ]
 
 
 @router.post("/v1/admin/partners/{organization_id}/keys", response_model=ApiKeyCreateResponse, status_code=201)
@@ -312,6 +489,7 @@ def create_partner_key(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_analyst)],
 ) -> ApiKeyCreateResponse:
+    require_super_admin(current_user)
     organization = db.get(Organization, organization_id)
     if organization is None:
         raise HTTPException(status_code=404, detail="Organization not found")
@@ -345,8 +523,128 @@ def revoke_partner_key(
     db: Annotated[Session, Depends(get_db)],
     current_user: Annotated[User, Depends(require_analyst)],
 ) -> Response:
+    require_super_admin(current_user)
     record = db.get(PartnerApiKey, key_id)
     if record is None:
+        raise HTTPException(status_code=404, detail="API key not found")
+    record.revoked_at = datetime.now(timezone.utc)
+    db.commit()
+    return Response(status_code=204)
+
+
+@router.get("/v1/partner/overview", response_model=PartnerOverviewResponse)
+def partner_overview(
+    principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
+    db: Annotated[Session, Depends(get_db)],
+) -> PartnerOverviewResponse:
+    organization = principal.membership.organization
+    now = datetime.now(timezone.utc)
+    month_start = datetime(now.year, now.month, 1, tzinfo=timezone.utc)
+    monthly = list(db.scalars(
+        select(PartnerApiUsage)
+        .where(
+            PartnerApiUsage.organization_id == organization.id,
+            PartnerApiUsage.created_at >= month_start,
+            PartnerApiUsage.response_status == 200,
+        )
+    ).all())
+    recent = list(db.scalars(
+        select(PartnerApiUsage)
+        .where(PartnerApiUsage.organization_id == organization.id)
+        .order_by(PartnerApiUsage.created_at.desc())
+        .limit(20)
+    ).all())
+    keys = list(db.scalars(
+        select(PartnerApiKey)
+        .where(PartnerApiKey.organization_id == organization.id)
+        .order_by(PartnerApiKey.created_at.desc())
+    ).all())
+
+    def risk_count(level: str) -> int:
+        return sum(1 for item in monthly if item.response_payload.get("level") == level)
+
+    return PartnerOverviewResponse(
+        organization=OrganizationResponse(
+            id=organization.id,
+            name=organization.name,
+            slug=organization.slug,
+            status=organization.status,
+            plan=organization.plan,
+            monthly_check_quota=organization.monthly_check_quota,
+            created_at=organization.created_at,
+            checks_this_month=len(monthly),
+            active_keys=sum(1 for key in keys if key.revoked_at is None),
+            member_count=int(db.scalar(select(func.count(OrganizationMember.id)).where(
+                OrganizationMember.organization_id == organization.id,
+            )) or 0),
+        ),
+        membership_role=principal.membership.role,
+        total_checks=int(db.scalar(select(func.count(PartnerApiUsage.id)).where(
+            PartnerApiUsage.organization_id == organization.id,
+            PartnerApiUsage.response_status == 200,
+        )) or 0),
+        checks_this_month=len(monthly),
+        remaining_this_month=max(0, organization.monthly_check_quota - len(monthly)),
+        high_risk_this_month=risk_count("High Risk"),
+        caution_this_month=risk_count("Caution"),
+        low_risk_this_month=risk_count("Low Risk"),
+        active_keys=sum(1 for key in keys if key.revoked_at is None),
+        recent_usage=[
+            PartnerUsageResponse(
+                request_id=item.request_id,
+                level=item.response_payload.get("level"),
+                score=item.response_payload.get("score"),
+                response_status=item.response_status,
+                created_at=item.created_at,
+            )
+            for item in recent
+        ],
+        keys=[_key_response(key) for key in keys],
+    )
+
+
+@router.post("/v1/partner/keys", response_model=ApiKeyCreateResponse, status_code=201)
+def create_own_partner_key(
+    request: ApiKeyCreateRequest,
+    principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
+    db: Annotated[Session, Depends(get_db)],
+) -> ApiKeyCreateResponse:
+    if principal.membership.role not in {"owner", "admin"}:
+        raise HTTPException(status_code=403, detail="Partner owner or administrator access required")
+    prefix, secret, secret_hash = generate_api_key(request.environment, get_settings())
+    record = PartnerApiKey(
+        organization_id=principal.membership.organization_id,
+        name=request.name.strip(),
+        prefix=prefix,
+        secret_hash=secret_hash,
+        environment=request.environment,
+        scopes=[CHECK_SCOPE],
+        created_by=principal.user.id,
+    )
+    db.add(record)
+    db.commit()
+    db.refresh(record)
+    return ApiKeyCreateResponse(
+        id=record.id,
+        organization_id=record.organization_id,
+        name=record.name,
+        environment=record.environment,
+        prefix=record.prefix,
+        secret=secret,
+        created_at=record.created_at,
+    )
+
+
+@router.post("/v1/partner/keys/{key_id}/revoke", status_code=204)
+def revoke_own_partner_key(
+    key_id: UUID,
+    principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
+    db: Annotated[Session, Depends(get_db)],
+) -> Response:
+    if principal.membership.role not in {"owner", "admin"}:
+        raise HTTPException(status_code=403, detail="Partner owner or administrator access required")
+    record = db.get(PartnerApiKey, key_id)
+    if record is None or record.organization_id != principal.membership.organization_id:
         raise HTTPException(status_code=404, detail="API key not found")
     record.revoked_at = datetime.now(timezone.utc)
     db.commit()

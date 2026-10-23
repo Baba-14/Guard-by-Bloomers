@@ -47,6 +47,8 @@ export default function Dashboard() {
   const router = useRouter();
   const [filter,setFilter] = useState<Filter>('All');
   const [isAdmin,setIsAdmin] = useState(false);
+  const [workspaceHref,setWorkspaceHref] = useState('/admin');
+  const [workspaceLabel,setWorkspaceLabel] = useState('Admin dashboard');
   const [checks,setChecks] = useState<CheckItem[]>([]);
   const [demo,setDemo] = useState(false);
   const [historyError,setHistoryError] = useState('');
@@ -56,7 +58,7 @@ export default function Dashboard() {
     if(demoRole){setDemo(true);setChecks(sampleChecks);setIsAdmin(demoRole==='admin');return}
     fetch('/api/auth/me')
       .then(response=>responseJson<{role:string}>(response))
-      .then(user=>{setIsAdmin(['super_admin','fraud_analyst'].includes(user.role));return fetch('/api/history',{headers:authenticatedHeaders(false)})})
+      .then(async user=>{if(user.role==='super_admin'){setIsAdmin(true);setWorkspaceHref('/super-admin');setWorkspaceLabel('Super admin dashboard')}else if(user.role==='fraud_analyst'){setIsAdmin(true)}else{const partner=await fetch('/api/partner/overview').catch(()=>null);if(partner?.ok){setIsAdmin(true);setWorkspaceHref('/partner');setWorkspaceLabel('Partner dashboard')}}return fetch('/api/history',{headers:authenticatedHeaders(false)})})
       .then(response=>responseJson<HistoryItem[]>(response))
       .then(rows=>setChecks(rows.map(row=>({
         type:row.check_type.replace(/^./,value=>value.toUpperCase()),
@@ -80,7 +82,7 @@ export default function Dashboard() {
             <div className={styles.heroActions}>
               <Link href="/detect" className={styles.primaryAction}><Search size={18}/>Start a new check</Link>
               <Link href="/reports" className={styles.secondaryAction}><Flag size={17}/>Report fraud</Link>
-              {isAdmin&&<Link href="/admin" className={styles.adminAction}><LayoutDashboard size={17}/>Admin dashboard</Link>}
+              {isAdmin&&<Link href={workspaceHref} className={styles.adminAction}><LayoutDashboard size={17}/>{workspaceLabel}</Link>}
             </div>
           </div>
           <div className={styles.heroSummary}>
