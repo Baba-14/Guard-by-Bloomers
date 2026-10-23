@@ -23,6 +23,7 @@ from .database import get_db
 from .intelligence_routes import router as intelligence_router
 from .models import AuditLog, Check, FraudReport, Profile, ReportStatus, User, UserRole
 from .rate_limit import PublicRateLimitMiddleware
+from .telegram import router as telegram_router
 
 app = FastAPI(title="Guard Analysis API", version="0.2.0")
 logger = logging.getLogger(__name__)
@@ -35,6 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(intelligence_router)
+app.include_router(telegram_router)
 
 
 class RegisterRequest(BaseModel):
@@ -106,6 +108,9 @@ class AdminCheckResponse(BaseModel):
     risk_level: str | None
     risk_score: int | None
     pattern: str | None
+    source: str
+    detection_reasons: list[str]
+    alert_delivery_status: str | None
     created_at: datetime
 
 
@@ -233,6 +238,13 @@ def get_recent_checks(
             risk_level=check.analysis_result.risk_level.value if check.analysis_result else None,
             risk_score=check.analysis_result.risk_score if check.analysis_result else None,
             pattern=check.analysis_result.likely_pattern if check.analysis_result else None,
+            source=check.input_metadata.get("source", "guard"),
+            detection_reasons=(
+                [signal.get("label") or signal.get("key", "Unknown signal")
+                 for signal in check.analysis_result.model_metadata.get("signals", [])]
+                if check.analysis_result else []
+            ),
+            alert_delivery_status=check.input_metadata.get("alert_delivery_status"),
             created_at=check.created_at,
         )
         for check in checks

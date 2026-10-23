@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
@@ -18,10 +19,16 @@ class ApiTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         app.dependency_overrides[get_db] = override_db
+        cls.known_data_patch = patch("backend.app.main.analyse_known_data", return_value=[])
+        cls.persistence_patch = patch("backend.app.main.persist_outcome", return_value=None)
+        cls.known_data_patch.start()
+        cls.persistence_patch.start()
         cls.client = TestClient(app)
 
     @classmethod
     def tearDownClass(cls):
+        cls.persistence_patch.stop()
+        cls.known_data_patch.stop()
         app.dependency_overrides.clear()
 
     def test_liveness_does_not_require_database(self):

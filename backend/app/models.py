@@ -5,7 +5,7 @@ from decimal import Decimal
 from enum import Enum
 from uuid import UUID, uuid4
 
-from sqlalchemy import Boolean, DateTime, Enum as SqlEnum, ForeignKey, Integer, Numeric, String, Text, UniqueConstraint, func
+from sqlalchemy import BigInteger, Boolean, DateTime, Enum as SqlEnum, ForeignKey, Integer, Numeric, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID as PgUUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -129,6 +129,23 @@ class AnalysisResultRecord(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     check: Mapped[Check] = relationship(back_populates="analysis_result")
+
+
+class TelegramUpdateRecord(Base):
+    """Content-free receipt used to make Telegram webhook processing idempotent."""
+
+    __tablename__ = "telegram_updates"
+
+    update_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    chat_id: Mapped[int] = mapped_column(BigInteger, index=True)
+    message_id: Mapped[int | None] = mapped_column(BigInteger)
+    check_id: Mapped[UUID | None] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("checks.id", ondelete="SET NULL"), nullable=True
+    )
+    processing_status: Mapped[str] = mapped_column(Text, default="processing")
+    alert_delivery_status: Mapped[str] = mapped_column(Text, default="not_required")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
 class FraudSignal(Base):

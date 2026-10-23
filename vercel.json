@@ -21,6 +21,12 @@
   },
   "rewrites": [
     {
+      "source": "/api/integrations/telegram/webhook",
+      "destination": {
+        "service": "backend"
+      }
+    },
+    {
       "source": "/(.*)",
       "destination": {
         "service": "app"

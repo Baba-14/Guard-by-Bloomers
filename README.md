@@ -114,6 +114,60 @@ The MVP API also exposes:
 - `GET /v1/admin/checks` and `GET/PATCH /v1/admin/reports` for analyst review.
 - `GET /health/live` for liveness and `GET /health` for database readiness.
 
+## Telegram group fraud detection
+
+The FastAPI service exposes `POST /api/integrations/telegram/webhook`. Vercel
+routes that one public path directly to the backend service; the rest of the
+public application remains on Next.js. Apply `005_telegram_integration.sql`
+with `backend/.venv/bin/python backend/scripts/migrate.py`, then configure these
+backend service environment variables:
+
+```bash
+TELEGRAM_BOT_TOKEN=token-from-botfather
+TELEGRAM_WEBHOOK_SECRET=a-long-random-A-Za-z0-9_-value
+TELEGRAM_ALLOWED_GROUP_IDS=-1001234567890,-1009876543210
+TELEGRAM_TIMEOUT_SECONDS=5
+```
+
+Keep `ANALYSIS_PERSISTENCE_ENABLED=true` in production so detections appear in
+the admin Fraud checks view. Telegram checks store a content hash, length,
+source and delivery metadata; raw messages remain excluded while
+`STORE_ANALYSIS_CONTENT=false`.
+
+Create the bot with `@BotFather`, add it to the existing group, and either make
+it an administrator or use `/setprivacy` in BotFather to disable privacy mode.
+Telegram privacy mode otherwise limits bots to commands, replies, mentions and
+service messages, so Guard would not receive ordinary group posts. The bot only
+needs permission to view messages and send messages; deletion and member
+management permissions are not required. If you change privacy mode, remove and
+re-add the bot to the group so Telegram applies the new setting.
+
+Register the webhook after the production deployment (replace the placeholders):
+
+```bash
+curl --fail-with-body -X POST \
+  "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/setWebhook" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "url": "https://YOUR_GUARD_DOMAIN/api/integrations/telegram/webhook",
+    "secret_token": "YOUR_TELEGRAM_WEBHOOK_SECRET",
+    "allowed_updates": ["message"],
+    "drop_pending_updates": true
+  }'
+```
+
+Confirm registration with `getWebhookInfo`. To determine a group ID safely,
+temporarily remove the webhook, post a test message in the group, call
+`getUpdates`, and read `message.chat.id`; supergroup IDs are normally negative
+and begin with `-100`. Restore the webhook immediately and put only approved IDs
+in `TELEGRAM_ALLOWED_GROUP_IDS`.
+
+For an end-to-end test, post a harmless sentence and confirm that Guard stays
+silent. Then post a synthetic example such as “Urgent MoMo reversal: send your
+OTP now” and confirm that Guard replies to that message. In Admin → Fraud
+checks, verify the Telegram source, detection time, risk result, warning signs
+and `delivered` alert state. Use a non-production test group first.
+
 All seven public check modes use the same result contract. Message, payment,
 call, and OCR-extracted screenshot text use the explainable text engine; links
 also receive URL-shape and moderated reputation checks; phone and WhatsApp

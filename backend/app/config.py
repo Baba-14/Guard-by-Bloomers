@@ -36,6 +36,17 @@ class Settings:
     store_analysis_content = os.getenv("STORE_ANALYSIS_CONTENT", "false").lower() in {
         "1", "true", "yes", "on"
     }
+    telegram_bot_token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    telegram_webhook_secret = os.getenv("TELEGRAM_WEBHOOK_SECRET", "").strip()
+    telegram_allowed_group_ids = tuple(
+        int(group_id.strip())
+        for group_id in os.getenv("TELEGRAM_ALLOWED_GROUP_IDS", "").split(",")
+        if group_id.strip()
+    )
+    telegram_api_base_url = os.getenv(
+        "TELEGRAM_API_BASE_URL", "https://api.telegram.org"
+    ).rstrip("/")
+    telegram_timeout_seconds = float(os.getenv("TELEGRAM_TIMEOUT_SECONDS", "5"))
 
     def require_jwt_secret(self) -> str:
         if len(self.jwt_secret) < 32:

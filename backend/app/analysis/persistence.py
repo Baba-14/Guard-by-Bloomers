@@ -30,6 +30,7 @@ def persist_outcome(
     outcome: AnalysisOutcome,
     settings: Settings,
     user_id: UUID | None = None,
+    source_metadata: dict | None = None,
 ) -> str | None:
     """Store an analysis when PostgreSQL is available without breaking checks when it is not."""
     if not settings.analysis_persistence_enabled:
@@ -39,7 +40,10 @@ def persist_outcome(
         "sha256": sha256(content.encode("utf-8")).hexdigest(),
         "length": len(content),
     }
-    if settings.store_analysis_content:
+    metadata.update(source_metadata or {})
+    # Group messages are never retained verbatim, even if storage is enabled for
+    # manually submitted checks elsewhere in Guard.
+    if settings.store_analysis_content and metadata.get("source") != "telegram":
         metadata["content"] = content
 
     try:
@@ -69,6 +73,7 @@ def persist_outcome(
                 "signals": [
                     {
                         "key": signal.key,
+                        "label": signal.label,
                         "source": signal.source,
                         "confidence": signal.confidence,
                         "weight": signal.weight,
