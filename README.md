@@ -154,7 +154,8 @@ Guard now routes each signed-in role to a dedicated workspace:
   their own API usage and risk outcomes. Owners and partner admins can issue and
   revoke their organization's credentials.
 
-Apply `007_partner_memberships.sql` after the public-API migration. A super
+Apply `007_partner_memberships.sql` and then `008_partner_controls.sql` after
+the public-API migration. A super
 administrator can then attach an existing Guard user to an organization through
 `POST /v1/admin/partners/{organization_id}/members`. Membership roles are
 `owner`, `admin`, `developer`, and `viewer`.

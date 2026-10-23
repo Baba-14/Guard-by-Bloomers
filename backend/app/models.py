@@ -206,6 +206,7 @@ class PartnerApiUsage(Base):
     )
     request_id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), default=uuid4, unique=True)
     idempotency_key: Mapped[str | None] = mapped_column(String(160))
+    customer_reference: Mapped[str | None] = mapped_column(String(128), index=True)
     endpoint: Mapped[str] = mapped_column(Text, default="/v1/checks")
     response_status: Mapped[int] = mapped_column(Integer)
     response_payload: Mapped[dict] = mapped_column(JSONB, default=dict)
@@ -235,6 +236,27 @@ class OrganizationMember(Base):
     organization: Mapped[Organization] = relationship()
     __table_args__ = (
         UniqueConstraint("organization_id", "user_id", name="organization_members_org_user_key"),
+    )
+
+
+class PartnerCustomer(Base):
+    """An end customer protected by a partner organization."""
+
+    __tablename__ = "partner_customers"
+
+    id: Mapped[UUID] = mapped_column(PgUUID(as_uuid=True), primary_key=True, default=uuid4)
+    organization_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), index=True
+    )
+    external_reference: Mapped[str] = mapped_column(String(128))
+    display_name: Mapped[str | None] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(Text, default="active")
+    metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("organization_id", "external_reference", name="partner_customers_org_reference_key"),
     )
 
 

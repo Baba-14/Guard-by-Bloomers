@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from backend.app.database import get_db
 from backend.app.main import app
-from backend.app.models import Organization, PartnerApiKey, PartnerApiUsage
+from backend.app.models import Organization, PartnerApiKey, PartnerApiUsage, PartnerCustomer
 from backend.app.partner_api import (
     PartnerPrincipal,
     api_key_hash,
@@ -105,9 +105,19 @@ class PartnerApiTests(unittest.TestCase):
         usage = next(item for item in self.db.added if isinstance(item, PartnerApiUsage))
         self.assertEqual(usage.organization_id, self.organization.id)
         self.assertEqual(usage.idempotency_key, "support-case-42")
+        self.assertEqual(usage.customer_reference, "customer-42")
+        customer = next(item for item in self.db.added if isinstance(item, PartnerCustomer))
+        self.assertEqual(customer.external_reference, "customer-42")
 
     def test_partner_check_validates_blank_content(self):
         response = self.client.post("/v1/checks", json={"type": "message", "content": "  "})
+        self.assertEqual(response.status_code, 422)
+
+    def test_partner_check_rejects_blank_customer_reference(self):
+        response = self.client.post(
+            "/v1/checks",
+            json={"type": "message", "content": "Please review this", "customer_reference": "  "},
+        )
         self.assertEqual(response.status_code, 422)
 
 
