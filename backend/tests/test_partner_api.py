@@ -9,7 +9,9 @@ from backend.app.database import get_db
 from backend.app.main import app
 from backend.app.models import Organization, PartnerApiKey, PartnerApiUsage, PartnerCustomer
 from backend.app.partner_api import (
+    PartnerMemberPrincipal,
     PartnerPrincipal,
+    _require_partner_feature,
     api_key_hash,
     api_key_prefix,
     generate_api_key,
@@ -119,6 +121,18 @@ class PartnerApiTests(unittest.TestCase):
             json={"type": "message", "content": "Please review this", "customer_reference": "  "},
         )
         self.assertEqual(response.status_code, 422)
+
+    def test_partner_workspace_features_are_enforced(self):
+        principal = PartnerMemberPrincipal(
+            user=SimpleNamespace(),
+            membership=SimpleNamespace(
+                organization=SimpleNamespace(workspace_features=["overview", "reports"])
+            ),
+        )
+        _require_partner_feature(principal, "overview")
+        with self.assertRaises(Exception) as context:
+            _require_partner_feature(principal, "keys")
+        self.assertEqual(context.exception.status_code, 403)
 
 
 if __name__ == "__main__":

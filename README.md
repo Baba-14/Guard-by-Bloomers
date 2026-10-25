@@ -151,11 +151,12 @@ Guard now routes each signed-in role to a dedicated workspace:
   organization provisioning, membership, API-key, quota, and usage oversight.
 - `/super-admin` — compatibility route that redirects to the unified admin dashboard.
 - `/partner` — organization owners, admins, developers, and viewers monitoring
-  their own API usage and risk outcomes. Owners and partner admins can issue and
-  revoke their organization's credentials.
+  their own API usage and risk outcomes in a full operational dashboard. Super
+  administrators choose which workspace sections each organization can access;
+  owners and partner admins can issue and revoke their organization's credentials.
 
-Apply `007_partner_memberships.sql` and then `008_partner_controls.sql` after
-the public-API migration. A super
+Apply `007_partner_memberships.sql`, `008_partner_controls.sql`, and then
+`009_partner_workspace_features.sql` after the public-API migration. A super
 administrator can then attach an existing Guard user to an organization through
 `POST /v1/admin/partners/{organization_id}/members`. Membership roles are
 `owner`, `admin`, `developer`, and `viewer`.

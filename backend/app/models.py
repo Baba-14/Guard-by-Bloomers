@@ -159,6 +159,10 @@ class Organization(Base):
     status: Mapped[str] = mapped_column(Text, default="active")
     plan: Mapped[str] = mapped_column(Text, default="pilot")
     monthly_check_quota: Mapped[int] = mapped_column(Integer, default=1000)
+    workspace_features: Mapped[list] = mapped_column(
+        JSONB,
+        default=lambda: ["overview", "reports", "intelligence", "customers", "usage", "keys", "team"],
+    )
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 

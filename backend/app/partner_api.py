@@ -27,6 +27,7 @@ from .models import AuditLog, Organization, OrganizationMember, PartnerApiKey, P
 
 router = APIRouter(tags=["partner-api"])
 CHECK_SCOPE = "checks:write"
+PartnerFeature = Literal["overview", "reports", "intelligence", "customers", "usage", "keys", "team"]
 
 
 def require_super_admin(user: User) -> None:
@@ -94,6 +95,10 @@ class OrganizationCreateRequest(BaseModel):
     slug: str = Field(min_length=2, max_length=80, pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
     plan: str = Field(default="pilot", min_length=2, max_length=40)
     monthly_check_quota: int = Field(default=1000, ge=0, le=100_000_000)
+    workspace_features: list[PartnerFeature] = Field(
+        default_factory=lambda: ["overview", "reports", "intelligence", "customers", "usage", "keys", "team"],
+        min_length=1,
+    )
 
 
 class OrganizationUpdateRequest(BaseModel):
@@ -101,6 +106,7 @@ class OrganizationUpdateRequest(BaseModel):
     plan: str | None = Field(default=None, min_length=2, max_length=40)
     status: Literal["active", "suspended"] | None = None
     monthly_check_quota: int | None = Field(default=None, ge=0, le=100_000_000)
+    workspace_features: list[PartnerFeature] | None = Field(default=None, min_length=1)
 
 
 class OrganizationResponse(BaseModel):
@@ -110,6 +116,7 @@ class OrganizationResponse(BaseModel):
     status: str
     plan: str
     monthly_check_quota: int
+    workspace_features: list[PartnerFeature]
     created_at: datetime
     checks_this_month: int = 0
     active_keys: int = 0
@@ -329,6 +336,7 @@ def _organization_response(db: Session, organization: Organization) -> Organizat
         status=organization.status,
         plan=organization.plan,
         monthly_check_quota=organization.monthly_check_quota,
+        workspace_features=organization.workspace_features,
         created_at=organization.created_at,
         checks_this_month=_monthly_usage(db, organization.id),
         active_keys=int(db.scalar(select(func.count(PartnerApiKey.id)).where(
@@ -400,6 +408,12 @@ def _require_partner_manager(principal: PartnerMemberPrincipal) -> None:
 def _require_partner_owner(principal: PartnerMemberPrincipal) -> None:
     if principal.membership.role != "owner":
         raise HTTPException(status_code=403, detail="Partner owner access required")
+
+
+def _require_partner_feature(principal: PartnerMemberPrincipal, *features: PartnerFeature) -> None:
+    enabled = set(principal.membership.organization.workspace_features or [])
+    if not enabled.intersection(features):
+        raise HTTPException(status_code=403, detail="This workspace section is not enabled")
 
 
 @router.post("/v1/checks", response_model=PartnerCheckResponse)
@@ -529,6 +543,7 @@ def create_partner(
         slug=request.slug,
         plan=request.plan.strip(),
         monthly_check_quota=request.monthly_check_quota,
+        workspace_features=request.workspace_features,
     )
     db.add(organization)
     try:
@@ -863,6 +878,11 @@ def partner_overview(
     db: Annotated[Session, Depends(get_db)],
 ) -> PartnerOverviewResponse:
     organization = principal.membership.organization
+    features = set(organization.workspace_features or [])
+    can_view_usage = bool(features.intersection({"overview", "reports", "intelligence", "usage"}))
+    can_view_recent = bool(features.intersection({"overview", "reports", "usage"}))
+    can_view_keys = "keys" in features
+    can_view_customers = bool(features.intersection({"overview", "customers", "intelligence"}))
     now = datetime.now(timezone.utc)
     month_start = datetime(now.year, now.month, 1, tzinfo=timezone.utc)
     monthly = list(db.scalars(
@@ -872,18 +892,18 @@ def partner_overview(
             PartnerApiUsage.created_at >= month_start,
             PartnerApiUsage.response_status == 200,
         )
-    ).all())
+    ).all()) if can_view_usage else []
     recent = list(db.scalars(
         select(PartnerApiUsage)
         .where(PartnerApiUsage.organization_id == organization.id)
         .order_by(PartnerApiUsage.created_at.desc())
         .limit(20)
-    ).all())
+    ).all()) if can_view_recent else []
     keys = list(db.scalars(
         select(PartnerApiKey)
         .where(PartnerApiKey.organization_id == organization.id)
         .order_by(PartnerApiKey.created_at.desc())
-    ).all())
+    ).all()) if can_view_keys else []
     key_prefixes = {key.id: key.prefix for key in keys}
 
     def risk_count(level: str) -> int:
@@ -897,6 +917,7 @@ def partner_overview(
             status=organization.status,
             plan=organization.plan,
             monthly_check_quota=organization.monthly_check_quota,
+            workspace_features=organization.workspace_features,
             created_at=organization.created_at,
             checks_this_month=len(monthly),
             active_keys=sum(1 for key in keys if key.revoked_at is None),
@@ -908,7 +929,7 @@ def partner_overview(
         total_checks=int(db.scalar(select(func.count(PartnerApiUsage.id)).where(
             PartnerApiUsage.organization_id == organization.id,
             PartnerApiUsage.response_status == 200,
-        )) or 0),
+        )) or 0) if can_view_usage else 0,
         checks_this_month=len(monthly),
         remaining_this_month=max(0, organization.monthly_check_quota - len(monthly)),
         high_risk_this_month=risk_count("High Risk"),
@@ -917,7 +938,7 @@ def partner_overview(
         active_keys=sum(1 for key in keys if key.revoked_at is None),
         customer_count=int(db.scalar(select(func.count(PartnerCustomer.id)).where(
             PartnerCustomer.organization_id == organization.id,
-        )) or 0),
+        )) or 0) if can_view_customers else 0,
         recent_usage=[
             PartnerUsageResponse(
                 request_id=item.request_id,
@@ -939,6 +960,7 @@ def list_own_partner_members(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> list[OrganizationMemberResponse]:
+    _require_partner_feature(principal, "team")
     rows = db.execute(
         select(OrganizationMember, User)
         .join(User, User.id == OrganizationMember.user_id)
@@ -955,6 +977,7 @@ def add_own_partner_member(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> OrganizationMemberResponse:
+    _require_partner_feature(principal, "team")
     _require_partner_owner(principal)
     user = db.scalar(select(User).options(selectinload(User.profile)).where(
         User.email == request.email.lower().strip(),
@@ -989,6 +1012,7 @@ def update_own_partner_member(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> OrganizationMemberResponse:
+    _require_partner_feature(principal, "team")
     _require_partner_owner(principal)
     member = db.get(OrganizationMember, member_id)
     if member is None or member.organization_id != principal.membership.organization_id:
@@ -1010,6 +1034,7 @@ def remove_own_partner_member(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> Response:
+    _require_partner_feature(principal, "team")
     _require_partner_owner(principal)
     member = db.get(OrganizationMember, member_id)
     if member is None or member.organization_id != principal.membership.organization_id:
@@ -1029,6 +1054,7 @@ def list_own_partner_customers(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> list[PartnerCustomerResponse]:
+    _require_partner_feature(principal, "customers", "intelligence")
     customers = db.scalars(select(PartnerCustomer).where(
         PartnerCustomer.organization_id == principal.membership.organization_id,
     ).order_by(PartnerCustomer.created_at.desc())).all()
@@ -1041,6 +1067,7 @@ def create_own_partner_customer(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> PartnerCustomerResponse:
+    _require_partner_feature(principal, "customers")
     _require_partner_manager(principal)
     customer = PartnerCustomer(
         organization_id=principal.membership.organization_id,
@@ -1070,6 +1097,7 @@ def update_own_partner_customer(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> PartnerCustomerResponse:
+    _require_partner_feature(principal, "customers")
     _require_partner_manager(principal)
     customer = db.get(PartnerCustomer, customer_id)
     if customer is None or customer.organization_id != principal.membership.organization_id:
@@ -1090,6 +1118,7 @@ def list_own_partner_usage(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> list[PartnerUsageResponse]:
+    _require_partner_feature(principal, "overview", "reports", "intelligence", "usage")
     organization_id = principal.membership.organization_id
     usage = db.scalars(select(PartnerApiUsage).where(
         PartnerApiUsage.organization_id == organization_id,
@@ -1114,6 +1143,7 @@ def create_own_partner_key(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> ApiKeyCreateResponse:
+    _require_partner_feature(principal, "keys")
     _require_partner_manager(principal)
     prefix, secret, secret_hash = generate_api_key(request.environment, get_settings())
     record = PartnerApiKey(
@@ -1151,6 +1181,7 @@ def revoke_own_partner_key(
     principal: Annotated[PartnerMemberPrincipal, Depends(get_partner_member)],
     db: Annotated[Session, Depends(get_db)],
 ) -> Response:
+    _require_partner_feature(principal, "keys")
     _require_partner_manager(principal)
     record = db.get(PartnerApiKey, key_id)
     if record is None or record.organization_id != principal.membership.organization_id:
